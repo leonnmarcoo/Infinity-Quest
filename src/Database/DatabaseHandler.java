@@ -2,6 +2,8 @@ package Database;
 
 import java.sql.*;
 
+import Objects.Admin;
+
 public class DatabaseHandler {
     private static DatabaseHandler handler = null;
     private static Statement stmt = null;
@@ -69,7 +71,9 @@ public class DatabaseHandler {
         return false;
     }
 
-    public static ResultSet getAdmins() {
+    // CRUD Admin
+
+    public static ResultSet getAdmin() {
         
         ResultSet result = null;
         try {
@@ -81,4 +85,55 @@ public class DatabaseHandler {
         }
         return result;
     }
+
+    public static boolean createAdmin(Admin admin) {
+
+        try {
+            pstatement = getDBConnection().prepareStatement("INSERT INTO Admin (adminName, adminPassword) VALUES (?, ?)");
+            pstatement.setString(1, admin.getAdminName());
+            pstatement.setString(2, admin.getAdminPassword());
+
+            return pstatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteAdmin(Admin admin) {
+
+        try {
+            pstatement = getDBConnection().prepareStatement("DELETE FROM Admin WHERE adminID = ?");
+            pstatement.setInt(1, admin.getAdminID());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateAdmin(Admin admin) {
+
+        try {
+            pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
+            pstatement.setString(1, admin.getAdminName());
+            pstatement.setString(2, admin.getAdminPassword());
+            pstatement.setInt(3, admin.getAdminID());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    
+
 }

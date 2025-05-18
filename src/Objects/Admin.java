@@ -1,15 +1,17 @@
+package Objects;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Admin {
 
     private final SimpleIntegerProperty adminID;
-    private final SimpleStringProperty adminUsername;
+    private final SimpleStringProperty adminName;
     private final SimpleStringProperty adminPassword;
 
-    public Admin(int adminID, String adminUsername, String adminPassword) {
+    public Admin(int adminID, String adminName, String adminPassword) {
         this.adminID = new SimpleIntegerProperty(adminID);
-        this.adminUsername = new SimpleStringProperty(adminUsername);
+        this.adminName = new SimpleStringProperty(adminName);
         this.adminPassword = new SimpleStringProperty(adminPassword);
     }
 
@@ -17,8 +19,8 @@ public class Admin {
         return adminID.get();
     }
 
-    public String getAdminUsername() {
-        return adminUsername.get();
+    public String getAdminName() {
+        return adminName.get();
     }
 
     public String getAdminPassword() {
