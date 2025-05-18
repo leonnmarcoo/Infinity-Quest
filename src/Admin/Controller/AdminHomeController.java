@@ -178,6 +178,8 @@ public class AdminHomeController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Admin created successfully!");
             alert.showAndWait();
+
+            clearForm();
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
