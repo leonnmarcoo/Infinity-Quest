@@ -3,6 +3,7 @@ package Database;
 import java.sql.*;
 
 import Objects.Admin;
+import Objects.User;
 
 public class DatabaseHandler {
     private static DatabaseHandler handler = null;
@@ -124,6 +125,73 @@ public class DatabaseHandler {
             pstatement.setString(2, admin.getAdminPassword());
             pstatement.setInt(3, admin.getAdminID());
 
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // CRUD ADMIN-SIDE User
+
+    public static ResultSet getUser() { 
+    getInstance();
+    ResultSet result = null;
+
+        try {
+            String query = "SELECT * FROM User";
+            result = handler.execQuery(query);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    public static boolean createUser(User user) {
+
+        try {
+            pstatement = getDBConnection().prepareStatement("INSERT INTO User (userName, userPassword, userEmail, userBio) VALUES (?, ?, ?, ?)");
+            pstatement.setString(1, user.getUserName());
+            pstatement.setString(2, user.getUserPassword());
+            pstatement.setString(3, user.getUserEmail());
+            pstatement.setString(4, user.getUserBio());
+            return pstatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteUser(User user) {
+
+        try {
+            pstatement = getDBConnection().prepareStatement("DELETE FROM User WHERE userName = ?");
+            pstatement.setString(1, user.getUserName());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateUser(User user) {
+
+        try {
+            pstatement = getDBConnection().prepareStatement("UPDATE User SET userPassword = ?, userEmail = ?, userBio = ? WHERE userName = ?");
+            pstatement.setString(1, user.getUserPassword());
+            pstatement.setString(2, user.getUserEmail());
+            pstatement.setString(3, user.getUserBio());
+            pstatement.setString(4, user.getUserName());
+            
             int res = pstatement.executeUpdate();
             if (res > 0) {
                 return true;

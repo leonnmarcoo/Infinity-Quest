@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.Controller.AdminUserController">
    <children>
       <AnchorPane prefHeight="982.0" prefWidth="1512.0">
          <children>
@@ -73,22 +73,22 @@
                   <TableColumn fx:id="bioColumn" prefWidth="316.80224609375" text="Bio" />
               </columns>
             </TableView>
-            <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+            <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" onAction="#createUser" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="updateButton" layoutX="788.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+            <Button fx:id="updateButton" layoutX="788.0" layoutY="817.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="deleteButton" layoutX="1147.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+            <Button fx:id="deleteButton" layoutX="1147.0" layoutY="817.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
+            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" onAction="#backToAdmin" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
