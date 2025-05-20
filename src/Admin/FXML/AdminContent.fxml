@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.Controller.AdminContentController">
    <children>
@@ -67,32 +71,96 @@
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <TabPane layoutX="40.0" layoutY="173.0" prefHeight="769.0" prefWidth="352.0" style="-fx-background-color: Transparent;" tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" tabMinWidth="155.0">
+            <TabPane fx:id="contentTabPane" layoutX="40.0" layoutY="173.0" prefHeight="769.0" prefWidth="352.0" style="-fx-background-color: Transparent;" tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" tabMinWidth="155.0">
               <tabs>
-                <Tab style="-fx-background-color: #CE2431;" text="Movie">
+                <Tab fx:id="movieTab" style="-fx-background-color: #CE2431;" text="Movie">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="744.0" prefWidth="352.0">
                            <children>
                               <ScrollPane hbarPolicy="NEVER" prefHeight="744.0" prefWidth="352.0" style="-fx-background-color: #141414;" vbarPolicy="NEVER">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="898.0" prefWidth="352.0" style="-fx-background-color: #141414;">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="830.0" prefWidth="352.0" style="-fx-background-color: #141414;">
                                        <children>
-                                          <Label layoutX="2.0" text="Movie Title" textFill="WHITE">
+                                          <Label fx:id="mTitleLabel" layoutX="2.0" text="Movie Title" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="mTitleTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="2.0" layoutY="83.0" text="Movie Runtime" textFill="WHITE">
+                                          <Label fx:id="mRuntimeLabel" layoutX="2.0" layoutY="83.0" text="Runtime" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie runtime" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter runtime" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="166.0" text="Release Date" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <DatePicker editable="false" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a date" />
+                                          <Label layoutX="2.0" layoutY="249.0" text="Synopsis" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea layoutY="282.0" prefHeight="40.0" prefWidth="350.0" promptText="Write a synopsis" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="12.0" />
+                                             </font>
+                                          </TextArea>
+                                          <Label layoutX="2.0" layoutY="332.0" text="Director" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <Label layoutX="2.0" layoutY="415.0" text="Phase" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <Label layoutX="2.0" layoutY="498.0" text="Age Rating" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <Label layoutX="2.0" layoutY="581.0" text="Chronological Order" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="664.0" text="Poster" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="747.0" text="Trailer Link" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -109,10 +177,117 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="898.0" prefWidth="352.0">
                            <children>
-                              <ScrollPane hbarPolicy="NEVER" prefHeight="898.0" prefWidth="352.0" style="-fx-background-color: #141414;" vbarPolicy="NEVER">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="898.0" prefWidth="352.0" style="-fx-background-color: #141414;" />
-                                </content>
+                              <ScrollPane hbarPolicy="NEVER" prefHeight="744.0" prefWidth="352.0" style="-fx-background-color: #141414;" vbarPolicy="NEVER">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="996.0" prefWidth="352.0" style="-fx-background-color: #141414;">
+                                       <children>
+                                          <Label layoutX="2.0" text="TV Show Title" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="83.0" text="Average Runtime" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter average runtime" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="166.0" text="Season" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the season" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="249.0" text="Number of Episode" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="282.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the number of episodes" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="332.0" text="Release Date" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <DatePicker editable="false" layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a date" />
+                                          <Label layoutX="2.0" layoutY="415.0" text="Synopsis" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Write a synopsis" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="12.0" />
+                                             </font>
+                                          </TextArea>
+                                          <Label layoutX="2.0" layoutY="498.0" text="Director" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <Label layoutX="2.0" layoutY="581.0" text="Phase" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <Label layoutX="2.0" layoutY="664.0" text="Age Rating" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <Label layoutX="2.0" layoutY="747.0" text="Chronological Order" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="830.0" text="Poster" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="863.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="2.0" layoutY="913.0" text="Trailer Link" textFill="WHITE">
+                                             <font>
+                                                <Font name="Geist Medium" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutY="946.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                             <font>
+                                                <Font name="Geist Regular" size="18.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
                               </ScrollPane>
                            </children>
                         </AnchorPane>
@@ -120,6 +295,50 @@
                 </Tab>
               </tabs>
             </TabPane>
+            <TableView layoutX="430.0" layoutY="120.0" prefHeight="662.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ContentID" />
+                <TableColumn prefWidth="75.0" text="Title" />
+                  <TableColumn prefWidth="75.0" text="Runtime" />
+                  <TableColumn prefWidth="75.0" text="Season" />
+                  <TableColumn prefWidth="75.0" text="Episode" />
+                  <TableColumn prefWidth="115.07574462890625" text="Release Date" />
+                  <TableColumn prefWidth="91.92425537109375" text="Synopsis" />
+                  <TableColumn prefWidth="68.3712158203125" text="Director" />
+                  <TableColumn prefWidth="62.3409423828125" text="Phase" />
+                  <TableColumn prefWidth="74.4090576171875" text="Age Rating" />
+                  <TableColumn prefWidth="120.7802734375" text="Chronological Order" />
+                  <TableColumn prefWidth="44.977294921875" text="Poster" />
+                  <TableColumn prefWidth="88.9696044921875" text="Trailer" />
+              </columns>
+            </TableView>
+            <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="updateButton" layoutX="788.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteButton" layoutX="1147.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../../Images/Icons/Back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
    </children>
