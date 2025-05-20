@@ -1,3 +1,0 @@
-# .gitignore files are not pushed to github
-
-**/DatabaseCredentials.java
