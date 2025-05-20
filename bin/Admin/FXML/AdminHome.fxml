@@ -37,7 +37,7 @@
                               <Image url="@../../Images/Navigation%20Card/Content.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="contentButton" layoutX="330.0" layoutY="40.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
+                        <Button fx:id="contentButton" layoutX="330.0" layoutY="40.0" mnemonicParsing="false" onAction="#contentButtonHandler" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
                         <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="620.0" layoutY="40.0">
                            <image>
                               <Image url="@../../Images/Navigation%20Card/Cast.png" />
