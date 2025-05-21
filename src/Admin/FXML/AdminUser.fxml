@@ -67,10 +67,11 @@
             </TextField>
             <TableView fx:id="userTable" layoutX="430.0" layoutY="120.0" prefHeight="662.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
               <columns>
-                <TableColumn fx:id="usernameColumn" prefWidth="202.01763916015625" text="Username" />
-                <TableColumn fx:id="passwordColumn" prefWidth="208.87939453125" text="Password" />
-                  <TableColumn fx:id="emailColumn" prefWidth="315.6207275390625" text="Email" />
-                  <TableColumn fx:id="bioColumn" prefWidth="316.80224609375" text="Bio" />
+                <TableColumn fx:id="userIDColumn" prefWidth="92.0" text="UserID" />
+                <TableColumn fx:id="usernameColumn" prefWidth="199.0" text="Username" />
+                  <TableColumn fx:id="passwordColumn" prefWidth="153.0" text="Password" />
+                  <TableColumn fx:id="emailColumn" prefWidth="197.0" text="Email" />
+                  <TableColumn fx:id="bioColumn" prefWidth="400.0" text="Bio" />
               </columns>
             </TableView>
             <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" onAction="#createUser" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">

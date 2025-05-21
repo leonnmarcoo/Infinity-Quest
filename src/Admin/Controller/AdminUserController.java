@@ -40,7 +40,9 @@ import javax.xml.transform.Templates;
 
 public class AdminUserController implements Initializable {
 
-    ObservableList<User> userList = FXCollections.observableArrayList();    
+    ObservableList<User> userList = FXCollections.observableArrayList();  
+    
+    private User selectedUser = null;
     
     @FXML
     private Button backButton;
@@ -119,6 +121,9 @@ public class AdminUserController implements Initializable {
     private TableColumn<User, String> usernameColumn;
 
     @FXML
+    private TableColumn<User, Integer> userIDColumn;
+
+    @FXML
     private Label usernameLabel;
 
     @FXML
@@ -133,7 +138,6 @@ public class AdminUserController implements Initializable {
         initializeCol();
         displayUsers();
 
-    // Make table and columns editable
     userTable.setEditable(true);
     usernameColumn.setEditable(false);
     passwordColumn.setEditable(true);
@@ -147,20 +151,20 @@ public class AdminUserController implements Initializable {
     passwordColumn.setOnEditCommit(event -> {
         User user = event.getRowValue();
         user.setUserPassword(event.getNewValue());
-        DatabaseHandler.updateUser(user);
-        displayUsers();
+        // DatabaseHandler.updateUser(user);
+        // displayUsers();
     });
     emailColumn.setOnEditCommit(event -> {
         User user = event.getRowValue();
         user.setUserEmail(event.getNewValue());
-        DatabaseHandler.updateUser(user);
-        displayUsers();
+        // DatabaseHandler.updateUser(user);
+        // displayUsers();
     });
     bioColumn.setOnEditCommit(event -> {
         User user = event.getRowValue();
         user.setUserBio(event.getNewValue());
-        DatabaseHandler.updateUser(user);
-        displayUsers();
+        // DatabaseHandler.updateUser(user);
+        // displayUsers();
     });
         userTable.setOnMouseClicked(event -> {
         if (event.getClickCount() == 1 && userTable.getSelectionModel().getSelectedItem() != null) {
@@ -174,6 +178,7 @@ public class AdminUserController implements Initializable {
 
     }
     private void initializeCol() {
+        userIDColumn.setCellValueFactory(new PropertyValueFactory<>("userID"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<>("userPassword"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("userEmail"));
@@ -185,18 +190,28 @@ public class AdminUserController implements Initializable {
         ResultSet result = DatabaseHandler.getUser();
         try {
             while (result.next()) {
+                int userID = result.getInt("userID");
                 String username = result.getString("userName");
                 String password = result.getString("userPassword");
                 String email = result.getString("userEmail");
                 String bio = result.getString("userBio");
 
-                User user = new User(username, password, email, bio);
+                User user = new User(userID, username, password, email, bio);
                 userList.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         userTable.setItems(userList);
+    }
+
+    private void clearForm() {
+        usernameTextField.clear();
+        passwordTextField.clear();
+        emailTextField.clear();
+        bioTextField.clear();
+        selectedUser = null;
+        updateButton.setDisable(true);
     }
 
     @FXML
@@ -207,7 +222,7 @@ public class AdminUserController implements Initializable {
         String email = emailTextField.getText();
         String bio = bioTextField.getText();
 
-        User user = new User(username, password, email, bio);
+        User user = new User(0, username, password, email, bio);
 
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || bio.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -223,6 +238,8 @@ public class AdminUserController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("User created successfully!");
             alert.showAndWait();
+
+            clearForm();
 
         } else {
             Alert alert = new Alert(AlertType.ERROR);
@@ -278,28 +295,51 @@ public class AdminUserController implements Initializable {
             return;
         }
 
+        // selectedUser.setUserPassword(passwordTextField.getText());
+        // selectedUser.setUserEmail(emailTextField.getText());
+        // selectedUser.setUserBio(bioTextField.getText()); 
+
         String password = passwordTextField.getText();
         String email = emailTextField.getText();
         String bio = bioTextField.getText();
 
-        User updatedUser = new User(selectedUser.getUserName(),password, email, bio);
+        User updatedUser = new User(0, selectedUser.getUserName(),password, email, bio);
 
-        if (DatabaseHandler.updateUser(updatedUser)) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("User updated successfully!");
-            alert.showAndWait();
-            displayUsers();
 
-    }   else {
+    if (DatabaseHandler.updateUser(selectedUser)) {
+        
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText("User updated successfully!");
+        alert.showAndWait();
+        displayUsers();
 
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to update the account.");
-            alert.showAndWait();
-        }
+    } else {
+
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Failed to update the account.");
+        alert.showAndWait();
+    }
+
+    //     if (DatabaseHandler.updateUser(updatedUser)) {
+    //         Alert alert = new Alert(AlertType.INFORMATION);
+    //         alert.setTitle("Success");
+    //         alert.setHeaderText(null);
+    //         alert.setContentText("User updated successfully!");
+    //         alert.showAndWait();
+    //         displayUsers();
+
+    // }   else {
+
+    //         Alert alert = new Alert(AlertType.ERROR);
+    //         alert.setTitle("Error");
+    //         alert.setHeaderText(null);
+    //         alert.setContentText("Failed to update the account.");
+    //         alert.showAndWait();
+    //     }
     }
 
     @FXML
