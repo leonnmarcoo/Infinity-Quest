@@ -13,7 +13,7 @@ public class Content {
     private final SimpleStringProperty contentSynopsis;
     private final SimpleStringProperty contentDirector;
     private final SimpleIntegerProperty contentPhase;
-    private final SimpleIntegerProperty contentAgeRating;
+    private final SimpleStringProperty contentAgeRating;
     private final SimpleIntegerProperty contentChronologicalOrder;
     private final SimpleStringProperty contentPoster;
     private final SimpleStringProperty contentTrailer;
@@ -21,7 +21,7 @@ public class Content {
     public Content(int contentID, String contentTitle, String contentRuntime,
         Integer contentSeason, Integer contentEpisode, LocalDate contentReleaseDate,
         String contentSynopsis, String contentDirector, int contentPhase,
-        int contentAgeRating, int contentChronologicalOrder,
+        String contentAgeRating, int contentChronologicalOrder,
         String contentPoster, String contentTrailer) {
 
         this.contentID = new SimpleIntegerProperty(contentID);
@@ -33,7 +33,7 @@ public class Content {
         this.contentSynopsis = new SimpleStringProperty(contentSynopsis);
         this.contentDirector = new SimpleStringProperty(contentDirector);
         this.contentPhase = new SimpleIntegerProperty(contentPhase);
-        this.contentAgeRating = new SimpleIntegerProperty(contentAgeRating);
+        this.contentAgeRating = new SimpleStringProperty(contentAgeRating);
         this.contentChronologicalOrder = new SimpleIntegerProperty(contentChronologicalOrder);
         this.contentPoster = new SimpleStringProperty(contentPoster);
         this.contentTrailer = new SimpleStringProperty(contentTrailer);
@@ -66,7 +66,7 @@ public class Content {
     public int getContentPhase() { 
         return contentPhase.get(); }
 
-    public int getContentAgeRating() { 
+    public String getContentAgeRating() { 
         return contentAgeRating.get(); }
 
     public int getContentChronologicalOrder() { 

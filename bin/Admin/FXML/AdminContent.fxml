@@ -155,12 +155,12 @@
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="2.0" layoutY="747.0" text="Trailer Link" textFill="WHITE">
+                                          <Label fx:id="mTrailerlinkLabel" layoutX="2.0" layoutY="747.0" text="Trailer Link" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="mTrailerLinkTextField" layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -255,32 +255,32 @@
                                              </font>
                                           </Label>
                                           <ComboBox fx:id="tAgeRatingTextfield" layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
-                                          <Label layoutX="2.0" layoutY="747.0" text="Chronological Order" textFill="WHITE">
+                                          <Label fx:id="tChronologicalOrderLabel" layoutX="2.0" layoutY="747.0" text="Chronological Order" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tChronologicalOrderTextField" layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="2.0" layoutY="830.0" text="Poster" textFill="WHITE">
+                                          <Label fx:id="tPosterLabel" layoutX="2.0" layoutY="830.0" text="Poster" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutY="863.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tPosterTextField" layoutY="863.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="2.0" layoutY="913.0" text="Trailer Link" textFill="WHITE">
+                                          <Label fx:id="tTrailerLinkLabel" layoutX="2.0" layoutY="913.0" text="Trailer Link" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutY="946.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tTrailerLinkTextField" layoutY="946.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -312,7 +312,7 @@
                   <TableColumn fx:id="TrailerColumn" prefWidth="88.9696044921875" text="Trailer" />
               </columns>
             </TableView>
-            <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+            <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" onAction="#createContentHandler" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
@@ -322,7 +322,7 @@
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="deleteButton" layoutX="1147.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+            <Button fx:id="deleteButton" layoutX="1147.0" layoutY="817.0" mnemonicParsing="false" onAction="#deleteContentHandler" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
