@@ -26,7 +26,7 @@
                   <Image url="@../../Images/Background/Admin%20Content.png" />
                </image>
             </ImageView>
-            <Button fx:id="userButton" layoutX="450.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="userButton" layoutX="450.0" layoutY="32.0" mnemonicParsing="false" onAction="#userButtonHandler" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
@@ -295,21 +295,21 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <TableView layoutX="430.0" layoutY="120.0" prefHeight="662.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+            <TableView fx:id="contentTable" layoutX="430.0" layoutY="120.0" prefHeight="662.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
               <columns>
-                <TableColumn prefWidth="75.0" text="ContentID" />
-                <TableColumn prefWidth="75.0" text="Title" />
-                  <TableColumn prefWidth="75.0" text="Runtime" />
-                  <TableColumn prefWidth="75.0" text="Season" />
-                  <TableColumn prefWidth="75.0" text="Episode" />
-                  <TableColumn prefWidth="115.07574462890625" text="Release Date" />
-                  <TableColumn prefWidth="91.92425537109375" text="Synopsis" />
-                  <TableColumn prefWidth="68.3712158203125" text="Director" />
-                  <TableColumn prefWidth="62.3409423828125" text="Phase" />
-                  <TableColumn prefWidth="74.4090576171875" text="Age Rating" />
-                  <TableColumn prefWidth="120.7802734375" text="Chronological Order" />
-                  <TableColumn prefWidth="44.977294921875" text="Poster" />
-                  <TableColumn prefWidth="88.9696044921875" text="Trailer" />
+                <TableColumn fx:id="ContentIDColumn" prefWidth="75.0" text="ContentID" />
+                <TableColumn fx:id="TitleColumn" prefWidth="75.0" text="Title" />
+                  <TableColumn fx:id="RuntimeColumn" prefWidth="75.0" text="Runtime" />
+                  <TableColumn fx:id="SeasonColumn" prefWidth="75.0" text="Season" />
+                  <TableColumn fx:id="EpisodeColumn" prefWidth="75.0" text="Episode" />
+                  <TableColumn fx:id="ReleaseDateColumn" prefWidth="115.07574462890625" text="Release Date" />
+                  <TableColumn fx:id="SynopsisColumn" prefWidth="91.92425537109375" text="Synopsis" />
+                  <TableColumn fx:id="DirectorColumn" prefWidth="68.3712158203125" text="Director" />
+                  <TableColumn fx:id="PhaseColumn" prefWidth="62.3409423828125" text="Phase" />
+                  <TableColumn fx:id="AgeRatingColumn" prefWidth="74.4090576171875" text="Age Rating" />
+                  <TableColumn fx:id="ChronologicalOrderColumn" prefWidth="120.7802734375" text="Chronological Order" />
+                  <TableColumn fx:id="PosterColumn" prefWidth="44.977294921875" text="Poster" />
+                  <TableColumn fx:id="TrailerColumn" prefWidth="88.9696044921875" text="Trailer" />
               </columns>
             </TableView>
             <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
@@ -327,7 +327,7 @@
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
+            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>

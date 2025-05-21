@@ -215,6 +215,22 @@ public class AdminUserController implements Initializable {
     }
 
     @FXML
+    private void contentButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminContent.fxml"));
+
+            root = loader.load();
+
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void createUser(ActionEvent event) throws IOException {
 
         String username = usernameTextField.getText();
