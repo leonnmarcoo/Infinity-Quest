@@ -442,60 +442,60 @@ private void loadDirectorOptions() {
         stage.show();
     }
 
-@FXML
-private void createContentHandler(ActionEvent event) throws IOException {
-    String title, runtime, synopsis, director, ageRating, poster, trailer;
-    Integer season = null, episode = null, chronologicalOrder = null, phase = null;
-    LocalDate releaseDate;
+    @FXML
+    private void createContentHandler(ActionEvent event) throws IOException {
+        String title, runtime, synopsis, director, ageRating, poster, trailer;
+        Integer season = null, episode = null, chronologicalOrder = null, phase = null;
+        LocalDate releaseDate;
 
-    if (contentTabPane.getSelectionModel().getSelectedItem() == movieTab) {
+        if (contentTabPane.getSelectionModel().getSelectedItem() == movieTab) {
 
-        title = mTitleTextfield.getText();
-        runtime = mRuntimeTextfield.getText();
-        synopsis = mSynopsisTextfield.getText();
-        director = mDirectorCombobox.getValue();
-        phase = mPhaseCombobox.getValue() != null ? Integer.parseInt(mPhaseCombobox.getValue()) : null;
-        ageRating = mAgeRatingCombobox.getValue();
-        chronologicalOrder = mChronologicalOrderTextfield.getText().isEmpty() ? null : Integer.parseInt(mChronologicalOrderTextfield.getText());
-        poster = mPosterTextfield.getText();
-        trailer = mTrailerLinkTextField.getText();
-        releaseDate = mReleaseDatePicker.getValue();
+            title = mTitleTextfield.getText();
+            runtime = mRuntimeTextfield.getText();
+            synopsis = mSynopsisTextfield.getText();
+            director = mDirectorCombobox.getValue();
+            phase = mPhaseCombobox.getValue() != null ? Integer.parseInt(mPhaseCombobox.getValue()) : null;
+            ageRating = mAgeRatingCombobox.getValue();
+            chronologicalOrder = mChronologicalOrderTextfield.getText().isEmpty() ? null : Integer.parseInt(mChronologicalOrderTextfield.getText());
+            poster = mPosterTextfield.getText();
+            trailer = mTrailerLinkTextField.getText();
+            releaseDate = mReleaseDatePicker.getValue();
 
-    } else {
+        } else {
 
-        title = tShowTitleTextField.getText();
-        runtime = tAverageRuntimeTextField.getText();
-        synopsis = tSynopsisTextfield.getText();
-        director = tDirectorTextfield.getValue();
-        phase = tPhaseTextfield.getValue() != null ? Integer.parseInt(tPhaseTextfield.getValue()) : null;
-        ageRating = tAgeRatingTextfield.getValue();
-        season = tSeasonTextField.getText().isEmpty() ? null : Integer.parseInt(tSeasonTextField.getText());
-        episode = tEpisodeTextfield.getText().isEmpty() ? null : Integer.parseInt(tEpisodeTextfield.getText());
-        poster = tPosterTextField.getText();
-        trailer = tTrailerLinkTextField.getText();
-        releaseDate = tReleaseDatePicker.getValue();
-        chronologicalOrder = tChronologicalOrderTextField.getText().isEmpty() ? null : Integer.parseInt(tChronologicalOrderTextField.getText());
+            title = tShowTitleTextField.getText();
+            runtime = tAverageRuntimeTextField.getText();
+            synopsis = tSynopsisTextfield.getText();
+            director = tDirectorTextfield.getValue();
+            phase = tPhaseTextfield.getValue() != null ? Integer.parseInt(tPhaseTextfield.getValue()) : null;
+            ageRating = tAgeRatingTextfield.getValue();
+            season = tSeasonTextField.getText().isEmpty() ? null : Integer.parseInt(tSeasonTextField.getText());
+            episode = tEpisodeTextfield.getText().isEmpty() ? null : Integer.parseInt(tEpisodeTextfield.getText());
+            poster = tPosterTextField.getText();
+            trailer = tTrailerLinkTextField.getText();
+            releaseDate = tReleaseDatePicker.getValue();
+            chronologicalOrder = tChronologicalOrderTextField.getText().isEmpty() ? null : Integer.parseInt(tChronologicalOrderTextField.getText());
+        }
+
+        Content content = new Content(
+            0, title, runtime, season, episode, releaseDate,
+            synopsis, director, phase != null ? phase : 0, ageRating, 
+            chronologicalOrder != null ? chronologicalOrder : 0, poster, trailer
+        );
+
+        DatabaseHandler.createContent(content);
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Content Added");
+            alert.setHeaderText(null);
+            alert.setContentText("Content has been created successfully.");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.showAndWait();
+
+        displayContent();
+        
+        clearForm();
     }
-
-    Content content = new Content(
-        0, title, runtime, season, episode, releaseDate,
-        synopsis, director, phase != null ? phase : 0, ageRating, 
-        chronologicalOrder != null ? chronologicalOrder : 0, poster, trailer
-    );
-
-    DatabaseHandler.createContent(content);
-
-    Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Content Added");
-        alert.setHeaderText(null);
-        alert.setContentText("Content has been created successfully.");
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.showAndWait();
-
-    displayContent();
-    
-    clearForm();
-  }
 
     @FXML
     private void deleteContentHandler(ActionEvent event) {
@@ -531,73 +531,73 @@ private void createContentHandler(ActionEvent event) throws IOException {
     }
 
     @FXML
-private void updateContentHandler(ActionEvent event) {
-    Content selectedContent = contentTable.getSelectionModel().getSelectedItem();
-    if (selectedContent == null) {
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.setTitle("No Selection");
-        alert.setHeaderText(null);
-        alert.setContentText("Please select a content item to update.");
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.showAndWait();
-        return;
+    private void updateContentHandler(ActionEvent event) {
+        Content selectedContent = contentTable.getSelectionModel().getSelectedItem();
+        if (selectedContent == null) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a content item to update.");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.showAndWait();
+            return;
+        }
+
+        String title, runtime, synopsis, director, ageRating, poster, trailer;
+        Integer season = null, episode = null, chronologicalOrder = null, phase = null;
+        LocalDate releaseDate;
+
+        if (contentTabPane.getSelectionModel().getSelectedItem() == movieTab) {
+            title = mTitleTextfield.getText();
+            runtime = mRuntimeTextfield.getText();
+            synopsis = mSynopsisTextfield.getText();
+            director = mDirectorCombobox.getValue();
+            phase = mPhaseCombobox.getValue() != null ? Integer.parseInt(mPhaseCombobox.getValue()) : null;
+            ageRating = mAgeRatingCombobox.getValue();
+            chronologicalOrder = mChronologicalOrderTextfield.getText().isEmpty() ? null : Integer.parseInt(mChronologicalOrderTextfield.getText());
+            poster = mPosterTextfield.getText();
+            trailer = mTrailerLinkTextField.getText();
+            releaseDate = mReleaseDatePicker.getValue();
+        } else {
+            title = tShowTitleTextField.getText();
+            runtime = tAverageRuntimeTextField.getText();
+            synopsis = tSynopsisTextfield.getText();
+            director = tDirectorTextfield.getValue();
+            phase = tPhaseTextfield.getValue() != null ? Integer.parseInt(tPhaseTextfield.getValue()) : null;
+            ageRating = tAgeRatingTextfield.getValue();
+            season = tSeasonTextField.getText().isEmpty() ? null : Integer.parseInt(tSeasonTextField.getText());
+            episode = tEpisodeTextfield.getText().isEmpty() ? null : Integer.parseInt(tEpisodeTextfield.getText());
+            poster = tPosterTextField.getText();
+            trailer = tTrailerLinkTextField.getText();
+            releaseDate = tReleaseDatePicker.getValue();
+            chronologicalOrder = tChronologicalOrderTextField.getText().isEmpty() ? null : Integer.parseInt(tChronologicalOrderTextField.getText());
+        }
+
+        Content updatedContent = new Content(
+            selectedContent.getContentID(),
+            title, runtime, season, episode, releaseDate,
+            synopsis, director, phase != null ? phase : 0, ageRating,
+            chronologicalOrder != null ? chronologicalOrder : 0, poster, trailer
+        );
+
+        boolean success = DatabaseHandler.updateContent(updatedContent);
+        if (success) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Updated");
+            alert.setHeaderText(null);
+            alert.setContentText("Content has been updated successfully.");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.showAndWait();
+            displayContent();
+            clearForm();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to update content.");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.showAndWait();
+        }
     }
-
-    String title, runtime, synopsis, director, ageRating, poster, trailer;
-    Integer season = null, episode = null, chronologicalOrder = null, phase = null;
-    LocalDate releaseDate;
-
-    if (contentTabPane.getSelectionModel().getSelectedItem() == movieTab) {
-        title = mTitleTextfield.getText();
-        runtime = mRuntimeTextfield.getText();
-        synopsis = mSynopsisTextfield.getText();
-        director = mDirectorCombobox.getValue();
-        phase = mPhaseCombobox.getValue() != null ? Integer.parseInt(mPhaseCombobox.getValue()) : null;
-        ageRating = mAgeRatingCombobox.getValue();
-        chronologicalOrder = mChronologicalOrderTextfield.getText().isEmpty() ? null : Integer.parseInt(mChronologicalOrderTextfield.getText());
-        poster = mPosterTextfield.getText();
-        trailer = mTrailerLinkTextField.getText();
-        releaseDate = mReleaseDatePicker.getValue();
-    } else {
-        title = tShowTitleTextField.getText();
-        runtime = tAverageRuntimeTextField.getText();
-        synopsis = tSynopsisTextfield.getText();
-        director = tDirectorTextfield.getValue();
-        phase = tPhaseTextfield.getValue() != null ? Integer.parseInt(tPhaseTextfield.getValue()) : null;
-        ageRating = tAgeRatingTextfield.getValue();
-        season = tSeasonTextField.getText().isEmpty() ? null : Integer.parseInt(tSeasonTextField.getText());
-        episode = tEpisodeTextfield.getText().isEmpty() ? null : Integer.parseInt(tEpisodeTextfield.getText());
-        poster = tPosterTextField.getText();
-        trailer = tTrailerLinkTextField.getText();
-        releaseDate = tReleaseDatePicker.getValue();
-        chronologicalOrder = tChronologicalOrderTextField.getText().isEmpty() ? null : Integer.parseInt(tChronologicalOrderTextField.getText());
-    }
-
-    Content updatedContent = new Content(
-        selectedContent.getContentID(),
-        title, runtime, season, episode, releaseDate,
-        synopsis, director, phase != null ? phase : 0, ageRating,
-        chronologicalOrder != null ? chronologicalOrder : 0, poster, trailer
-    );
-
-    boolean success = DatabaseHandler.updateContent(updatedContent);
-    if (success) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Updated");
-        alert.setHeaderText(null);
-        alert.setContentText("Content has been updated successfully.");
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.showAndWait();
-        displayContent();
-        clearForm();
-    } else {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Failed to update content.");
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.showAndWait();
-    }
-}
 
 }
