@@ -294,34 +294,49 @@ public class DatabaseHandler {
         return false;
     }
 
-    public static boolean updateContent(Content content) {
+public static boolean updateContent(Content content) {
+    try {
+        pstatement = getDBConnection().prepareStatement(
+            "UPDATE Content SET contentTitle = ?, contentRuntime = ?, contentSeason = ?, contentEpisode = ?, contentReleaseDate = ?, contentSynopsis = ?, contentDirector = ?, contentPhase = ?, contentAgeRating = ?, contentChronologicalOrder = ?, contentPoster = ?, contentTrailer = ? WHERE contentID = ?"
+        );
 
-        try {
-            pstatement = getDBConnection().prepareStatement(
-                "UPDATE Content SET contentTitle = ?, contentRuntime = ?, contentSeason = ?, contentEpisode = ?, contentReleaseDate = ?, contentSynopsis = ?, contentDirector = ?, contentPhase = ?, contentAgeRating = ?, contentChronologicalOrder = ?, contentPoster = ?, contentTrailer = ? WHERE contentID = ?"
-            );
+        pstatement.setString(1, content.getContentTitle());
+        pstatement.setString(2, content.getContentRuntime());
 
-            pstatement.setString(1, content.getContentTitle());
-            pstatement.setString(2, content.getContentRuntime());
+        if (content.getContentSeason() != null) {
             pstatement.setInt(3, content.getContentSeason());
-            pstatement.setInt(4, content.getContentEpisode());
-            pstatement.setDate(5, java.sql.Date.valueOf(content.getContentReleaseDate()));
-            pstatement.setString(6, content.getContentSynopsis());
-            pstatement.setString(7, content.getContentDirector());
-            pstatement.setInt(8, content.getContentPhase());
-            pstatement.setString(9, content.getContentAgeRating());
-            pstatement.setInt(10, content.getContentChronologicalOrder());
-            pstatement.setString(11, content.getContentPoster());
-            pstatement.setString(12, content.getContentTrailer());
-            pstatement.setInt(13, content.getContentID());
-
-            int res = pstatement.executeUpdate();
-            if (res > 0) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            pstatement.setNull(3, java.sql.Types.INTEGER);
         }
-        return false;
+
+        if (content.getContentEpisode() != null) {
+            pstatement.setInt(4, content.getContentEpisode());
+        } else {
+            pstatement.setNull(4, java.sql.Types.INTEGER);
+        }
+
+        if (content.getContentReleaseDate() != null) {
+            pstatement.setDate(5, java.sql.Date.valueOf(content.getContentReleaseDate()));
+        } else {
+            pstatement.setNull(5, java.sql.Types.DATE);
+        }
+
+        pstatement.setString(6, content.getContentSynopsis());
+        pstatement.setString(7, content.getContentDirector());
+        pstatement.setInt(8, content.getContentPhase());
+        pstatement.setString(9, content.getContentAgeRating());
+        pstatement.setInt(10, content.getContentChronologicalOrder());
+        pstatement.setString(11, content.getContentPoster());
+        pstatement.setString(12, content.getContentTrailer());
+        pstatement.setInt(13, content.getContentID());
+
+        int res = pstatement.executeUpdate();
+        if (res > 0) {
+            return true;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return false;
+}
 }   
