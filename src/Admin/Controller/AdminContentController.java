@@ -362,7 +362,7 @@ private void loadDirectorOptions() {
         PosterColumn.setCellValueFactory(new PropertyValueFactory<>("contentPoster"));
         TrailerColumn.setCellValueFactory(new PropertyValueFactory<>("contentTrailer"));
     
-}
+    }
 
     private void displayContent() {
         try {
