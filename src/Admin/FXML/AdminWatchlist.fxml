@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -15,6 +20,62 @@
                   <Image url="@../../Images/Background/Admin%20Watchlist.png" />
                </image>
             </ImageView>
+            <Label layoutX="40.0" layoutY="120.0" text="Watchlist Data" textFill="#ce2431">
+               <font>
+                  <Font name="Geist Bold" size="32.0" />
+               </font>
+            </Label>
+            <Button layoutX="40.0" layoutY="178.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="40.0" layoutY="233.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+            </Button>
+            <TableView layoutX="430.0" layoutY="120.0" prefHeight="341.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+              <columns>
+                <TableColumn prefWidth="189.40313720703125" text="WatchlistID" />
+                <TableColumn prefWidth="359.54266357421875" text="User" />
+                  <TableColumn prefWidth="491.45733642578125" text="Movie/TV Show" />
+              </columns>
+            </TableView>
+            <Label layoutX="40.0" layoutY="491.0" text="Watched Data" textFill="#ce2431">
+               <font>
+                  <Font name="Geist Bold" size="32.0" />
+               </font>
+            </Label>
+            <Button layoutX="40.0" layoutY="549.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="40.0" layoutY="604.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+            </Button>
+            <TableView layoutX="430.0" layoutY="491.0" prefHeight="341.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+               <columns>
+                  <TableColumn prefWidth="189.40313720703125" text="WatchedID" />
+                  <TableColumn prefWidth="359.54266357421875" text="User" />
+                  <TableColumn prefWidth="491.45733642578125" text="Movie/TV Show" />
+               </columns>
+            </TableView>
+            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0">
+                     <image>
+                        <Image url="@../../Images/Icons/Back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
    </children>
