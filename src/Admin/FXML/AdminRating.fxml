@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="982.0" fitWidth="1512.0">
                <image>
-                  <Image url="@../../Images/Background/Admin%20Watchlist.png" />
+                  <Image url="@../../Images/Background/Admin%20Rating.png" />
                </image>
             </ImageView>
             <Button fx:id="userButton" layoutX="450.0" layoutY="32.0" mnemonicParsing="false" onAction="#userButtonHandler" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: Transparent;" textFill="WHITE">
@@ -59,51 +59,30 @@
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Label layoutX="40.0" layoutY="120.0" text="Watchlist Data" textFill="#ce2431">
+            <Label fx:id="userLabel" layoutX="40.0" layoutY="120.0" text="Rating Data" textFill="#ce2431">
                <font>
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <Button layoutX="40.0" layoutY="178.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="40.0" layoutY="233.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <TableView layoutX="430.0" layoutY="120.0" prefHeight="341.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+            <TableView layoutX="40.0" layoutY="173.0" prefHeight="609.0" prefWidth="1432.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
               <columns>
-                <TableColumn prefWidth="189.40313720703125" text="WatchlistID" />
-                <TableColumn prefWidth="359.54266357421875" text="User" />
-                  <TableColumn prefWidth="491.45733642578125" text="Movie/TV Show" />
+                <TableColumn prefWidth="137.8127899169922" text="RatingID" />
+                <TableColumn prefWidth="394.20069885253906" text="User" />
+                  <TableColumn prefWidth="696.4732055664062" text="Movie/TV Show" />
+                  <TableColumn prefWidth="201.02685546875" text="Rating" />
               </columns>
             </TableView>
-            <Label layoutX="40.0" layoutY="491.0" text="Watched Data" textFill="#ce2431">
-               <font>
-                  <Font name="Geist Bold" size="32.0" />
-               </font>
-            </Label>
-            <Button layoutX="40.0" layoutY="549.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+            <Button layoutX="40.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="40.0" layoutY="604.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+            <Button layoutX="405.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <TableView layoutX="430.0" layoutY="491.0" prefHeight="341.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
-               <columns>
-                  <TableColumn prefWidth="189.40313720703125" text="WatchedID" />
-                  <TableColumn prefWidth="359.54266357421875" text="User" />
-                  <TableColumn prefWidth="491.45733642578125" text="Movie/TV Show" />
-               </columns>
-            </TableView>
-            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
+            <Button graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
