@@ -5,6 +5,10 @@ import java.sql.*;
 import Objects.Admin;
 import Objects.User;
 import Objects.Content;
+import Objects.Actor;
+import Objects.Role;
+import Objects.Cast;
+import Objects.Director;
 
 public class DatabaseHandler {
     private static DatabaseHandler handler = null;
@@ -76,7 +80,6 @@ public class DatabaseHandler {
 // ============================ CRUD ADMIN ===============================
 
     public static ResultSet getAdmin() {
-        
         ResultSet result = null;
         try {
             String query = "SELECT * FROM Admin";
@@ -89,7 +92,6 @@ public class DatabaseHandler {
     }
 
     public static boolean createAdmin(Admin admin) {
-
         try {
             pstatement = getDBConnection().prepareStatement("INSERT INTO Admin (adminName, adminPassword) VALUES (?, ?)");
             pstatement.setString(1, admin.getAdminName());
@@ -103,7 +105,6 @@ public class DatabaseHandler {
     }
 
     public static boolean deleteAdmin(Admin admin) {
-
         try {
             pstatement = getDBConnection().prepareStatement("DELETE FROM Admin WHERE adminID = ?");
             pstatement.setInt(1, admin.getAdminID());
@@ -119,7 +120,6 @@ public class DatabaseHandler {
     }
 
     public static boolean updateAdmin(Admin admin) {
-
         try {
             pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
             pstatement.setString(1, admin.getAdminName());
@@ -154,7 +154,6 @@ public class DatabaseHandler {
 
 
     public static boolean createUser(User user) {
-
         try {
             pstatement = getDBConnection().prepareStatement("INSERT INTO User (userName, userPassword, userEmail, userBio) VALUES (?, ?, ?, ?)");
             pstatement.setString(1, user.getUserName());
@@ -169,7 +168,6 @@ public class DatabaseHandler {
     }
 
     public static boolean deleteUser(User user) {
-
         try {
             pstatement = getDBConnection().prepareStatement("DELETE FROM User WHERE userName = ?");
             pstatement.setString(1, user.getUserName());
@@ -185,7 +183,6 @@ public class DatabaseHandler {
     }
 
     public static boolean updateUser(User user) {
-
         try {
             pstatement = getDBConnection().prepareStatement("UPDATE User SET userPassword = ?, userEmail = ?, userBio = ? WHERE userName = ?");
             pstatement.setString(1, user.getUserPassword());
@@ -338,5 +335,64 @@ public static boolean updateContent(Content content) {
         e.printStackTrace();
     }
     return false;
-}
+    }
+
+// ============================ CRUD ACTOR ===============================
+
+    public static ResultSet getActor() {
+        
+        ResultSet result = null;
+        try {
+            String query = "SELECT * FROM Actor";
+            result = handler.execQuery(query);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static boolean createActor(Actor actor) {
+        try {
+            pstatement = getDBConnection().prepareStatement("INSERT INTO Actor (actorName) VALUES (?)");
+            pstatement.setString(1, actor.getActorName());
+
+            return pstatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteActor(Actor actor) {
+        try {
+            pstatement = getDBConnection().prepareStatement("DELETE FROM Actor WHERE actorID = ?");
+            pstatement.setInt(1, actor.getActorID());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // public static boolean updateActor(Actor actor) {
+    //     try {
+    //         pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
+    //         pstatement.setString(1, admin.getAdminName());
+    //         pstatement.setString(2, admin.getAdminPassword());
+    //         pstatement.setInt(3, admin.getAdminID());
+
+    //         int res = pstatement.executeUpdate();
+    //         if (res > 0) {
+    //             return true;
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return false;
+    // }
 }   

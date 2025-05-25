@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.Controller.AdminCastController">
    <children>
       <AnchorPane prefHeight="982.0" prefWidth="1512.0">
          <children>
@@ -69,7 +69,7 @@
                </font></Label>
             <TabPane layoutX="40.0" layoutY="173.0" prefHeight="709.0" prefWidth="1432.0" style="-fx-background-color: Transparent;" tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" tabMinWidth="100.0">
               <tabs>
-                <Tab style="-fx-background-color: #CE2431;" text="Actor &amp; Role">
+                <Tab fx:id="actorAndRoleTab" style="-fx-background-color: #CE2431;" text="Actor &amp; Role">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="1432.0">
                            <children>
@@ -78,28 +78,28 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="mActorTextfield" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter actor name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                              <TextField fx:id="actorTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter actor name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                  <font>
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
                               </TextField>
                               <TableView fx:id="actorTable" layoutX="390.0" prefHeight="317.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                                 <columns>
-                                  <TableColumn prefWidth="518.8897705078125" text="ActorID" />
-                                  <TableColumn prefWidth="520.9364013671875" text="Actor Name" />
+                                  <TableColumn fx:id="actorIDColumn" prefWidth="518.8897705078125" text="ActorID" />
+                                  <TableColumn fx:id="actorNameColumn" prefWidth="520.9364013671875" text="Actor Name" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="createButton" graphicTextGap="2.0" layoutY="93.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+                              <Button fx:id="createActorButton" graphicTextGap="2.0" layoutY="93.0" mnemonicParsing="false" onAction="#createActor" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="updateButton" graphicTextGap="2.0" layoutX="120.0" layoutY="93.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+                              <Button fx:id="updateActorButton" graphicTextGap="2.0" layoutX="120.0" layoutY="93.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="deleteButton" graphicTextGap="2.0" layoutX="240.0" layoutY="93.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+                              <Button fx:id="deleteActorButton" graphicTextGap="2.0" layoutX="240.0" layoutY="93.0" mnemonicParsing="false" onAction="#deleteActor" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
@@ -109,28 +109,28 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <TextField layoutY="375.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter role name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                              <TextField fx:id="roleTextField" layoutY="375.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter role name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                  <font>
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
                               </TextField>
-                              <TableView fx:id="actorTable1" layoutX="390.0" layoutY="342.0" prefHeight="317.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+                              <TableView fx:id="roleTable" layoutX="390.0" layoutY="342.0" prefHeight="317.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                                  <columns>
-                                    <TableColumn prefWidth="518.8897705078125" text="RoleID" />
-                                    <TableColumn prefWidth="520.9364013671875" text="Role Name" />
+                                    <TableColumn fx:id="roleIDColumn" prefWidth="518.8897705078125" text="RoleID" />
+                                    <TableColumn fx:id="roleNameColumn" prefWidth="520.9364013671875" text="Role Name" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="createButton1" graphicTextGap="2.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+                              <Button fx:id="createRoleButton" graphicTextGap="2.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="updateButton1" graphicTextGap="2.0" layoutX="120.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+                              <Button fx:id="updateRoleButton" graphicTextGap="2.0" layoutX="120.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="deleteButton1" graphicTextGap="2.0" layoutX="240.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+                              <Button fx:id="deleteRoleButton" graphicTextGap="2.0" layoutX="240.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
@@ -139,7 +139,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab style="-fx-background-color: #CE2431;" text="Cast">
+                  <Tab fx:id="castTab" style="-fx-background-color: #CE2431;" text="Cast">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="1432.0">
                            <children>
@@ -148,38 +148,38 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an actor" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                              <ComboBox fx:id="actorComboBox" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an actor" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
                               <Label layoutX="2.0" layoutY="83.0" text="Role" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a role" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                              <ComboBox fx:id="roleComboBox" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a role" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
                               <Label layoutX="2.0" layoutY="166.0" text="Movie/TV Show" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a movie or TV show" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
-                              <TableView layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+                              <ComboBox fx:id="contentComboBox" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a movie or TV show" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                              <TableView fx:id="castTable" layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                                 <columns>
-                                  <TableColumn prefWidth="128.62921142578125" text="CastID" />
-                                  <TableColumn prefWidth="288.62530517578125" text="Actor" />
-                                    <TableColumn prefWidth="288.37469482421875" text="Role" />
-                                    <TableColumn prefWidth="335.0013427734375" text="Movie/TV Show" />
+                                  <TableColumn fx:id="castIDColumn" prefWidth="128.62921142578125" text="CastID" />
+                                  <TableColumn fx:id="actorColumn" prefWidth="288.62530517578125" text="Actor" />
+                                    <TableColumn fx:id="roleColumn" prefWidth="288.37469482421875" text="Role" />
+                                    <TableColumn fx:id="contentColumn" prefWidth="335.0013427734375" text="Movie/TV Show" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="390.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+                              <Button fx:id="createCastButton" layoutX="390.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="748.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+                              <Button fx:id="updateCastButton" layoutX="748.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="1107.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+                              <Button fx:id="deleteCastButton" layoutX="1107.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
@@ -188,7 +188,7 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab style="-fx-background-color: #CE2431;" text="Director">
+                  <Tab fx:id="directorTab" style="-fx-background-color: #CE2431;" text="Director">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="1432.0">
                            <children>
@@ -197,28 +197,28 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="mActorTextfield2" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter director name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                              <TextField fx:id="directorTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter director name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
                                  <font>
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
                               </TextField>
-                              <TableView layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+                              <TableView fx:id="directorTable" layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                                 <columns>
-                                  <TableColumn prefWidth="516.4096069335938" text="DirectorID" />
-                                  <TableColumn prefWidth="522.0903930664062" text="Director Name" />
+                                  <TableColumn fx:id="directorIDColumn" prefWidth="516.4096069335938" text="DirectorID" />
+                                  <TableColumn fx:id="directorNameColumn" prefWidth="522.0903930664062" text="Director Name" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="390.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+                              <Button fx:id="createDirectorButton" layoutX="390.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="748.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+                              <Button fx:id="updateDirectorButton" layoutX="748.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="1107.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+                              <Button fx:id="deleteDirectorButton" layoutX="1107.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
