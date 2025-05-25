@@ -52,213 +52,213 @@ public class AdminContentController implements Initializable {
 
 // ======================= TABLEVIEW AND COLUMNS =======================
 
-@FXML private TableView<Content> contentTable;
+    @FXML private TableView<Content> contentTable;
 
-@FXML 
-private TableColumn<Content, Integer> ContentIDColumn;
+    @FXML 
+    private TableColumn<Content, Integer> ContentIDColumn;
 
-@FXML 
-private TableColumn<Content, String> TitleColumn;
+    @FXML 
+    private TableColumn<Content, String> TitleColumn;
 
-@FXML 
-private TableColumn<Content, String> RuntimeColumn;
+    @FXML 
+    private TableColumn<Content, String> RuntimeColumn;
 
-@FXML 
-private TableColumn<Content, Integer> SeasonColumn;
+    @FXML 
+    private TableColumn<Content, Integer> SeasonColumn;
 
-@FXML 
-private TableColumn<Content, Integer> EpisodeColumn;
+    @FXML 
+    private TableColumn<Content, Integer> EpisodeColumn;
 
-@FXML 
-private TableColumn<Content, LocalDate> ReleaseDateColumn;
+    @FXML 
+    private TableColumn<Content, LocalDate> ReleaseDateColumn;
 
-@FXML 
-private TableColumn<Content, String> SynopsisColumn;
+    @FXML 
+    private TableColumn<Content, String> SynopsisColumn;
 
-@FXML 
-private TableColumn<Content, String> DirectorColumn;
+    @FXML 
+    private TableColumn<Content, String> DirectorColumn;
 
-@FXML 
-private TableColumn<Content, Integer> PhaseColumn;
+    @FXML 
+    private TableColumn<Content, Integer> PhaseColumn;
 
-@FXML 
-private TableColumn<Content, String> AgeRatingColumn;
+    @FXML 
+    private TableColumn<Content, String> AgeRatingColumn;
 
-@FXML 
-private TableColumn<Content, Integer> ChronologicalOrderColumn;
+    @FXML 
+    private TableColumn<Content, Integer> ChronologicalOrderColumn;
 
-@FXML 
-private TableColumn<Content, String> PosterColumn;
+    @FXML 
+    private TableColumn<Content, String> PosterColumn;
 
-@FXML 
-private TableColumn<Content, String> TrailerColumn;
+    @FXML 
+    private TableColumn<Content, String> TrailerColumn;
 
 // ========================== FORM CONTROLS ===========================
 
-@FXML 
-private TextField mTitleTextfield;
+    @FXML 
+    private TextField mTitleTextfield;
 
-@FXML 
-private TextField mRuntimeTextfield;
+    @FXML 
+    private TextField mRuntimeTextfield;
 
-@FXML 
-private TextField mPosterTextfield;
+    @FXML 
+    private TextField mPosterTextfield;
 
-@FXML 
-private TextField mChronologicalOrderTextfield;
+    @FXML 
+    private TextField mChronologicalOrderTextfield;
 
-@FXML 
-private TextArea mSynopsisTextfield;
+    @FXML 
+    private TextArea mSynopsisTextfield;
 
-@FXML 
-private DatePicker mReleaseDatePicker;
+    @FXML 
+    private DatePicker mReleaseDatePicker;
 
-@FXML 
-private ComboBox<String> mDirectorCombobox;
+    @FXML 
+    private ComboBox<String> mDirectorCombobox;
 
-@FXML 
-private ComboBox<String> mPhaseCombobox;
+    @FXML 
+    private ComboBox<String> mPhaseCombobox;
 
-@FXML 
-private ComboBox<String> mAgeRatingCombobox;
+    @FXML 
+    private ComboBox<String> mAgeRatingCombobox;
 
-@FXML 
-private TextField tShowTitleTextField;
+    @FXML 
+    private TextField tShowTitleTextField;
 
-@FXML 
-private TextField tSeasonTextField;
+    @FXML 
+    private TextField tSeasonTextField;
 
-@FXML 
-private TextField tEpisodeTextfield;
+    @FXML 
+    private TextField tEpisodeTextfield;
 
-@FXML 
-private TextArea tSynopsisTextfield;
+    @FXML 
+    private TextArea tSynopsisTextfield;
 
-@FXML 
-private DatePicker tReleaseDatePicker;
+    @FXML 
+    private DatePicker tReleaseDatePicker;
 
-@FXML 
-private ComboBox<String> tDirectorTextfield;
+    @FXML 
+    private ComboBox<String> tDirectorTextfield;
 
-@FXML 
-private ComboBox<String> tPhaseTextfield;
+    @FXML 
+    private ComboBox<String> tPhaseTextfield;
 
-@FXML 
-private ComboBox<String> tAgeRatingTextfield;
+    @FXML 
+    private ComboBox<String> tAgeRatingTextfield;
 
-@FXML 
-private TextField tAverageRuntimeTextField;
+    @FXML 
+    private TextField tAverageRuntimeTextField;
 
-@FXML
-private TextField mTrailerLinkTextField;
+    @FXML
+    private TextField mTrailerLinkTextField;
 
-@FXML
-private TextField tTrailerLinkTextField;
+    @FXML
+    private TextField tTrailerLinkTextField;
 
-@FXML
-private TextField tPosterTextField;
+    @FXML
+    private TextField tPosterTextField;
 
-@FXML
-private TextField tChronologicalOrderTextField;
+    @FXML
+    private TextField tChronologicalOrderTextField;
 
 // ======================== LABELS FOR DISPLAY =========================
 
-@FXML 
-private Label mTitleLabel;
+    @FXML 
+    private Label mTitleLabel;
 
-@FXML 
-private Label mRuntimeLabel;
+    @FXML 
+    private Label mRuntimeLabel;
 
-@FXML 
-private Label tTvShowTitleLabel;
+    @FXML 
+    private Label tTvShowTitleLabel;
 
-@FXML 
-private Label tSeasonLabel;
+    @FXML 
+    private Label tSeasonLabel;
 
-@FXML 
-private Label tEpisodeLabel;
+    @FXML 
+    private Label tEpisodeLabel;
 
-@FXML 
-private Label tReleaseDateLabel;
+    @FXML 
+    private Label tReleaseDateLabel;
 
-@FXML 
-private Label tSynopsisLabel;
+    @FXML 
+    private Label tSynopsisLabel;
 
-@FXML 
-private Label tDirectorLabel;
+    @FXML 
+    private Label tDirectorLabel;
 
-@FXML 
-private Label tPhaseLabel;
+    @FXML 
+    private Label tPhaseLabel;
 
-@FXML 
-private Label tAgeRatingLabel;
+    @FXML 
+    private Label tAgeRatingLabel;
 
-@FXML 
-private Label tAverageRuntimeLabel;
+    @FXML 
+    private Label tAverageRuntimeLabel;
 
-@FXML
-private Label mTrailerlinkLabel;
+    @FXML
+    private Label mTrailerlinkLabel;
 
-@FXML
-private Label tTrailerLinkLabel;
+    @FXML
+    private Label tTrailerLinkLabel;
 
-@FXML
-private Label tPosterLabel;
+    @FXML
+    private Label tPosterLabel;
 
-@FXML
-private Label tChronologicalOrderLabel;
+    @FXML
+    private Label tChronologicalOrderLabel;
 
-@FXML 
-private Label userLabel;
+    @FXML 
+    private Label userLabel;
 
 // ============================ BUTTONS ===============================
 
-@FXML 
-private Button backButton;
+    @FXML 
+    private Button backButton;
 
-@FXML 
-private Button userButton;
+    @FXML 
+    private Button userButton;
 
-@FXML 
-private Button contentButton;
+    @FXML 
+    private Button contentButton;
 
-@FXML 
-private Button castButton;
+    @FXML 
+    private Button castButton;
 
-@FXML 
-private Button watchlistButton;
+    @FXML 
+    private Button watchlistButton;
 
-@FXML 
-private Button ratingButton;
+    @FXML 
+    private Button ratingButton;
 
-@FXML 
-private Button reviewButton;
+    @FXML 
+    private Button reviewButton;
 
-@FXML 
-private Button likeButton;
+    @FXML 
+    private Button likeButton;
 
-@FXML 
-private Button dislikeButton;
+    @FXML 
+    private Button dislikeButton;
 
-@FXML 
-private Button createButton;
+    @FXML 
+    private Button createButton;
 
-@FXML 
-private Button deleteButton;
+    @FXML 
+    private Button deleteButton;
 
-@FXML 
-private Button updateButton;
+    @FXML 
+    private Button updateButton;
 
 // ============================== TABS ================================
 
-@FXML 
-private TabPane contentTabPane;
+    @FXML 
+    private TabPane contentTabPane;
 
-@FXML 
-private Tab movieTab;
+    @FXML 
+    private Tab movieTab;
 
-@FXML 
-private Tab tvshowTab;
+    @FXML 
+    private Tab tvshowTab;
 
     private Stage stage;
 
