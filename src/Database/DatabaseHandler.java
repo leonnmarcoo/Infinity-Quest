@@ -52,7 +52,7 @@ public class DatabaseHandler {
         return result;
     }
 
-    // VALIDATE ADMIN LOGIN
+// ============================ VALIDATE ADMIN LOGIN ===============================
 
     public static boolean validateadminLogin(String adminName, String adminPassword){
 
@@ -73,7 +73,7 @@ public class DatabaseHandler {
         return false;
     }
 
-    // CRUD Admin
+// ============================ CRUD ADMIN ===============================
 
     public static ResultSet getAdmin() {
         
@@ -136,7 +136,7 @@ public class DatabaseHandler {
         return false;
     }
 
-    // CRUD ADMIN-SIDE User
+// ============================ CRUD USER ===============================
 
     public static ResultSet getUser() { 
     getInstance();
@@ -203,7 +203,7 @@ public class DatabaseHandler {
         return false;
     }
 
-    // CRUD ADMIN-SIDE Content
+// ============================ CRUD CONTENT ===============================
 
     public static ResultSet getContent() { 
         getInstance();
