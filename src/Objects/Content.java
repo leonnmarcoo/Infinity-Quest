@@ -40,42 +40,55 @@ public class Content {
     }
 
     public int getContentID() { 
-        return contentID.get(); }
+        return contentID.get(); 
+    }
 
     public String getContentTitle() { 
-        return contentTitle.get(); }
+        return contentTitle.get(); 
+    }
 
     public String getContentRuntime() { 
-        return contentRuntime.get(); }
+        return contentRuntime.get(); 
+    }
 
     public Integer getContentSeason() { 
-        return contentSeason.get(); }
+        return contentSeason.get(); 
+    }
 
     public Integer getContentEpisode() { 
-        return contentEpisode.get(); }
+        return contentEpisode.get(); 
+    }
 
     public LocalDate getContentReleaseDate() { 
-        return contentReleaseDate.get(); }
+        return contentReleaseDate.get(); 
+    }
 
     public String getContentSynopsis() { 
-        return contentSynopsis.get(); }
+        return contentSynopsis.get(); 
+    }
 
     public String getContentDirector() { 
-        return contentDirector.get(); }
+        return contentDirector.get(); 
+    }
 
     public int getContentPhase() { 
-        return contentPhase.get(); }
+        return contentPhase.get(); 
+    }
 
     public String getContentAgeRating() { 
-        return contentAgeRating.get(); }
+        return contentAgeRating.get(); 
+    }
 
     public int getContentChronologicalOrder() { 
-        return contentChronologicalOrder.get(); }
+        return contentChronologicalOrder.get(); 
+    }
 
     public String getContentPoster() { 
-        return contentPoster.get(); }
+        return contentPoster.get(); 
+    }
 
     public String getContentTrailer() { 
-        return contentTrailer.get(); } 
+        return contentTrailer.get(); 
+    } 
 
 }

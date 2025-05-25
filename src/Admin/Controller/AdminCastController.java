@@ -4,6 +4,7 @@ import Objects.Actor;
 import Objects.Role;
 import Objects.Cast;
 import Objects.Director;
+import Objects.Content;
 import Database.DatabaseHandler;
 
 import java.awt.Desktop;
@@ -59,8 +60,11 @@ public class AdminCastController implements Initializable {
     ObservableList<Director> directorList = FXCollections.observableArrayList();
 
 // ============================== ACTOR & ROLE TAB ================================
+
     @FXML
     private Tab actorAndRoleTab;
+
+// ============================== ACTOR ================================
 
     @FXML
     private TextField actorTextField;
@@ -82,6 +86,8 @@ public class AdminCastController implements Initializable {
 
     @FXML
     private Button deleteActorButton;
+
+// ============================== ROLE ================================
 
     @FXML
     private TextField roleTextField;
@@ -106,8 +112,44 @@ public class AdminCastController implements Initializable {
 
 // ============================== CAST TAB ================================
 
+    @FXML
+    private Tab castTab;
+
+    @FXML
+    private ComboBox <Actor> actorComboBox;
+
+    @FXML
+    private ComboBox <Role> roleComboBox;
+
+    @FXML
+    private ComboBox <Content> contentComboBox;
+
+    @FXML
+    private TableView<Cast> castTable;
+
+    @FXML
+    private TableColumn<Cast, Integer> castIDColumn;
+
+    @FXML
+    private TableColumn<Cast, String> actorColumn;
+
+    @FXML
+    private TableColumn<Cast, String> roleColumn;
+
+    @FXML
+    private TableColumn<Cast, String> contentColumn;
+
+    @FXML
+    private Button addCastButton;
+
+    @FXML
+    private Button updateCastButton;
+
+    @FXML
+    private Button deleteCastButton;
 
 // ============================== DIRECTOR TAB ================================
+
     @FXML
     private Tab directorTab;
 
