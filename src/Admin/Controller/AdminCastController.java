@@ -318,16 +318,84 @@ public class AdminCastController implements Initializable {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);
-            alert.setContentText("Actor deleted successfully!");
+            alert.setContentText("Role deleted successfully!");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("Failed to delete actor");
+            alert.setContentText("Failed to delete role");
             alert.showAndWait();
         }
         displayRole();
+    }
+
+// ============================ DIRECTOR ===============================
+
+    private void displayDirector() {
+        directorList.clear();
+
+        ResultSet result = DatabaseHandler.getDirector();
+
+        try {
+            while (result.next()) {
+                int directorID = result.getInt("directorID");
+                String directorName = result.getString("directorName");
+                Director director = new Director(directorID, directorName);
+                directorList.add(director);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        directorTable.setItems(directorList);
+    }
+
+    @FXML
+    private void createDirector(ActionEvent event) throws IOException {
+
+        String directorName = directorTextField.getText();
+        
+        directorName = directorName.trim();
+
+        Director director = new Director(0, directorName);
+
+        if (DatabaseHandler.createDirector(director)) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Director created successfully!");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to create director");
+            alert.showAndWait();
+        }
+        displayDirector();
+    }
+
+    @FXML
+    private void deleteDirector (ActionEvent event) {
+
+        Director director = directorTable.getSelectionModel().getSelectedItem();
+
+        int directorID = director.getDirectorID();
+
+        if (DatabaseHandler.deleteDirector(director)) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Director deleted successfully!");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to delete director");
+            alert.showAndWait();
+        }
+        displayDirector();
     }
 
 }

@@ -454,4 +454,63 @@ public static boolean updateContent(Content content) {
     //     }
     //     return false;
     // }
+
+// ============================ CRUD DIRECTOR ===============================
+
+    public static ResultSet getDirector() {
+        
+        ResultSet result = null;
+        try {
+            String query = "SELECT * FROM Director";
+            result = handler.execQuery(query);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static boolean createDirector(Director director) {
+        try {
+            pstatement = getDBConnection().prepareStatement("INSERT INTO Director (directorName) VALUES (?)");
+            pstatement.setString(1, director.getDirectorName());
+
+            return pstatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteDirector(Director director) {
+        try {
+            pstatement = getDBConnection().prepareStatement("DELETE FROM Director WHERE directorID = ?");
+            pstatement.setInt(1, director.getDirectorID());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // public static boolean updateDirector(Director director) {
+    //     try {
+    //         pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
+    //         pstatement.setString(1, admin.getAdminName());
+    //         pstatement.setString(2, admin.getAdminPassword());
+    //         pstatement.setInt(3, admin.getAdminID());
+
+    //         int res = pstatement.executeUpdate();
+    //         if (res > 0) {
+    //             return true;
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return false;
+    // }
 }   
