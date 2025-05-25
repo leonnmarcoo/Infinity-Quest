@@ -120,7 +120,7 @@
                                     <TableColumn fx:id="roleNameColumn" prefWidth="520.9364013671875" text="Role Name" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="createRoleButton" graphicTextGap="2.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+                              <Button fx:id="createRoleButton" graphicTextGap="2.0" layoutY="435.0" mnemonicParsing="false" onAction="#createRole" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
@@ -130,7 +130,7 @@
                                     <Font name="Geist Black" size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="deleteRoleButton" graphicTextGap="2.0" layoutX="240.0" layoutY="435.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+                              <Button fx:id="deleteRoleButton" graphicTextGap="2.0" layoutX="240.0" layoutY="435.0" mnemonicParsing="false" onAction="#deleteRole" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Black" size="14.0" />
                                  </font>

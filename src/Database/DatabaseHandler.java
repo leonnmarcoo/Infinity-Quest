@@ -395,4 +395,63 @@ public static boolean updateContent(Content content) {
     //     }
     //     return false;
     // }
+
+    // ============================ CRUD ROLE ===============================
+
+    public static ResultSet getRole() {
+        
+        ResultSet result = null;
+        try {
+            String query = "SELECT * FROM Role";
+            result = handler.execQuery(query);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static boolean createRole(Role role) {
+        try {
+            pstatement = getDBConnection().prepareStatement("INSERT INTO Role (roleName) VALUES (?)");
+            pstatement.setString(1, role.getRoleName());
+
+            return pstatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteRole(Role role) {
+        try {
+            pstatement = getDBConnection().prepareStatement("DELETE FROM Role WHERE roleID = ?");
+            pstatement.setInt(1, role.getRoleID());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // public static boolean updateRole(Role role) {
+    //     try {
+    //         pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
+    //         pstatement.setString(1, admin.getAdminName());
+    //         pstatement.setString(2, admin.getAdminPassword());
+    //         pstatement.setInt(3, admin.getAdminID());
+
+    //         int res = pstatement.executeUpdate();
+    //         if (res > 0) {
+    //             return true;
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return false;
+    // }
 }   

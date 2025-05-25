@@ -282,4 +282,52 @@ public class AdminCastController implements Initializable {
         roleTable.setItems(roleList);
     }
 
+    @FXML
+    private void createRole(ActionEvent event) throws IOException {
+
+        String roleName = roleTextField.getText();
+        
+        roleName = roleName.trim();
+
+        Role role = new Role(0, roleName);
+
+        if (DatabaseHandler.createRole(role)) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Role created successfully!");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to create role");
+            alert.showAndWait();
+        }
+        displayRole();
+    }
+
+    @FXML
+    private void deleteRole (ActionEvent event) {
+
+        Role role = roleTable.getSelectionModel().getSelectedItem();
+
+        int roleID = role.getRoleID();
+
+        if (DatabaseHandler.deleteRole(role)) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Actor deleted successfully!");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to delete actor");
+            alert.showAndWait();
+        }
+        displayRole();
+    }
+
 }
