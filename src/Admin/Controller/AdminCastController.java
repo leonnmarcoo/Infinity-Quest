@@ -215,6 +215,8 @@ public class AdminCastController implements Initializable {
         initializeDirectorColumn();
         
         displayActor();
+        displayRole();
+        displayDirector();
     }
 
     private void initializeActorColumn() {
@@ -372,6 +374,10 @@ public class AdminCastController implements Initializable {
         displayRole();
     }
 
+// ============================ CAST ===============================
+
+    
+
 // ============================ DIRECTOR ===============================
 
     private void displayDirector() {
@@ -440,4 +446,14 @@ public class AdminCastController implements Initializable {
         displayDirector();
     }
 
+// ============================ NAVIGATION ===============================
+
+    @FXML
+    private void backButtonHandler(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/Admin/FXML/AdminHome.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
