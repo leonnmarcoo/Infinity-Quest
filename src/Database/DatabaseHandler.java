@@ -216,62 +216,62 @@ public class DatabaseHandler {
         return result;
     }
 
-    public static ResultSet getAllDirectors() {
-        getInstance();
-        ResultSet result = null;
+public static ResultSet getAllDirectors() {
+    getInstance();
+    ResultSet result = null;
 
     try {
-        String query = "SELECT DISTINCT directorName FROM Director ORDER BY directorName ASC";
+        String query = "SELECT directorID, directorName FROM Director ORDER BY directorName ASC";
         result = handler.execQuery(query);
     } catch (Exception e) {
         e.printStackTrace();
     }
 
-        return result;
-    }
+    return result;
+}
 
     public static boolean createContent(Content content) {
-    try {
-        pstatement = getDBConnection().prepareStatement(
-            "INSERT INTO Content (contentTitle, contentRuntime, contentSeason, contentEpisode, contentReleaseDate, contentSynopsis, contentDirector, contentPhase, contentAgeRating, contentChronologicalOrder, contentPoster, contentTrailer) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        );
+        try {
+            pstatement = getDBConnection().prepareStatement(
+                "INSERT INTO Content (contentTitle, contentRuntime, contentSeason, contentEpisode, contentReleaseDate, contentSynopsis, directorID, contentPhase, contentAgeRating, contentChronologicalOrder, contentPoster, contentTrailer) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            );
 
-        pstatement.setString(1, content.getContentTitle());
-        pstatement.setString(2, content.getContentRuntime());
+            pstatement.setString(1, content.getContentTitle());
+            pstatement.setString(2, content.getContentRuntime());
 
-        if (content.getContentSeason() != null) {
-            pstatement.setInt(3, content.getContentSeason());
-        } else {
-            pstatement.setNull(3, java.sql.Types.INTEGER);
+            if (content.getContentSeason() != null) {
+                pstatement.setInt(3, content.getContentSeason());
+            } else {
+                pstatement.setNull(3, java.sql.Types.INTEGER);
+            }
+
+            if (content.getContentEpisode() != null) {
+                pstatement.setInt(4, content.getContentEpisode());
+            } else {
+                pstatement.setNull(4, java.sql.Types.INTEGER);
+            }
+
+            if (content.getContentReleaseDate() != null) {
+                pstatement.setString(5, content.getContentReleaseDate().toString());
+            } else {
+                pstatement.setNull(5, java.sql.Types.VARCHAR);
+            }
+
+            pstatement.setString(6, content.getContentSynopsis());
+            pstatement.setInt(7, content.getDirectorID());
+            pstatement.setInt(8, content.getContentPhase());
+            pstatement.setString(9, content.getContentAgeRating());
+            pstatement.setInt(10, content.getContentChronologicalOrder());
+            pstatement.setString(11, content.getContentPoster());
+            pstatement.setString(12, content.getContentTrailer());
+
+            return pstatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        if (content.getContentEpisode() != null) {
-            pstatement.setInt(4, content.getContentEpisode());
-        } else {
-            pstatement.setNull(4, java.sql.Types.INTEGER);
-        }
-
-        if (content.getContentReleaseDate() != null) {
-            pstatement.setDate(5, java.sql.Date.valueOf(content.getContentReleaseDate()));
-        } else {
-            pstatement.setNull(5, java.sql.Types.DATE);
-        }
-
-        pstatement.setString(6, content.getContentSynopsis());
-        pstatement.setString(7, content.getContentDirector());
-        pstatement.setInt(8, content.getContentPhase());
-        pstatement.setString(9, content.getContentAgeRating());
-        pstatement.setInt(10, content.getContentChronologicalOrder());
-        pstatement.setString(11, content.getContentPoster());
-        pstatement.setString(12, content.getContentTrailer());
-
-        return pstatement.executeUpdate() > 0;
-    } catch (Exception e) {
-        e.printStackTrace();
+        return false;
     }
-    return false;
- }
 
 
 
@@ -291,50 +291,50 @@ public class DatabaseHandler {
         return false;
     }
 
-public static boolean updateContent(Content content) {
-    try {
-        pstatement = getDBConnection().prepareStatement(
-            "UPDATE Content SET contentTitle = ?, contentRuntime = ?, contentSeason = ?, contentEpisode = ?, contentReleaseDate = ?, contentSynopsis = ?, contentDirector = ?, contentPhase = ?, contentAgeRating = ?, contentChronologicalOrder = ?, contentPoster = ?, contentTrailer = ? WHERE contentID = ?"
-        );
+    public static boolean updateContent(Content content) {
+        try {
+            pstatement = getDBConnection().prepareStatement(
+                "UPDATE Content SET contentTitle = ?, contentRuntime = ?, contentSeason = ?, contentEpisode = ?, contentReleaseDate = ?, contentSynopsis = ?, directorID = ?, ContentPhase = ?, contentAgeRating = ?, contentChronologicalOrder = ?, contentPoster = ?, contentTrailer = ? WHERE contentID = ?"
+            );
 
-        pstatement.setString(1, content.getContentTitle());
-        pstatement.setString(2, content.getContentRuntime());
+            pstatement.setString(1, content.getContentTitle());
+            pstatement.setString(2, content.getContentRuntime());
 
-        if (content.getContentSeason() != null) {
-            pstatement.setInt(3, content.getContentSeason());
-        } else {
-            pstatement.setNull(3, java.sql.Types.INTEGER);
+            if (content.getContentSeason() != null) {
+                pstatement.setInt(3, content.getContentSeason());
+            } else {
+                pstatement.setNull(3, java.sql.Types.INTEGER);
+            }
+
+            if (content.getContentEpisode() != null) {
+                pstatement.setInt(4, content.getContentEpisode());
+            } else {
+                pstatement.setNull(4, java.sql.Types.INTEGER);
+            }
+
+            if (content.getContentReleaseDate() != null) {
+                pstatement.setString(5, content.getContentReleaseDate().toString());
+            } else {
+                pstatement.setNull(5, java.sql.Types.VARCHAR);
+            }
+
+            pstatement.setString(6, content.getContentSynopsis());
+            pstatement.setInt(7, content.getDirectorID());
+            pstatement.setInt(8, content.getContentPhase());
+            pstatement.setString(9, content.getContentAgeRating());
+            pstatement.setInt(10, content.getContentChronologicalOrder());
+            pstatement.setString(11, content.getContentPoster());
+            pstatement.setString(12, content.getContentTrailer());
+            pstatement.setInt(13, content.getContentID());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        if (content.getContentEpisode() != null) {
-            pstatement.setInt(4, content.getContentEpisode());
-        } else {
-            pstatement.setNull(4, java.sql.Types.INTEGER);
-        }
-
-        if (content.getContentReleaseDate() != null) {
-            pstatement.setDate(5, java.sql.Date.valueOf(content.getContentReleaseDate()));
-        } else {
-            pstatement.setNull(5, java.sql.Types.DATE);
-        }
-
-        pstatement.setString(6, content.getContentSynopsis());
-        pstatement.setString(7, content.getContentDirector());
-        pstatement.setInt(8, content.getContentPhase());
-        pstatement.setString(9, content.getContentAgeRating());
-        pstatement.setInt(10, content.getContentChronologicalOrder());
-        pstatement.setString(11, content.getContentPoster());
-        pstatement.setString(12, content.getContentTrailer());
-        pstatement.setInt(13, content.getContentID());
-
-        int res = pstatement.executeUpdate();
-        if (res > 0) {
-            return true;
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return false;
+        return false;
     }
 
 // ============================ CRUD ACTOR ===============================
