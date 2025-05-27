@@ -11,7 +11,7 @@ public class Content {
     private final SimpleObjectProperty<Integer> contentEpisode;
     private final SimpleObjectProperty<LocalDate> contentReleaseDate;
     private final SimpleStringProperty contentSynopsis;
-    private final SimpleStringProperty contentDirector;
+    private final SimpleIntegerProperty directorID;
     private final SimpleIntegerProperty contentPhase;
     private final SimpleStringProperty contentAgeRating;
     private final SimpleIntegerProperty contentChronologicalOrder;
@@ -20,7 +20,7 @@ public class Content {
 
     public Content(int contentID, String contentTitle, String contentRuntime,
         Integer contentSeason, Integer contentEpisode, LocalDate contentReleaseDate,
-        String contentSynopsis, String contentDirector, int contentPhase,
+        String contentSynopsis, Integer directorID, int contentPhase,
         String contentAgeRating, int contentChronologicalOrder,
         String contentPoster, String contentTrailer) {
 
@@ -31,7 +31,7 @@ public class Content {
         this.contentEpisode = new SimpleObjectProperty<>(contentEpisode);
         this.contentReleaseDate = new SimpleObjectProperty<>(contentReleaseDate);
         this.contentSynopsis = new SimpleStringProperty(contentSynopsis);
-        this.contentDirector = new SimpleStringProperty(contentDirector);
+        this.directorID = new SimpleIntegerProperty(directorID);
         this.contentPhase = new SimpleIntegerProperty(contentPhase);
         this.contentAgeRating = new SimpleStringProperty(contentAgeRating);
         this.contentChronologicalOrder = new SimpleIntegerProperty(contentChronologicalOrder);
@@ -67,8 +67,8 @@ public class Content {
         return contentSynopsis.get(); 
     }
 
-    public String getContentDirector() { 
-        return contentDirector.get(); 
+    public int getDirectorID() { 
+        return directorID.get(); 
     }
 
     public int getContentPhase() { 

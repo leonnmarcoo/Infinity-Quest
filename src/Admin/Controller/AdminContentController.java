@@ -48,6 +48,8 @@ import javax.naming.spi.DirStateFactory;
 import javax.xml.transform.Templates;
 
 
+
+
 public class AdminContentController implements Initializable {
 
 // ======================= TABLEVIEW AND COLUMNS =======================
@@ -260,6 +262,9 @@ public class AdminContentController implements Initializable {
     @FXML 
     private Tab tvshowTab;
 
+    private final java.util.Map<String, Integer> directorNameToID = new java.util.HashMap<>();
+    private final java.util.Map<Integer, String> directorIDToName = new java.util.HashMap<>();
+
     private Stage stage;
 
     private Scene scene;
@@ -270,8 +275,8 @@ public class AdminContentController implements Initializable {
         initializeCol();
         loadPhaseOptions();
         loadAgeRatingOptions();
-        displayContent();
         loadDirectorOptions();
+        displayContent();
 
         List<String> allPhases = Arrays.asList("1", "2", "3", "4", "5", "6");
             tPhaseTextfield.setItems(FXCollections.observableArrayList(allPhases));
@@ -295,7 +300,7 @@ public class AdminContentController implements Initializable {
             mTitleTextfield.setText(newSelection.getContentTitle());
             mRuntimeTextfield.setText(newSelection.getContentRuntime());
             mSynopsisTextfield.setText(newSelection.getContentSynopsis());
-            mDirectorCombobox.setValue(newSelection.getContentDirector());
+            mDirectorCombobox.setValue(directorIDToName.get(newSelection.getDirectorID()));
             mPhaseCombobox.setValue(String.valueOf(newSelection.getContentPhase()));
             mAgeRatingCombobox.setValue(newSelection.getContentAgeRating());
             mChronologicalOrderTextfield.setText(String.valueOf(newSelection.getContentChronologicalOrder()));
@@ -306,7 +311,7 @@ public class AdminContentController implements Initializable {
             tShowTitleTextField.setText(newSelection.getContentTitle());
             tAverageRuntimeTextField.setText(newSelection.getContentRuntime());
             tSynopsisTextfield.setText(newSelection.getContentSynopsis());
-            tDirectorTextfield.setValue(newSelection.getContentDirector());
+            tDirectorTextfield.setValue(directorIDToName.get(newSelection.getDirectorID()));
             tPhaseTextfield.setValue(String.valueOf(newSelection.getContentPhase()));
             tAgeRatingTextfield.setValue(newSelection.getContentAgeRating());
             tSeasonTextField.setText(newSelection.getContentSeason() != null ? String.valueOf(newSelection.getContentSeason()) : "");
@@ -331,20 +336,23 @@ public class AdminContentController implements Initializable {
 
 }
 
-private void loadDirectorOptions() {
-    ObservableList<String> directors = FXCollections.observableArrayList();
-    try {
-        ResultSet rs = DatabaseHandler.getAllDirectors();
-        while (rs.next()) {
-            directors.add(rs.getString("directorName"));
+    private void loadDirectorOptions() {
+        ObservableList<String> directors = FXCollections.observableArrayList();
+        try {
+            ResultSet rs = DatabaseHandler.getAllDirectors();
+            while (rs.next()) {
+                String name = rs.getString("directorName");
+                int id = rs.getInt("directorID");
+                directors.add(name);
+                directorNameToID.put(name, id);
+                directorIDToName.put(id, name);
+            }
+            mDirectorCombobox.setItems(directors);
+            tDirectorTextfield.setItems(directors);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        mDirectorCombobox.setItems(directors);
-        tDirectorTextfield.setItems(directors); // <-- Add this line
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
-    contentTable.setEditable(true);
-}
 
     @FXML
     public void initializeCol() {
@@ -355,7 +363,11 @@ private void loadDirectorOptions() {
         EpisodeColumn.setCellValueFactory(new PropertyValueFactory<>("contentEpisode"));
         ReleaseDateColumn.setCellValueFactory(new PropertyValueFactory<>("contentReleaseDate"));
         SynopsisColumn.setCellValueFactory(new PropertyValueFactory<>("contentSynopsis"));
-        DirectorColumn.setCellValueFactory(new PropertyValueFactory<>("contentDirector"));
+        DirectorColumn.setCellValueFactory(cellData -> {
+            int directorID = cellData.getValue().getDirectorID();
+            String directorName = directorIDToName.getOrDefault(directorID, "");
+            return new SimpleStringProperty(directorName);
+        });
         PhaseColumn.setCellValueFactory(new PropertyValueFactory<>("contentPhase"));
         AgeRatingColumn.setCellValueFactory(new PropertyValueFactory<>("contentAgeRating"));
         ChronologicalOrderColumn.setCellValueFactory(new PropertyValueFactory<>("contentChronologicalOrder"));
@@ -377,7 +389,7 @@ private void loadDirectorOptions() {
                 java.sql.Date sqlDate = rs.getDate("contentReleaseDate");
                 LocalDate releaseDate = (sqlDate != null) ? sqlDate.toLocalDate() : null;
                 String synopsis = rs.getString("contentSynopsis");
-                String director = rs.getString("contentDirector");
+                int director = rs.getInt("directorID");
                 int phase = rs.getInt("contentPhase");
                 String ageRating = rs.getString("contentAgeRating");
                 int chronologicalOrder = rs.getInt("contentChronologicalOrder");
@@ -444,29 +456,29 @@ private void loadDirectorOptions() {
 
     @FXML
     private void createContentHandler(ActionEvent event) throws IOException {
-        String title, runtime, synopsis, director, ageRating, poster, trailer;
+        String title, runtime, synopsis, ageRating, poster, trailer;
         Integer season = null, episode = null, chronologicalOrder = null, phase = null;
         LocalDate releaseDate;
+        int directorID = 0;
 
         if (contentTabPane.getSelectionModel().getSelectedItem() == movieTab) {
-
             title = mTitleTextfield.getText();
             runtime = mRuntimeTextfield.getText();
             synopsis = mSynopsisTextfield.getText();
-            director = mDirectorCombobox.getValue();
+            String directorName = mDirectorCombobox.getValue();
+            directorID = (directorName != null && directorNameToID.containsKey(directorName)) ? directorNameToID.get(directorName) : 0;
             phase = mPhaseCombobox.getValue() != null ? Integer.parseInt(mPhaseCombobox.getValue()) : null;
             ageRating = mAgeRatingCombobox.getValue();
             chronologicalOrder = mChronologicalOrderTextfield.getText().isEmpty() ? null : Integer.parseInt(mChronologicalOrderTextfield.getText());
             poster = mPosterTextfield.getText();
             trailer = mTrailerLinkTextField.getText();
             releaseDate = mReleaseDatePicker.getValue();
-
         } else {
-
             title = tShowTitleTextField.getText();
             runtime = tAverageRuntimeTextField.getText();
             synopsis = tSynopsisTextfield.getText();
-            director = tDirectorTextfield.getValue();
+            String directorName = tDirectorTextfield.getValue();
+            directorID = (directorName != null && directorNameToID.containsKey(directorName)) ? directorNameToID.get(directorName) : 0;
             phase = tPhaseTextfield.getValue() != null ? Integer.parseInt(tPhaseTextfield.getValue()) : null;
             ageRating = tAgeRatingTextfield.getValue();
             season = tSeasonTextField.getText().isEmpty() ? null : Integer.parseInt(tSeasonTextField.getText());
@@ -479,21 +491,20 @@ private void loadDirectorOptions() {
 
         Content content = new Content(
             0, title, runtime, season, episode, releaseDate,
-            synopsis, director, phase != null ? phase : 0, ageRating, 
+            synopsis, directorID, phase != null ? phase : 0, ageRating, 
             chronologicalOrder != null ? chronologicalOrder : 0, poster, trailer
         );
 
         DatabaseHandler.createContent(content);
 
         Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Content Added");
-            alert.setHeaderText(null);
-            alert.setContentText("Content has been created successfully.");
-            alert.initModality(Modality.APPLICATION_MODAL);
-            alert.showAndWait();
+        alert.setTitle("Content Added");
+        alert.setHeaderText(null);
+        alert.setContentText("Content has been created successfully.");
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.showAndWait();
 
         displayContent();
-        
         clearForm();
     }
 
@@ -543,15 +554,17 @@ private void loadDirectorOptions() {
             return;
         }
 
-        String title, runtime, synopsis, director, ageRating, poster, trailer;
+        String title, runtime, synopsis, directorName, ageRating, poster, trailer;
         Integer season = null, episode = null, chronologicalOrder = null, phase = null;
         LocalDate releaseDate;
+        int directorID = 0;
 
         if (contentTabPane.getSelectionModel().getSelectedItem() == movieTab) {
             title = mTitleTextfield.getText();
             runtime = mRuntimeTextfield.getText();
             synopsis = mSynopsisTextfield.getText();
-            director = mDirectorCombobox.getValue();
+            directorName = mDirectorCombobox.getValue();
+            directorID = (directorName != null && directorNameToID.containsKey(directorName)) ? directorNameToID.get(directorName) : 0;
             phase = mPhaseCombobox.getValue() != null ? Integer.parseInt(mPhaseCombobox.getValue()) : null;
             ageRating = mAgeRatingCombobox.getValue();
             chronologicalOrder = mChronologicalOrderTextfield.getText().isEmpty() ? null : Integer.parseInt(mChronologicalOrderTextfield.getText());
@@ -562,7 +575,8 @@ private void loadDirectorOptions() {
             title = tShowTitleTextField.getText();
             runtime = tAverageRuntimeTextField.getText();
             synopsis = tSynopsisTextfield.getText();
-            director = tDirectorTextfield.getValue();
+            directorName = tDirectorTextfield.getValue();
+            directorID = (directorName != null && directorNameToID.containsKey(directorName)) ? directorNameToID.get(directorName) : 0;
             phase = tPhaseTextfield.getValue() != null ? Integer.parseInt(tPhaseTextfield.getValue()) : null;
             ageRating = tAgeRatingTextfield.getValue();
             season = tSeasonTextField.getText().isEmpty() ? null : Integer.parseInt(tSeasonTextField.getText());
@@ -576,7 +590,7 @@ private void loadDirectorOptions() {
         Content updatedContent = new Content(
             selectedContent.getContentID(),
             title, runtime, season, episode, releaseDate,
-            synopsis, director, phase != null ? phase : 0, ageRating,
+            synopsis, directorID, phase != null ? phase : 0, ageRating,
             chronologicalOrder != null ? chronologicalOrder : 0, poster, trailer
         );
 
