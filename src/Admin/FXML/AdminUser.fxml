@@ -111,7 +111,7 @@
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="castButton" layoutX="632.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="castButton" layoutX="632.0" layoutY="32.0" mnemonicParsing="false" onAction="#castButtonHandler" prefHeight="18.0" prefWidth="61.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>

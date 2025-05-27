@@ -23,12 +23,12 @@
                   <Image url="@../../Images/Background/Admin%20Cast.png" />
                </image>
             </ImageView>
-            <Button fx:id="userButton" layoutX="450.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="userButton" layoutX="450.0" layoutY="32.0" mnemonicParsing="false" onAction="#userButtonHandler" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="contentButton" layoutX="523.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="97.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="contentButton" layoutX="523.0" layoutY="32.0" mnemonicParsing="false" onAction="#contentButtonHandler" prefHeight="18.0" prefWidth="97.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>

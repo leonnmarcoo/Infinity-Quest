@@ -429,29 +429,6 @@ public class AdminContentController implements Initializable {
         tAgeRatingTextfield.getSelectionModel().clearSelection();
         tAverageRuntimeTextField.clear();
         tTrailerLinkTextField.clear();
-}
-    
-    @FXML
-    private void userButtonHandler(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminUser.fxml"));
-            root = loader.load();
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void backButtonHandler(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/Admin/FXML/AdminHome.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     @FXML
@@ -611,6 +588,45 @@ public class AdminContentController implements Initializable {
             alert.setContentText("Failed to update content.");
             alert.initModality(Modality.APPLICATION_MODAL);
             alert.showAndWait();
+        }
+    }
+    
+    @FXML
+    private void backButtonHandler(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/Admin/FXML/AdminHome.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void userButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminUser.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void castButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminCast.fxml"));
+
+            root = loader.load();
+
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
