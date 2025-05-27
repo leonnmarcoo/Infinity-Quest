@@ -52,11 +52,9 @@ import com.mysql.cj.xdevapi.Table;
 public class AdminCastController implements Initializable {
 
     ObservableList<Actor> actorList = FXCollections.observableArrayList();
-
     ObservableList<Role> roleList = FXCollections.observableArrayList();
-
     ObservableList<Cast> castList = FXCollections.observableArrayList();
-
+    ObservableList<Content> contentList = FXCollections.observableArrayList();
     ObservableList<Director> directorList = FXCollections.observableArrayList();
 
 // ============================== ACTOR & ROLE TAB ================================
@@ -213,10 +211,16 @@ public class AdminCastController implements Initializable {
         initializeRoleColumn();
         initializeCastColumn();
         initializeDirectorColumn();
-        
+
         displayActor();
         displayRole();
         displayDirector();
+
+        loadActors();
+        loadRoles();
+        loadContents();
+        loadCasts();
+        bindComboBoxes();
     }
 
     private void initializeActorColumn() {
@@ -230,12 +234,24 @@ public class AdminCastController implements Initializable {
     }
 
     private void initializeCastColumn() {
+        castIDColumn.setCellValueFactory(new PropertyValueFactory<>("castID"));
+        actorColumn.setCellValueFactory(new PropertyValueFactory<>("actorName"));
+        roleColumn.setCellValueFactory(new PropertyValueFactory<>("roleName"));
+        contentColumn.setCellValueFactory(new PropertyValueFactory<>("contentTitle"));
 
+        castTable.setItems(castList);
+        castTable.setEditable(false);
     }
 
     private void initializeDirectorColumn() {
         directorIDColumn.setCellValueFactory(new PropertyValueFactory<>("directorID"));
         directorNameColumn.setCellValueFactory(new PropertyValueFactory<>("directorName"));
+    }
+
+    private void bindComboBoxes() {
+        actorComboBox.setItems(actorList);
+        roleComboBox.setItems(roleList);
+        contentComboBox.setItems(contentList);
     }
 
 // ============================ ACTOR ===============================
@@ -376,7 +392,117 @@ public class AdminCastController implements Initializable {
 
 // ============================ CAST ===============================
 
-    
+    private void loadActors() {
+        actorList.clear();
+        ResultSet rs = DatabaseHandler.getActor();
+        try {
+            while (rs.next()) {
+                actorList.add(new Actor(rs.getInt("actorID"), rs.getString("actorName")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadRoles() {
+        roleList.clear();
+        ResultSet rs = DatabaseHandler.getRole();
+        try {
+            while (rs.next()) {
+                roleList.add(new Role(rs.getInt("roleID"), rs.getString("roleName")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadContents() {
+        contentList.clear();
+        ResultSet rs = DatabaseHandler.getContent();
+        try {
+            while (rs.next()) {
+                contentList.add(new Content(rs.getInt("contentID"), rs.getString("title"), /* add other required arguments here, e.g. */ null));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadCasts() {
+        castList.clear();
+        ResultSet rs = DatabaseHandler.getCast();
+        try {
+            while (rs.next()) {
+                castList.add(new Cast(
+                    rs.getInt("castID"),
+                    rs.getInt("actorID"),
+                    rs.getInt("roleID"),
+                    rs.getInt("contentID"),
+                    rs.getString("actorName"),
+                    rs.getString("roleName"),
+                    rs.getString("contentTitle")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void addCast(ActionEvent event) {
+        Actor actor = actorComboBox.getValue();
+        Role role = roleComboBox.getValue();
+        Content content = contentComboBox.getValue();
+        if (actor == null || role == null || content == null) {
+            showAlert(Alert.AlertType.ERROR, "Please select an actor, role, and content");
+            return;
+        }
+        if (DatabaseHandler.createCast(actor.getActorID(), role.getRoleID(), content.getContentID())) {
+            showAlert(Alert.AlertType.INFORMATION, "Cast added successfully!");
+            loadCasts();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Failed to add cast");
+        }
+    }
+
+    @FXML
+    private void updateCast(ActionEvent event) {
+        Cast selected = castTable.getSelectionModel().getSelectedItem();
+        Actor actor = actorComboBox.getValue();
+        Role role = roleComboBox.getValue();
+        Content content = contentComboBox.getValue();
+        if (selected == null) {
+            showAlert(Alert.AlertType.ERROR, "No cast selected");
+            return;
+        }
+        if (DatabaseHandler.updateCast(selected.getCastID(), actor.getActorID(), role.getRoleID(), content.getContentID())) {
+            showAlert(Alert.AlertType.INFORMATION, "Cast updated successfully!");
+            loadCasts();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Failed to update cast");
+        }
+    }
+
+    @FXML
+    private void deleteCast(ActionEvent event) {
+        Cast selected = castTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert(Alert.AlertType.ERROR, "No cast selected");
+            return;
+        }
+        if (DatabaseHandler.deleteCast(selected.getCastID())) {
+            showAlert(Alert.AlertType.INFORMATION, "Cast deleted successfully!");
+            loadCasts();
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Failed to delete cast");
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String msg) {
+        Alert alert = new Alert(type);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
 
 // ============================ DIRECTOR ===============================
 
