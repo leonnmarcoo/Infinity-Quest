@@ -91,4 +91,8 @@ public class Content {
         return contentTrailer.get(); 
     } 
 
+    @Override
+    public String toString() {
+        return contentTitle.get();
+    }
 }

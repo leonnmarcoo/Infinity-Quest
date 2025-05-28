@@ -20,4 +20,8 @@ public class Role {
         return roleName.get();
     }
     
+    @Override
+    public String toString() {
+        return roleName.get();
+    }
 }
