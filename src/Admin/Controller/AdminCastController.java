@@ -421,7 +421,7 @@ public class AdminCastController implements Initializable {
         ResultSet rs = DatabaseHandler.getContent();
         try {
             while (rs.next()) {
-                contentList.add(new Content(rs.getInt("contentID"), rs.getString("title"), /* add other required arguments here, e.g. */ null));
+                contentList.add(new Content(rs.getInt("contentID"), rs.getString("title"), rs.getString("runtime"), rs.getObject("season", Integer.class), rs.getObject("episode", Integer.class), rs.getObject("releaseDate", java.time.LocalDate.class), rs.getString("synopsis"), rs.getInt("directorID"), rs.getInt("phase"), rs.getString("ageRating"), rs.getInt("chronologicalOrder"), rs.getString("poster"), rs.getString("trailer")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
