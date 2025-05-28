@@ -566,4 +566,24 @@ public static ResultSet getAllDirectors() {
     //     }
     //     return false;
     // }
+
+// ============================ VALIDATE USER-LOGIN ===============================
+
+    public static boolean validateUserLogin(String username, String password) {
+        getInstance();
+        String query = "SELECT * FROM User WHERE userName = '" + username + "' AND userPassword = '" + password + "'";
+        
+        System.out.println(query);
+    
+        ResultSet result = handler.execQuery(query);
+        try {
+            if (result.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }   

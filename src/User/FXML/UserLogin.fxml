@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.Controller.UserLoginController">
    <children>
       <AnchorPane prefHeight="956.0" prefWidth="440.0">
          <children>
@@ -29,7 +28,7 @@
                   <Font name="Geist Regular" size="16.0" />
                </font>
             </PasswordField>
-            <Button fx:id="loginButton" layoutX="50.0" layoutY="866.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="LOGIN" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="50.0" layoutY="866.0" mnemonicParsing="false" onAction="#loginButtonHandler" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="LOGIN" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
