@@ -14,13 +14,13 @@ public class Cast {
     private final SimpleStringProperty contentTitle;
 
     public Cast(int castID, int actorID, int roleID, int contentID, String actorName, String roleName, String contentTitle) {
-        this.castID = new SimpleIntegerProperty();
-        this.actorID = new SimpleIntegerProperty();
-        this.roleID = new SimpleIntegerProperty();
-        this.contentID = new SimpleIntegerProperty();
-        this.actorName = new SimpleStringProperty();
-        this.roleName = new SimpleStringProperty();
-        this.contentTitle = new SimpleStringProperty();
+        this.castID = new SimpleIntegerProperty(castID);
+        this.actorID = new SimpleIntegerProperty(actorID);
+        this.roleID = new SimpleIntegerProperty(roleID);
+        this.contentID = new SimpleIntegerProperty(contentID);
+        this.actorName = new SimpleStringProperty(actorName);
+        this.roleName = new SimpleStringProperty(roleName);
+        this.contentTitle = new SimpleStringProperty(contentTitle);
     }
 
     public int getCastID() {
