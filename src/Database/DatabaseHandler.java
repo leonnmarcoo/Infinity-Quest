@@ -481,13 +481,15 @@ public static ResultSet getAllDirectors() {
         return false;
     }
 
-    public static boolean updateCast(int actorID, int roleID, int contentID) {
+    public static boolean updateCast(int castID, int actorID, int roleID, int contentID) {
         try {
             pstatement = getDBConnection().prepareStatement(
                 "UPDATE Cast SET actorID = ?, roleID = ?, contentID = ? WHERE castID = ?");
             pstatement.setInt(1, actorID);
             pstatement.setInt(2, roleID);
             pstatement.setInt(3, contentID);
+            pstatement.setInt(4, castID);
+            return pstatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -502,9 +504,9 @@ public static ResultSet getAllDirectors() {
             return pstatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return false;
     }
-    return false;
-}
 
 // ============================ CRUD DIRECTOR ===============================
 
