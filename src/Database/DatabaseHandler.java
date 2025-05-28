@@ -455,6 +455,57 @@ public static ResultSet getAllDirectors() {
     //     return false;
     // }
 
+// ============================ CRUD CAST ===============================
+
+    public static ResultSet getCast() {
+        getInstance();
+        String query = "SELECT c.castID, c.actorID, c.roleID, c.contentID, " +
+                       "a.actorName, r.roleName, con.title " +
+                       "FROM Cast c " +
+                       "JOIN Actor a ON c.actorID = a.actorID " +
+                       "JOIN Role r ON c.roleID = r.roleID " +
+                       "JOIN Content con ON c.contentID = con.contentID";
+        return handler.execQuery(query);
+    }
+
+    public static boolean createCast(int actorID, int roleID, int contentID) {
+        try {
+            pstatement = getDBConnection().prepareStatement(
+                "INSERT INTO Cast (actorID, roleID, contentID) VALUES (?, ?, ?)");
+            pstatement.setInt(1, actorID);
+            pstatement.setInt(2, roleID);
+            pstatement.setInt(3, contentID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateCast(int actorID, int roleID, int contentID) {
+        try {
+            pstatement = getDBConnection().prepareStatement(
+                "UPDATE Cast SET actorID = ?, roleID = ?, contentID = ? WHERE castID = ?");
+            pstatement.setInt(1, actorID);
+            pstatement.setInt(2, roleID);
+            pstatement.setInt(3, contentID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteCast(int castID) {
+        try {
+            pstatement = getDBConnection().prepareStatement(
+                "DELETE FROM Cast WHERE castID = ?");
+            pstatement.setInt(1, castID);
+            return pstatement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+    return false;
+}
+
 // ============================ CRUD DIRECTOR ===============================
 
     public static ResultSet getDirector() {

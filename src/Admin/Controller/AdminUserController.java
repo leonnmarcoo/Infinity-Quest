@@ -215,22 +215,6 @@ public class AdminUserController implements Initializable {
     }
 
     @FXML
-    private void contentButtonHandler(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminContent.fxml"));
-
-            root = loader.load();
-
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     private void createUser(ActionEvent event) throws IOException {
 
         String username = usernameTextField.getText();
@@ -278,8 +262,7 @@ public class AdminUserController implements Initializable {
             alert.setContentText("Please select a user to delete.");
             alert.showAndWait();
             return;
-    }
-
+        }
         if (DatabaseHandler.deleteUser(selectedUser)) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
@@ -287,9 +270,7 @@ public class AdminUserController implements Initializable {
             alert.setContentText("User deleted successfully!");
             alert.showAndWait();
             displayUsers();
-
-    }   else {
-
+        } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -321,24 +302,21 @@ public class AdminUserController implements Initializable {
 
         User updatedUser = new User(0, selectedUser.getUserName(),password, email, bio);
 
-
-    if (DatabaseHandler.updateUser(selectedUser)) {
-        
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText("User updated successfully!");
-        alert.showAndWait();
-        displayUsers();
-
-    } else {
-
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Failed to update the account.");
-        alert.showAndWait();
-    }
+        if (DatabaseHandler.updateUser(selectedUser)) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("User updated successfully!");
+            alert.showAndWait();
+            displayUsers();
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to update the account.");
+            alert.showAndWait();
+            }
+        }
 
     //     if (DatabaseHandler.updateUser(updatedUser)) {
     //         Alert alert = new Alert(AlertType.INFORMATION);
@@ -356,7 +334,8 @@ public class AdminUserController implements Initializable {
     //         alert.setContentText("Failed to update the account.");
     //         alert.showAndWait();
     //     }
-    }
+
+// ============================ NAVIGATION ===============================
 
     @FXML
     private void backButtonHandler(ActionEvent event) throws IOException {
@@ -365,6 +344,34 @@ public class AdminUserController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void contentButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminContent.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void castButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminCast.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
