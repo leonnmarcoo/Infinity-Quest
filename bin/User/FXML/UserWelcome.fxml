@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.Controller.UserWelcomeController">
    <children>
       <AnchorPane prefHeight="956.0" prefWidth="440.0">
          <children>
@@ -17,12 +16,12 @@
                   <Image url="@../../Images/Background/User%20Welcome.png" />
                </image>
             </ImageView>
-            <Button fx:id="loginButton" layoutX="50.0" layoutY="792.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="LOGIN" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="50.0" layoutY="792.0" mnemonicParsing="false" onAction="#loginButtonHandler" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="LOGIN" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="signUpButton" layoutX="50.0" layoutY="866.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #141414; -fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: #CE2431; -fx-border-width: 2;" text="SIGN UP" textFill="WHITE">
+            <Button fx:id="signUpButton" layoutX="50.0" layoutY="866.0" mnemonicParsing="false" onAction="#signUpButtonHandler" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #141414; -fx-border-radius: 100; -fx-background-radius: 100; -fx-border-color: #CE2431; -fx-border-width: 2;" text="SIGN UP" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>

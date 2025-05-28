@@ -59,7 +59,7 @@
                   <Font name="Geist Regular" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="clickhereButton" layoutX="1141.0" layoutY="822.0" mnemonicParsing="false" style="-fx-background-color: 141414;" text="Click here!" textFill="#ce2431">
+            <Button fx:id="clickhereButton" layoutX="1141.0" layoutY="822.0" mnemonicParsing="false" onAction="#clickhereButtonHandler" style="-fx-background-color: 141414;" text="Click here!" textFill="#ce2431">
                <font>
                   <Font name="Geist Regular" size="18.0" />
                </font>

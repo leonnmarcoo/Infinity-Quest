@@ -460,11 +460,11 @@ public static ResultSet getAllDirectors() {
     public static ResultSet getCast() {
         getInstance();
         String query = "SELECT c.castID, c.actorID, c.roleID, c.contentID, " +
-                       "a.actorName, r.roleName, con.title " +
-                       "FROM Cast c " +
-                       "JOIN Actor a ON c.actorID = a.actorID " +
-                       "JOIN Role r ON c.roleID = r.roleID " +
-                       "JOIN Content con ON c.contentID = con.contentID";
+                    "a.actorName, r.roleName, con.contentTitle " +
+                    "FROM Cast c " +
+                    "JOIN Actor a ON c.actorID = a.actorID " +
+                    "JOIN Role r ON c.roleID = r.roleID " +
+                    "JOIN Content con ON c.contentID = con.contentID";
         return handler.execQuery(query);
     }
 
@@ -566,4 +566,24 @@ public static ResultSet getAllDirectors() {
     //     }
     //     return false;
     // }
+
+// ============================ VALIDATE USER-LOGIN ===============================
+
+    public static boolean validateUserLogin(String username, String password) {
+        getInstance();
+        String query = "SELECT * FROM User WHERE userName = '" + username + "' AND userPassword = '" + password + "'";
+        
+        System.out.println(query);
+    
+        ResultSet result = handler.execQuery(query);
+        try {
+            if (result.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }   

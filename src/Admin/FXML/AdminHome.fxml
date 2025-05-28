@@ -49,19 +49,19 @@
                               <Image url="@../../Images/Navigation%20Card/Watchlist.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="watchlistButton" layoutX="910.0" layoutY="40.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
+                        <Button fx:id="watchlistButton" layoutX="910.0" layoutY="40.0" mnemonicParsing="false" onAction="#watchlistButtonHandler" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
                         <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="1200.0" layoutY="40.0">
                            <image>
                               <Image url="@../../Images/Navigation%20Card/Rating.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="ratingButton" layoutX="1200.0" layoutY="40.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
+                        <Button fx:id="ratingButton" layoutX="1200.0" layoutY="40.0" mnemonicParsing="false" onAction="#ratingButtonHandler" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
                         <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="1490.0" layoutY="40.0">
                            <image>
                               <Image url="@../../Images/Navigation%20Card/Review.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="reviewButton" layoutX="1490.0" layoutY="40.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
+                        <Button fx:id="reviewButton" layoutX="1490.0" layoutY="40.0" mnemonicParsing="false" onAction="#reviewButtonHandler" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: Transparent; -fx-background-radius: 20;" />
                         <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="1780.0" layoutY="40.0">
                            <image>
                               <Image url="@../../Images/Navigation%20Card/Like.png" />
