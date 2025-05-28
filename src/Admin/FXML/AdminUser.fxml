@@ -116,7 +116,7 @@
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="watchlistButton" layoutX="705.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="111.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="watchlistButton" layoutX="705.0" layoutY="32.0" mnemonicParsing="false" onAction="#watchlistButtonHandler" prefHeight="18.0" prefWidth="111.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
