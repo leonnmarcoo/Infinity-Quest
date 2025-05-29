@@ -182,23 +182,64 @@ public class DatabaseHandler {
         return false;
     }
 
-    public static boolean updateUser(User user) {
-        try {
-            pstatement = getDBConnection().prepareStatement("UPDATE User SET userPassword = ?, userEmail = ?, userBio = ? WHERE userName = ?");
-            pstatement.setString(1, user.getUserPassword());
-            pstatement.setString(2, user.getUserEmail());
-            pstatement.setString(3, user.getUserBio());
-            pstatement.setString(4, user.getUserName());
+    // public static boolean updateUser(User user) {
+    //     try {
+    //         pstatement = getDBConnection().prepareStatement("UPDATE User SET userPassword = ?, userEmail = ?, userBio = ? WHERE userName = ?");
+    //         pstatement.setString(1, user.getUserPassword());
+    //         pstatement.setString(2, user.getUserEmail());
+    //         pstatement.setString(3, user.getUserBio());
+    //         pstatement.setString(4, user.getUserName());
             
+    //         int res = pstatement.executeUpdate();
+    //         if (res > 0) {
+    //             return true;
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return false;
+    // }
+
+//     public static boolean updateUser(User user) {
+//     try {
+//         pstatement = getDBConnection().prepareStatement(
+//             "UPDATE User SET userName = ?, userPassword = ?, userEmail = ?, userBio = ? WHERE userID = ?"
+//         );
+//         pstatement.setString(1, user.getUserName());
+//         pstatement.setString(2, user.getUserPassword());
+//         pstatement.setString(3, user.getUserEmail());
+//         pstatement.setString(4, user.getUserBio());
+//         pstatement.setInt(5, user.getUserID());
+        
+//         int res = pstatement.executeUpdate();
+//         return res > 0;
+//     } catch (Exception e) {
+//         e.printStackTrace();
+//     }
+//     return false;
+// }
+
+    public static boolean updateUser(User user) {
+        String sql = "UPDATE `User` SET userName = ?, userPassword = ?, userEmail = ?, userBio = ? WHERE userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement pstatement = conn.prepareStatement(sql)) {
+
+            pstatement.setString(1, user.getUserName());
+            pstatement.setString(2, user.getUserPassword());
+            pstatement.setString(3, user.getUserEmail());
+            pstatement.setString(4, user.getUserBio());
+            pstatement.setInt(5, user.getUserID());
+
             int res = pstatement.executeUpdate();
-            if (res > 0) {
-                return true;
-            }
-        } catch (Exception e) {
+            return res > 0;
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
+
+
 
 // ============================ CRUD CONTENT ===============================
 
