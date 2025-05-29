@@ -20,4 +20,8 @@ public class Director {
         return directorName.get();
     }
     
+    @Override
+    public String toString() {
+        return directorName.get();
+    }
 }

@@ -449,7 +449,7 @@ public class AdminCastController implements Initializable {
     }
 
     @FXML
-    private void addCast(ActionEvent event) {
+    private void createCast(ActionEvent event) {
         Actor actor = actorComboBox.getValue();
         Role role = roleComboBox.getValue();
         Content content = contentComboBox.getValue();

@@ -169,17 +169,17 @@
                                     <TableColumn fx:id="contentColumn" prefWidth="335.0013427734375" text="Movie/TV Show" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="createCastButton" layoutX="390.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+                              <Button fx:id="createCastButton" layoutX="390.0" layoutY="619.0" mnemonicParsing="false" onAction="#createCast" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="updateCastButton" layoutX="748.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+                              <Button fx:id="updateCastButton" layoutX="748.0" layoutY="619.0" mnemonicParsing="false" onAction="#updateCast" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="deleteCastButton" layoutX="1107.0" layoutY="619.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+                              <Button fx:id="deleteCastButton" layoutX="1107.0" layoutY="619.0" mnemonicParsing="false" onAction="#deleteCast" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Bold" size="20.0" />
                                  </font>

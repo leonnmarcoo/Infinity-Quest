@@ -516,10 +516,12 @@ public static ResultSet getAllDirectors() {
             pstatement.setInt(1, actorID);
             pstatement.setInt(2, roleID);
             pstatement.setInt(3, contentID);
+            int result = pstatement.executeUpdate();
+            return result > 0;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public static boolean updateCast(int castID, int actorID, int roleID, int contentID) {

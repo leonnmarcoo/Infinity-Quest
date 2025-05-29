@@ -20,4 +20,8 @@ public class Actor {
         return actorName.get();
     }
     
+    @Override
+    public String toString() {
+        return actorName.get();
+    }
 }
