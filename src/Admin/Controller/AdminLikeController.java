@@ -1,0 +1,213 @@
+package Admin.Controller;
+
+import java.io.IOException;
+
+import Objects.Like;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+
+public class AdminLikeController {
+
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private Button userButton;
+
+    @FXML
+    private Label userLabel;
+
+    @FXML
+    private Button contentButton;
+
+    @FXML
+    private Button castButton;
+
+    @FXML
+    private Button watchlistButton;
+
+    @FXML
+    private Button ratingButton;
+
+    @FXML
+    private Button reviewButton;
+
+    @FXML
+    private Button likeButton;
+
+    @FXML
+    private Button dislikeButton;
+// ==================================================================
+
+
+    @FXML
+    private TableView<Like> likeDataTable;
+
+
+    @FXML
+    private TableColumn<Like, Integer> likeIDCol;
+
+
+    @FXML
+    private TableColumn<Like, Integer> likeUserCol;
+    
+    @FXML
+    private TableColumn<Like, Integer> likeContentCol;
+
+// === Update Delete =============================================
+
+    @FXML
+    private Button likeDeleteButton;
+
+    @FXML
+    private Button likeUpdateButton;
+
+     @FXML
+    void likeDeleteButtonHandler(ActionEvent event) {
+
+    }
+
+    @FXML
+    void likeUpdateButtonnHandler(ActionEvent event) {
+
+    }
+
+// ==============================NAVIGATION=====================================================================================
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    @FXML
+    private void userButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminUser.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void contentButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminContent.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void castButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminCast.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void watchlistButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminWatchlist.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+        @FXML
+    private void backButtonHandler(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/Admin/FXML/AdminHome.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+        @FXML
+    private void ratingButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminRating.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+     @FXML
+    private void reviewButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminReview.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void likeButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminLike.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+     }
+    
+    
+    @FXML
+    private void dislikeButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminDislike.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+    }
+
+}
