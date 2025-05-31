@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.Controller.AdminLikeController">
    <children>
       <AnchorPane prefHeight="982.0" prefWidth="1512.0">
          <children>
@@ -19,32 +19,32 @@
                   <Image url="@../../Images/Background/Admin%20Like.png" />
                </image>
             </ImageView>
-            <Button fx:id="userButton" layoutX="450.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="userButton" layoutX="450.0" layoutY="32.0" mnemonicParsing="false" onAction="#userButtonHandler" prefHeight="18.0" prefWidth="65.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="contentButton" layoutX="523.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="97.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="contentButton" layoutX="523.0" layoutY="32.0" mnemonicParsing="false" onAction="#contentButtonHandler" prefHeight="18.0" prefWidth="97.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="castButton" layoutX="632.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="castButton" layoutX="632.0" layoutY="32.0" mnemonicParsing="false" onAction="#castButtonHandler" prefHeight="18.0" prefWidth="61.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="watchlistButton" layoutX="705.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="111.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="watchlistButton" layoutX="705.0" layoutY="32.0" mnemonicParsing="false" onAction="#watchlistButtonHandler" prefHeight="18.0" prefWidth="111.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="ratingButton" layoutX="828.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="ratingButton" layoutX="828.0" layoutY="32.0" mnemonicParsing="false" onAction="#ratingButtonHandler" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="reviewButton" layoutX="921.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="89.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="reviewButton" layoutX="921.0" layoutY="32.0" mnemonicParsing="false" onAction="#reviewButtonHandler" prefHeight="18.0" prefWidth="89.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="dislikeButton" layoutX="1088.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="dislikeButton" layoutX="1088.0" layoutY="32.0" mnemonicParsing="false" onAction="#dislikeButtonHandler" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
@@ -64,24 +64,24 @@
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <TableView layoutX="40.0" layoutY="173.0" prefHeight="609.0" prefWidth="1432.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+            <TableView fx:id="likeDataTable" layoutX="40.0" layoutY="173.0" prefHeight="609.0" prefWidth="1432.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                <columns>
-                  <TableColumn prefWidth="137.8127899169922" text="LikeID" />
-                  <TableColumn prefWidth="488.0771789550781" text="User" />
-                  <TableColumn prefWidth="602.9229736328125" text="Movie/TV Show" />
+                  <TableColumn fx:id="likeIDCol" prefWidth="137.8127899169922" text="LikeID" />
+                  <TableColumn fx:id="likeUserCol" prefWidth="488.0771789550781" text="User" />
+                  <TableColumn fx:id="likeContentCol" prefWidth="602.9229736328125" text="Movie/TV Show" />
                </columns>
             </TableView>
-            <Button layoutX="40.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+            <Button fx:id="likeUpdateButton" layoutX="40.0" layoutY="817.0" mnemonicParsing="false" onAction="#likeUpdateButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="405.0" layoutY="817.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+            <Button fx:id="likeDeleteButton" layoutX="405.0" layoutY="817.0" mnemonicParsing="false" onAction="#likeDeleteButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
+            <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
