@@ -70,7 +70,6 @@ public class UserSignupController {
         selectedUser = null;
     }    
 
-
     @FXML
     private void signUpButtonHandler(ActionEvent event) {
         String username = usernameTextField.getText();
@@ -92,22 +91,19 @@ public class UserSignupController {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);
-            alert.setContentText("User created successfully!");
+            alert.setContentText("Account created successfully!");
             alert.showAndWait();
-
             clearForm();
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserWelcome.fxml"));
-            root = loader.load();
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserWelcome.fxml"));
+                root = loader.load();
+                stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
@@ -116,5 +112,4 @@ public class UserSignupController {
             alert.showAndWait();
         }
     }
-
 }

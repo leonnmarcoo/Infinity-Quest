@@ -65,7 +65,7 @@ public class AdminLoginController {
         }
     }
 
-        @FXML
+    @FXML
     private void clickhereButtonHandler(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserWelcome.fxml"));
@@ -73,6 +73,7 @@ public class AdminLoginController {
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

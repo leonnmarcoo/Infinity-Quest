@@ -39,7 +39,7 @@ public class UserLoginController {
 
         if (DatabaseHandler.validateUserLogin(username, password)) {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminHome.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/UserHome.fxml"));
             root = loader.load();
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

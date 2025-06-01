@@ -42,8 +42,6 @@ import javax.xml.transform.Templates;
 
 import Database.DatabaseHandler;
 
-
-
 public class UserWelcomeController {
 
     @FXML
