@@ -18,7 +18,7 @@
          <children>
             <ImageView fitHeight="956.0" fitWidth="440.0">
                <image>
-                  <Image url="@../../Images/Background/User%20Home/Background.png" />
+                  <Image url="@../../Images/Background/Background.png" />
                </image>
             </ImageView>
             <ScrollPane hbarPolicy="NEVER" prefHeight="865.0" prefWidth="440.0" style="-fx-background-color: Transparent;" vbarPolicy="NEVER">
@@ -122,7 +122,12 @@
             </ScrollPane>
             <ImageView fitHeight="130.0" fitWidth="440.0">
                <image>
-                  <Image url="@../../Images/Background/User%20Home/Top%20Bar.png" />
+                  <Image url="@../../Images/Background/Top%20Bar.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="65.0" fitWidth="440.0">
+               <image>
+                  <Image url="@../../Images/Background/Status%20Bar.png" />
                </image>
             </ImageView>
             <Label fx:id="welcomeLabel" layoutX="20.0" layoutY="80.0" text="On your left, [user]" textFill="WHITE">
@@ -132,12 +137,7 @@
             </Label>
             <ImageView fitHeight="90.0" fitWidth="440.0" layoutY="866.0">
                <image>
-                  <Image url="@../../Images/Background/User%20Home/Navigation%20Bar.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="65.0" fitWidth="440.0">
-               <image>
-                  <Image url="@../../Images/Background/User%20Home/Status%20Bar.png" />
+                  <Image url="@../../Images/Background/Home%20Navigation%20Bar.png" />
                </image>
             </ImageView>
          </children>

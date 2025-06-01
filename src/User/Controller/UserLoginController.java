@@ -38,17 +38,13 @@ public class UserLoginController {
         String password = passwordPasswordField.getText();
 
         if (DatabaseHandler.validateUserLogin(username, password)) {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/UserHome.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
             root = loader.load();
-
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-
         } else {
-
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Login Failed");
             alert.setHeaderText(null);
