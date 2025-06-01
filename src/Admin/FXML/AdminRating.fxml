@@ -64,7 +64,7 @@
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <TableView fx:id="ratingDataTable" layoutX="40.0" layoutY="173.0" prefHeight="609.0" prefWidth="1432.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+            <TableView fx:id="ratingDataTable" layoutX="40.0" layoutY="173.0" prefHeight="684.0" prefWidth="1432.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
               <columns>
                 <TableColumn fx:id="ratingIDCol" prefWidth="137.8127899169922" text="RatingID" />
                 <TableColumn fx:id="ratingUserCol" prefWidth="394.20069885253906" text="User" />
@@ -72,16 +72,6 @@
                   <TableColumn fx:id="ratingCol" prefWidth="201.02685546875" text="Rating" />
               </columns>
             </TableView>
-            <Button fx:id="ratingUpdateButton" layoutX="40.0" layoutY="817.0" mnemonicParsing="false" onAction="#ratingUpdateButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="ratingDeleteButton" layoutX="405.0" layoutY="817.0" mnemonicParsing="false" onAction="#ratingDeleteButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
             <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />

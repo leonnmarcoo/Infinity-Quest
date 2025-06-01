@@ -133,8 +133,8 @@
             <TableView fx:id="adminTable" editable="true" layoutX="432.0" layoutY="470.0" prefHeight="472.0" prefWidth="1029.0" style="-fx-background-radius: 25; -fx-background-color: #272727;">
               <columns>
                 <TableColumn fx:id="adminIDColumn" prefWidth="330.433349609375" text="Admin ID" />
-                <TableColumn fx:id="adminNameColumn" minWidth="0.0" prefWidth="358.566650390625" text="Admin Username" />
-                  <TableColumn fx:id="adminPasswordColumn" prefWidth="340.9066162109375" text="Admin Password" />
+                <TableColumn fx:id="adminNameColumn" minWidth="0.0" prefWidth="696.0" text="Admin Username" />
+                  <TableColumn fx:id="adminPasswordColumn" minWidth="0.0" prefWidth="0.0" text="Admin Password" />
               </columns>
             </TableView>
          </children>

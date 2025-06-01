@@ -70,7 +70,7 @@ public class AdminWatchlistController implements Initializable {
     
    // ================================= WATCHLIST ================================================
 
-   @FXML
+    @FXML
     private TableView<Watchlist> watchlistDataTable;
 
     @FXML
@@ -92,8 +92,6 @@ public class AdminWatchlistController implements Initializable {
     
     private void displayWatchlist(){
 
-
-
     }
 
     // update delete
@@ -107,8 +105,6 @@ public class AdminWatchlistController implements Initializable {
     void watchlistUpdateButtonHandler(ActionEvent event) {
 
     }
-
-
 
 // ================================= WATCHED ================================================
 
@@ -128,17 +124,11 @@ public class AdminWatchlistController implements Initializable {
 
     @FXML
     void watchedDeleteButtonHandler(ActionEvent event) {
-
     }
 
     @FXML
     void watchedUpdateButtonHandler(ActionEvent event) {
-
     }
-
-
-
-
 
 // ==============================NAVIGATION=====================================================================================
 
@@ -202,7 +192,7 @@ public class AdminWatchlistController implements Initializable {
         }
     }
     
-        @FXML
+    @FXML
     private void backButtonHandler(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Admin/FXML/AdminHome.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -224,6 +214,7 @@ public class AdminWatchlistController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void reviewButtonHandler(ActionEvent event) {
         try {
@@ -238,8 +229,6 @@ public class AdminWatchlistController implements Initializable {
         }
     }
 
-
-
     @FXML
     private void likeButtonHandler(ActionEvent event) {
         try {
@@ -253,7 +242,6 @@ public class AdminWatchlistController implements Initializable {
             e.printStackTrace();
         }
      }
-    
     
     @FXML
     private void dislikeButtonHandler(ActionEvent event) {

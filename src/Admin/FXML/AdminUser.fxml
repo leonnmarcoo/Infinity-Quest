@@ -74,17 +74,12 @@
                   <TableColumn fx:id="bioColumn" prefWidth="400.0" text="Bio" />
               </columns>
             </TableView>
-            <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" onAction="#createUser" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+            <Button fx:id="updateButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="40.0" prefWidth="504.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="updateButton" layoutX="788.0" layoutY="817.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="deleteButton" layoutX="1147.0" layoutY="817.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+            <Button fx:id="deleteButton" layoutX="968.0" layoutY="817.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="40.0" prefWidth="504.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>

@@ -84,8 +84,6 @@ public class AdminRatingController {
     private Scene scene;
     private Parent root;
 
-
-
     @FXML
     private void userButtonHandler(ActionEvent event) {
         try {

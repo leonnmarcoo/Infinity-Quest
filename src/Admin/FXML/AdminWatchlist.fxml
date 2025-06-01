@@ -64,17 +64,7 @@
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="watchlistUpdateButton" layoutX="40.0" layoutY="178.0" mnemonicParsing="false" onAction="#watchlistUpdateButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="watchlistDeleteButton" layoutX="40.0" layoutY="233.0" mnemonicParsing="false" onAction="#watchlistDeleteButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <TableView fx:id="watchlistDataTable" layoutX="430.0" layoutY="120.0" prefHeight="341.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+            <TableView fx:id="watchlistDataTable" layoutX="330.0" layoutY="120.0" prefHeight="341.0" prefWidth="1142.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
               <columns>
                 <TableColumn fx:id="watchlistIDCol" prefWidth="189.40313720703125" text="WatchlistID" />
                 <TableColumn fx:id="watchlistUserCol" prefWidth="359.54266357421875" text="User" />
@@ -86,17 +76,7 @@
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="watchedUpdateButton" layoutX="40.0" layoutY="549.0" mnemonicParsing="false" onAction="#watchedUpdateButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="watchedDeleteButton" layoutX="40.0" layoutY="604.0" mnemonicParsing="false" onAction="#watchedDeleteButtonHandler" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
-               <font>
-                  <Font name="Geist Bold" size="20.0" />
-               </font>
-            </Button>
-            <TableView fx:id="watchedDataTable" layoutX="430.0" layoutY="491.0" prefHeight="341.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+            <TableView fx:id="watchedDataTable" layoutX="330.0" layoutY="491.0" prefHeight="341.0" prefWidth="1142.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                <columns>
                   <TableColumn fx:id="watchedIDCol" prefWidth="189.40313720703125" text="WatchedID" />
                   <TableColumn fx:id="watchedUserCol" prefWidth="359.54266357421875" text="User" />
