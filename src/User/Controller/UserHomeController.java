@@ -1,5 +1,284 @@
 package User.Controller;
 
-public class UserHomeController {
+import Objects.Content;
+import Objects.Director;
+import Database.DatabaseHandler;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+public class UserHomeController implements Initializable {
+
+    @FXML
+    private Label welcomeLabel;
+
+    // ============================== LATEST RELEASE ================================
+
+    @FXML
+    private ImageView latestReleaseImageView;
+
+    @FXML
+    private Label titleLabel;
+
+    @FXML
+    private Label directorLabel;
+
+    @FXML
+    private Label releaseDateLabel;
+
+    @FXML
+    private Label runtimeLabel;
+
+    @FXML
+    private Label ageRatingLabel;
+
+    @FXML
+    private Label synopsisLabel; 
+
+    // ============================== PHASE ================================
+
+    @FXML
+    private Button phaseOneButton;
+
+    @FXML
+    private Button phaseTwoButton;
+
+    @FXML
+    private Button phaseThreeButton;
+
+    @FXML
+    private Button phaseFourButton;
+
+    @FXML
+    private Button phaseFiveButton;
+
+    @FXML
+    private Button phaseSixButton;
+
+    // ============================== RELEASE DATE ORDER ================================
+
+    @FXML
+    private ScrollPane releaseDateScrollPane;
+
+    @FXML
+    private HBox releaseDateHBox;
     
+    private String username;
+    private List<Content> contentList = new ArrayList<>();
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (username != null) {
+            initializeUserHome();
+        }
+    }
+    
+    public void initializeUserHome() {
+        welcomeLabel.setText("On your left, " + username);
+        loadContent();
+        displayLatestRelease();
+        setupReleaseDateOrder();
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    private void loadContent() {
+        contentList.clear();
+        ResultSet rs = DatabaseHandler.getContent();
+        try {
+            while (rs.next()) {
+                String releaseDateStr = rs.getString("contentReleaseDate");
+                LocalDate releaseDate = null;
+                if (releaseDateStr != null && !releaseDateStr.isEmpty()) {
+                    try {
+                        releaseDate = LocalDate.parse(releaseDateStr);
+                    } catch (Exception e) {
+                        try {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            releaseDate = LocalDate.parse(releaseDateStr, formatter);
+                        } catch (Exception ex) {
+                            System.out.println("Could not parse date: " + releaseDateStr);
+                        }
+                    }
+                }
+                
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    releaseDate,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                contentList.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading content");
+        }
+    }
+    
+    private void displayLatestRelease() {
+        if (contentList.isEmpty()) {
+            return;
+        }
+        
+        Content latestContent = contentList.stream()
+                .filter(c -> c.getContentReleaseDate() != null)
+                .max(Comparator.comparing(Content::getContentReleaseDate))
+                .orElse(contentList.get(0));
+        
+        titleLabel.setText(latestContent.getContentTitle());
+        
+        try {
+            ResultSet rs = DatabaseHandler.getDirectorById(latestContent.getDirectorID());
+            if (rs.next()) {
+                directorLabel.setText(rs.getString("directorName"));
+            } else {
+                directorLabel.setText("Unknown Director");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            directorLabel.setText("Unknown Director");
+        }
+        
+        if (latestContent.getContentReleaseDate() != null) {
+            releaseDateLabel.setText(latestContent.getContentReleaseDate().toString());
+        } else {
+            releaseDateLabel.setText("Unknown Release Date");
+        }
+        
+        runtimeLabel.setText(latestContent.getContentRuntime());
+        ageRatingLabel.setText(latestContent.getContentAgeRating());
+        synopsisLabel.setText(latestContent.getContentSynopsis());
+        
+        try {
+            String posterPath = latestContent.getContentPoster();
+            if (posterPath != null && !posterPath.isEmpty()) {
+                File file = new File(posterPath);
+                if (file.exists()) {
+                    Image image = new Image(file.toURI().toString());
+                    latestReleaseImageView.setImage(image);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error loading poster image: " + e.getMessage());
+        }
+    }
+    
+    private void setupReleaseDateOrder() {
+        if (contentList.isEmpty()) {
+            return;
+        }
+        
+        if (releaseDateHBox == null) {
+            releaseDateHBox = new HBox(10); // 10px spacing
+            releaseDateHBox.setStyle("-fx-background-color: #141414;");
+        } else {
+            releaseDateHBox.getChildren().clear();
+        }
+        
+        contentList.stream()
+            .filter(c -> c.getContentReleaseDate() != null)
+            .sorted(Comparator.comparing(Content::getContentReleaseDate))
+            .forEach(content -> {
+                try {
+                    ImageView posterView = new ImageView();
+                    String posterPath = content.getContentPoster();
+                    
+                    if (posterPath != null && !posterPath.isEmpty()) {
+                        File file = new File(posterPath);
+                        if (file.exists()) {
+                            Image image = new Image(file.toURI().toString());
+                            posterView.setImage(image);
+                            posterView.setFitHeight(150);
+                            posterView.setFitWidth(100);
+                            posterView.setPreserveRatio(true);
+                            
+                            posterView.setOnMouseClicked(event -> showContentDetails(content));
+                            
+                            releaseDateHBox.getChildren().add(posterView);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        
+        releaseDateScrollPane.setContent(releaseDateHBox);
+        releaseDateScrollPane.setHbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
+        releaseDateScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
+    }
+    
+
+    private void showContentDetails(Content content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(content.getContentTitle());
+        alert.setHeaderText(null);
+        
+        StringBuilder contentInfo = new StringBuilder();
+        contentInfo.append("Title: ").append(content.getContentTitle()).append("\n");
+        
+        if (content.getContentReleaseDate() != null) {
+            contentInfo.append("Release Date: ").append(content.getContentReleaseDate()).append("\n");
+        }
+        
+        contentInfo.append("Runtime: ").append(content.getContentRuntime()).append("\n");
+        contentInfo.append("Age Rating: ").append(content.getContentAgeRating()).append("\n");
+        contentInfo.append("\nSynopsis: ").append(content.getContentSynopsis());
+        
+        alert.setContentText(contentInfo.toString());
+        alert.showAndWait();
+    }
+    
+    private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle("Infinity Quest");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

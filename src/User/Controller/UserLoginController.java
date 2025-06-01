@@ -40,6 +40,12 @@ public class UserLoginController {
         if (DatabaseHandler.validateUserLogin(username, password)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
             root = loader.load();
+            
+            // Pass username to UserHomeController
+            UserHomeController homeController = loader.getController();
+            homeController.setUsername(username);
+            homeController.initializeUserHome();
+            
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

@@ -629,4 +629,12 @@ public static ResultSet getAllDirectors() {
         return false;
     }
 
-}   
+    // ============================ GET DIRECTOR BY ID ===============================
+
+    public static ResultSet getDirectorById(int directorID) {
+        getInstance();
+        String query = "SELECT * FROM Director WHERE directorID = " + directorID;
+        return handler.execQuery(query);
+    }
+
+}
