@@ -4,8 +4,11 @@ import Objects.Content;
 import Objects.Director;
 import Database.DatabaseHandler;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -67,6 +71,9 @@ public class UserHomeController implements Initializable {
 
     @FXML
     private Label synopsisLabel; 
+
+    @FXML
+    private Hyperlink trailerHyperlink;
 
     // ============================== PHASE ================================
 
@@ -193,6 +200,22 @@ public class UserHomeController implements Initializable {
         runtimeLabel.setText(latestContent.getContentRuntime());
         ageRatingLabel.setText(latestContent.getContentAgeRating());
         synopsisLabel.setText(latestContent.getContentSynopsis());
+        
+        // Set up trailer hyperlink
+        String trailerURL = latestContent.getContentTrailer();
+        if (trailerURL != null && !trailerURL.isEmpty()) {
+            trailerHyperlink.setOnAction(event -> {
+                try {
+                    Desktop.getDesktop().browse(new URI(trailerURL));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Could not open trailer URL: " + trailerURL);
+                }
+            });
+            trailerHyperlink.setVisible(true);
+        } else {
+            trailerHyperlink.setVisible(false);
+        }
         
         try {
             String posterPath = latestContent.getContentPoster();
