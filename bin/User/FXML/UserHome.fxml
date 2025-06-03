@@ -108,6 +108,12 @@
                               <Font name="Geist Bold" size="22.0" />
                            </font>
                         </Label>
+                        <ImageView fitHeight="18.0" fitWidth="9.0" layoutX="411.0" layoutY="854.0">
+                           <image>
+                              <Image url="@../../Images/Icons/Right%20arrow.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="releaseDateButton" layoutX="400.0" layoutY="851.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: Transparent;" />
                         <ScrollPane fx:id="releaseDateScrollPane" hbarPolicy="NEVER" layoutY="890.0" prefHeight="155.0" prefWidth="440.0" style="-fx-background-color: #141414; -fx-background: #141414; -fx-border-color: #141414;" vbarPolicy="NEVER">
                            <content>
                               <HBox fx:id="releaseDateHBox" spacing="10.0" style="-fx-background-color: #141414;">
@@ -122,6 +128,12 @@
                               <Font name="Geist Bold" size="22.0" />
                            </font>
                         </Label>
+                        <ImageView fitHeight="18.0" fitWidth="9.0" layoutX="411.0" layoutY="1074.0">
+                           <image>
+                              <Image url="@../../Images/Icons/Right%20arrow.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="timelineButton" layoutX="400.0" layoutY="1070.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: Transparent;" />
                         <ScrollPane fx:id="timelineScrollPane" hbarPolicy="NEVER" layoutX="0.0" layoutY="1110.0" prefHeight="155.0" prefWidth="440.0" style="-fx-background-color: #141414; -fx-background: #141414; -fx-border-color: #141414;" vbarPolicy="NEVER">
                            <content>
                               <HBox fx:id="timelineHBox" spacing="10.0" style="-fx-background-color: #141414;">

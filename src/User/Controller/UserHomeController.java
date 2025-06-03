@@ -103,6 +103,9 @@ public class UserHomeController implements Initializable {
     @FXML
     private HBox releaseDateHBox;
 
+    @FXML
+    private Button releaseDateButton;
+
     // ============================== TIMELINE ORDER ================================
 
     @FXML
@@ -110,6 +113,9 @@ public class UserHomeController implements Initializable {
 
     @FXML 
     private HBox timelineHBox;
+
+    @FXML
+    private Button timelineButton;
     
     private String username;
     private List<Content> contentList = new ArrayList<>();
@@ -328,23 +334,26 @@ public class UserHomeController implements Initializable {
     }
 
     private void showContentDetails(Content content) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(content.getContentTitle());
-        alert.setHeaderText(null);
-        
-        StringBuilder contentInfo = new StringBuilder();
-        contentInfo.append("Title: ").append(content.getContentTitle()).append("\n");
-        
-        if (content.getContentReleaseDate() != null) {
-            contentInfo.append("Release Date: ").append(content.getContentReleaseDate()).append("\n");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserInformation.fxml"));
+            Parent root = loader.load();
+            
+            // Get the controller and set the content
+            UserInformationController controller = loader.getController();
+            controller.setContent(content);
+            
+            // Store username in the window's userData for use when returning to Home
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            stage.setUserData(username);
+            
+            // Set the scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading content details screen");
         }
-        
-        contentInfo.append("Runtime: ").append(content.getContentRuntime()).append("\n");
-        contentInfo.append("Age Rating: ").append(content.getContentAgeRating()).append("\n");
-        contentInfo.append("\nSynopsis: ").append(content.getContentSynopsis());
-        
-        alert.setContentText(contentInfo.toString());
-        alert.showAndWait();
     }
     
     private void showAlert(Alert.AlertType type, String message) {
