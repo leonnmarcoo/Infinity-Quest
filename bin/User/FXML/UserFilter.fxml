@@ -22,7 +22,7 @@
                   <Image url="@../../Images/Background/Background.png" />
                </image>
             </ImageView>
-            <ScrollPane fx:id="contentScrollPane" prefHeight="866.0" prefWidth="440.0" style="-fx-background-color: Transparent;">
+            <ScrollPane fx:id="contentScrollPane" prefHeight="866.0" prefWidth="440.0" style="-fx-background-color: Transparent; -fx-background: #141414;">
                <content>
                   <GridPane fx:id="contentGridPane" hgap="12.0" prefWidth="438.0" style="-fx-background-color: #141414;" vgap="12.0">
                     <columnConstraints>

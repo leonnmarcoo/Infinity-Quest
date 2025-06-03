@@ -127,7 +127,6 @@ public class UserHomeController implements Initializable {
         }
         
         phaseOneButton.setOnAction(this::phaseOneButtonHandler);
-        phaseTwoButton.setOnAction(this::phaseTwoButtonHandler);
     }
     
     public void initializeUserHome() {
@@ -383,22 +382,4 @@ public class UserHomeController implements Initializable {
         }
     }
 
-    @FXML
-    private void phaseTwoButtonHandler(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
-            Parent root = loader.load();
-
-            UserFilterController controller = loader.getController();
-            controller.setFilterData("Phase 2", 2, username);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
-        }
-    }
 }
