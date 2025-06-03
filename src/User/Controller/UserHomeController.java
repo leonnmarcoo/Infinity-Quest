@@ -102,6 +102,14 @@ public class UserHomeController implements Initializable {
 
     @FXML
     private HBox releaseDateHBox;
+
+    // ============================== TIMELINE ORDER ================================
+
+    @FXML
+    private ScrollPane timelineScrollPane;
+
+    @FXML 
+    private HBox timelineHBox;
     
     private String username;
     private List<Content> contentList = new ArrayList<>();
@@ -118,6 +126,7 @@ public class UserHomeController implements Initializable {
         loadContent();
         displayLatestRelease();
         setupReleaseDateOrder();
+        setupTimelineOrder();
     }
     
     public void setUsername(String username) {
@@ -273,6 +282,49 @@ public class UserHomeController implements Initializable {
         releaseDateScrollPane.setContent(releaseDateHBox);
         releaseDateScrollPane.setHbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
         releaseDateScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
+    }
+
+    private void setupTimelineOrder() {
+        if (contentList.isEmpty()) {
+            return;
+        }
+        
+        if (timelineHBox == null) {
+            timelineHBox = new HBox(10);
+            timelineHBox.setStyle("-fx-background-color: #141414;");
+        } else {
+            timelineHBox.getChildren().clear();
+        }
+        
+        contentList.stream()
+            .sorted(Comparator.comparing(Content::getContentChronologicalOrder))
+            .forEach(content -> {
+                try {
+                    ImageView posterView = new ImageView();
+                    String posterPath = content.getContentPoster();
+                    
+                    if (posterPath != null && !posterPath.isEmpty()) {
+                        File file = new File(posterPath);
+                        if (file.exists()) {
+                            Image image = new Image(file.toURI().toString());
+                            posterView.setImage(image);
+                            posterView.setFitHeight(150);
+                            posterView.setFitWidth(100);
+                            posterView.setPreserveRatio(true);
+                            
+                            posterView.setOnMouseClicked(event -> showContentDetails(content));
+                            
+                            timelineHBox.getChildren().add(posterView);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        
+        timelineScrollPane.setContent(timelineHBox);
+        timelineScrollPane.setHbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
+        timelineScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
     }
 
     private void showContentDetails(Content content) {

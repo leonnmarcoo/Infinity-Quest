@@ -23,7 +23,7 @@
             </ImageView>
             <ScrollPane hbarPolicy="NEVER" prefHeight="865.0" prefWidth="440.0" style="-fx-background-color: Transparent;" vbarPolicy="NEVER">
               <content>
-                <AnchorPane layoutY="135.0" minHeight="0.0" minWidth="0.0" prefHeight="1155.0" prefWidth="438.0" style="-fx-background-color: #141414;">
+                <AnchorPane layoutY="135.0" minHeight="0.0" minWidth="0.0" prefHeight="1290.0" prefWidth="438.0" style="-fx-background-color: #141414;">
                      <children>
                         <Label layoutX="20.0" layoutY="135.0" text="Latest Release" textFill="WHITE">
                            <font>
@@ -111,6 +111,20 @@
                         <ScrollPane fx:id="releaseDateScrollPane" hbarPolicy="NEVER" layoutY="890.0" prefHeight="155.0" prefWidth="440.0" style="-fx-background-color: #141414; -fx-background: #141414; -fx-border-color: #141414;" vbarPolicy="NEVER">
                            <content>
                               <HBox fx:id="releaseDateHBox" spacing="10.0" style="-fx-background-color: #141414;">
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </HBox>
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="20.0" layoutY="1070.0" text="Timeline Order" textFill="WHITE">
+                           <font>
+                              <Font name="Geist Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane fx:id="timelineScrollPane" hbarPolicy="NEVER" layoutX="0.0" layoutY="1110.0" prefHeight="155.0" prefWidth="440.0" style="-fx-background-color: #141414; -fx-background: #141414; -fx-border-color: #141414;" vbarPolicy="NEVER">
+                           <content>
+                              <HBox fx:id="timelineHBox" spacing="10.0" style="-fx-background-color: #141414;">
                                  <padding>
                                     <Insets left="20.0" right="20.0" />
                                  </padding>
