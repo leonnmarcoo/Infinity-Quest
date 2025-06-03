@@ -125,6 +125,9 @@ public class UserHomeController implements Initializable {
         if (username != null) {
             initializeUserHome();
         }
+        
+        phaseOneButton.setOnAction(this::phaseOneButtonHandler);
+        phaseTwoButton.setOnAction(this::phaseTwoButtonHandler);
     }
     
     public void initializeUserHome() {
@@ -338,15 +341,12 @@ public class UserHomeController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserInformation.fxml"));
             Parent root = loader.load();
             
-            // Get the controller and set the content
             UserInformationController controller = loader.getController();
             controller.setContent(content);
             
-            // Store username in the window's userData for use when returning to Home
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
             stage.setUserData(username);
             
-            // Set the scene
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -362,5 +362,43 @@ public class UserHomeController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void phaseOneButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+            
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 1", 1, username);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
+    @FXML
+    private void phaseTwoButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 2", 2, username);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); 
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
     }
 }
