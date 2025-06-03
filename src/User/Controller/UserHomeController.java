@@ -201,7 +201,6 @@ public class UserHomeController implements Initializable {
         ageRatingLabel.setText(latestContent.getContentAgeRating());
         synopsisLabel.setText(latestContent.getContentSynopsis());
         
-        // Set up trailer hyperlink
         String trailerURL = latestContent.getContentTrailer();
         if (trailerURL != null && !trailerURL.isEmpty()) {
             trailerHyperlink.setOnAction(event -> {
@@ -238,7 +237,7 @@ public class UserHomeController implements Initializable {
         }
         
         if (releaseDateHBox == null) {
-            releaseDateHBox = new HBox(10); // 10px spacing
+            releaseDateHBox = new HBox(10);
             releaseDateHBox.setStyle("-fx-background-color: #141414;");
         } else {
             releaseDateHBox.getChildren().clear();
@@ -275,7 +274,6 @@ public class UserHomeController implements Initializable {
         releaseDateScrollPane.setHbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
         releaseDateScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
     }
-    
 
     private void showContentDetails(Content content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
