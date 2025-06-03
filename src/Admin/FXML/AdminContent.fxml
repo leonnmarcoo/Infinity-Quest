@@ -86,7 +86,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="mTitleTextfield" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="mTitleTextfield" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -96,7 +96,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="mRuntimeTextfield" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter runtime" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="mRuntimeTextfield" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter runtime" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -122,25 +122,25 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="mDirectorCombobox" layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <ComboBox fx:id="mDirectorCombobox" layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                                           <Label layoutX="2.0" layoutY="415.0" text="Phase" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="mPhaseCombobox" layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <ComboBox fx:id="mPhaseCombobox" layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                                           <Label layoutX="2.0" layoutY="498.0" text="Age Rating" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="mAgeRatingCombobox" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <ComboBox fx:id="mAgeRatingCombobox" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                                           <Label layoutX="2.0" layoutY="581.0" text="Chronological Order" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="mChronologicalOrderTextfield" layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="mChronologicalOrderTextfield" layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -150,7 +150,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="mPosterTextfield" layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="mPosterTextfield" layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -160,7 +160,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="mTrailerLinkTextField" layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="mTrailerLinkTextField" layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -186,7 +186,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tShowTitleTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tShowTitleTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -196,7 +196,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tAverageRuntimeTextField" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter average runtime" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tAverageRuntimeTextField" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter average runtime" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -206,7 +206,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tSeasonTextField" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the season" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tSeasonTextField" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the season" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -216,7 +216,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tEpisodeTextfield" layoutY="282.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the number of episodes" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tEpisodeTextfield" layoutY="282.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the number of episodes" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -242,25 +242,25 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="tDirectorTextfield" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <ComboBox fx:id="tDirectorTextfield" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                                           <Label fx:id="tPhaseLabel" layoutX="2.0" layoutY="581.0" text="Phase" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="tPhaseTextfield" layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <ComboBox fx:id="tPhaseTextfield" layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                                           <Label fx:id="tAgeRatingLabel" layoutX="2.0" layoutY="664.0" text="Age Rating" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="tAgeRatingTextfield" layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                                          <ComboBox fx:id="tAgeRatingTextfield" layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                                           <Label fx:id="tChronologicalOrderLabel" layoutX="2.0" layoutY="747.0" text="Chronological Order" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tChronologicalOrderTextField" layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tChronologicalOrderTextField" layoutY="780.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter which order it is" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -270,7 +270,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tPosterTextField" layoutY="863.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tPosterTextField" layoutY="863.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter the poster path" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
@@ -280,7 +280,7 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tTrailerLinkTextField" layoutY="946.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextField fx:id="tTrailerLinkTextField" layoutY="946.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter trailer link" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>

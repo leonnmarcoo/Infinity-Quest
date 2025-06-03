@@ -110,9 +110,9 @@
                         </Label>
                         <ScrollPane fx:id="releaseDateScrollPane" hbarPolicy="NEVER" layoutY="890.0" prefHeight="155.0" prefWidth="440.0" style="-fx-background-color: #141414; -fx-background: #141414; -fx-border-color: #141414;" vbarPolicy="NEVER">
                            <content>
-                              <HBox fx:id="releaseDateHBox" style="-fx-background-color: #141414;">
+                              <HBox fx:id="releaseDateHBox" spacing="10.0" style="-fx-background-color: #141414;">
                                  <padding>
-                                    <Insets right="10.0" />
+                                    <Insets left="20.0" right="20.0" />
                                  </padding>
                               </HBox>
                            </content>

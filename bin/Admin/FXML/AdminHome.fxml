@@ -88,7 +88,7 @@
                   <Font name="Geist Medium" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField" layoutX="42.0" layoutY="556.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+            <TextField fx:id="usernameTextField" layoutX="42.0" layoutY="556.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="18.0" />
                </font>
@@ -98,7 +98,7 @@
                   <Font name="Geist Medium" size="22.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordPasswordField" layoutX="42.0" layoutY="639.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+            <PasswordField fx:id="passwordPasswordField" layoutX="42.0" layoutY="639.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="18.0" />
                </font>
