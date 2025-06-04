@@ -69,8 +69,12 @@ public class UserFilterController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         backButton.setOnAction(this::backButtonHandler);
         
-        if (filterTitle != null && phaseNumber > 0) {
-            loadFilteredContent();
+        if (filterTitle != null) {
+            if (phaseNumber > 0) {
+                loadFilteredContent();
+            } else if (sortType != null) {
+                loadAllContent();
+            }
         }
     }
     
@@ -233,5 +237,76 @@ public class UserFilterController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    
+    private String sortType;
+    
+    public void setSortData(String filterTitle, String sortType, String username) {
+        this.filterTitle = filterTitle;
+        this.sortType = sortType;
+        this.username = username;
+        this.phaseNumber = -1;
+        
+        filterLabel.setText(filterTitle);
+        
+        loadAllContent();
+    }
+    
+    private void loadAllContent() {
+        contentList.clear();
+        ResultSet rs = DatabaseHandler.getContent();
+        
+        try {
+            while (rs.next()) {
+                String releaseDateStr = rs.getString("contentReleaseDate");
+                LocalDate releaseDate = null;
+                
+                if (releaseDateStr != null && !releaseDateStr.isEmpty()) {
+                    try {
+                        releaseDate = LocalDate.parse(releaseDateStr);
+                    } catch (Exception e) {
+                        try {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            releaseDate = LocalDate.parse(releaseDateStr, formatter);
+                        } catch (Exception ex) {
+                            System.out.println("Could not parse date: " + releaseDateStr);
+                        }
+                    }
+                }
+                
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    releaseDate,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                
+                contentList.add(content);
+            }
+            
+            if (sortType != null) {
+                if (sortType.equals("release_date")) {
+                    contentList.sort(Comparator.comparing(Content::getContentReleaseDate, 
+                        Comparator.nullsLast(Comparator.naturalOrder())));
+                } else if (sortType.equals("chronological")) {
+                    contentList.sort(Comparator.comparing(Content::getContentChronologicalOrder));
+                }
+            }
+            
+            displayFilteredContent();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading content");
+        }
     }
 }
