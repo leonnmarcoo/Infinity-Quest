@@ -97,12 +97,12 @@
                               <Image url="@../../Images/Navigation%20Card/Phase%206.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="phaseOneButton" layoutX="20.0" layoutY="470.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
-                        <Button fx:id="phaseTwoButton" layoutX="225.0" layoutY="470.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
-                        <Button fx:id="phaseThreeButton" layoutX="20.0" layoutY="590.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
-                        <Button fx:id="phaseFourButton" layoutX="225.0" layoutY="590.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
-                        <Button fx:id="phaseFiveButton" layoutX="20.0" layoutY="710.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
-                        <Button fx:id="phaseSixButton" layoutX="225.0" layoutY="710.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+                        <Button fx:id="phaseOneButton" layoutX="20.0" layoutY="470.0" mnemonicParsing="false" onAction="#phaseOneButtonHandler" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+                        <Button fx:id="phaseTwoButton" layoutX="225.0" layoutY="470.0" mnemonicParsing="false" onAction="#phaseTwoButtonHandler" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+                        <Button fx:id="phaseThreeButton" layoutX="20.0" layoutY="590.0" mnemonicParsing="false" onAction="#phaseThreeButtonHandler" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+                        <Button fx:id="phaseFourButton" layoutX="225.0" layoutY="590.0" mnemonicParsing="false" onAction="#phaseFourButtonHandler" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+                        <Button fx:id="phaseFiveButton" layoutX="20.0" layoutY="710.0" mnemonicParsing="false" onAction="#phaseFiveButtonHandler" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
+                        <Button fx:id="phaseSixButton" layoutX="225.0" layoutY="710.0" mnemonicParsing="false" onAction="#phaseSixButtonHandler" prefHeight="110.0" prefWidth="195.0" style="-fx-background-color: transparent;" />
                         <Label layoutX="20.0" layoutY="850.0" text="Release Date Order" textFill="WHITE">
                            <font>
                               <Font name="Geist Bold" size="22.0" />
