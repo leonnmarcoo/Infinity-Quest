@@ -4,8 +4,11 @@ import Objects.Content;
 import Objects.Director;
 import Database.DatabaseHandler;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -68,6 +72,9 @@ public class UserHomeController implements Initializable {
     @FXML
     private Label synopsisLabel; 
 
+    @FXML
+    private Hyperlink trailerHyperlink;
+
     // ============================== PHASE ================================
 
     @FXML
@@ -95,6 +102,20 @@ public class UserHomeController implements Initializable {
 
     @FXML
     private HBox releaseDateHBox;
+
+    @FXML
+    private Button releaseDateButton;
+
+    // ============================== TIMELINE ORDER ================================
+
+    @FXML
+    private ScrollPane timelineScrollPane;
+
+    @FXML 
+    private HBox timelineHBox;
+
+    @FXML
+    private Button timelineButton;
     
     private String username;
     private List<Content> contentList = new ArrayList<>();
@@ -111,6 +132,7 @@ public class UserHomeController implements Initializable {
         loadContent();
         displayLatestRelease();
         setupReleaseDateOrder();
+        setupTimelineOrder();
     }
     
     public void setUsername(String username) {
@@ -194,6 +216,21 @@ public class UserHomeController implements Initializable {
         ageRatingLabel.setText(latestContent.getContentAgeRating());
         synopsisLabel.setText(latestContent.getContentSynopsis());
         
+        String trailerURL = latestContent.getContentTrailer();
+        if (trailerURL != null && !trailerURL.isEmpty()) {
+            trailerHyperlink.setOnAction(event -> {
+                try {
+                    Desktop.getDesktop().browse(new URI(trailerURL));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Could not open trailer URL: " + trailerURL);
+                }
+            });
+            trailerHyperlink.setVisible(true);
+        } else {
+            trailerHyperlink.setVisible(false);
+        }
+        
         try {
             String posterPath = latestContent.getContentPoster();
             if (posterPath != null && !posterPath.isEmpty()) {
@@ -215,7 +252,7 @@ public class UserHomeController implements Initializable {
         }
         
         if (releaseDateHBox == null) {
-            releaseDateHBox = new HBox(10); // 10px spacing
+            releaseDateHBox = new HBox(10);
             releaseDateHBox.setStyle("-fx-background-color: #141414;");
         } else {
             releaseDateHBox.getChildren().clear();
@@ -252,26 +289,68 @@ public class UserHomeController implements Initializable {
         releaseDateScrollPane.setHbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
         releaseDateScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
     }
-    
 
-    private void showContentDetails(Content content) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(content.getContentTitle());
-        alert.setHeaderText(null);
-        
-        StringBuilder contentInfo = new StringBuilder();
-        contentInfo.append("Title: ").append(content.getContentTitle()).append("\n");
-        
-        if (content.getContentReleaseDate() != null) {
-            contentInfo.append("Release Date: ").append(content.getContentReleaseDate()).append("\n");
+    private void setupTimelineOrder() {
+        if (contentList.isEmpty()) {
+            return;
         }
         
-        contentInfo.append("Runtime: ").append(content.getContentRuntime()).append("\n");
-        contentInfo.append("Age Rating: ").append(content.getContentAgeRating()).append("\n");
-        contentInfo.append("\nSynopsis: ").append(content.getContentSynopsis());
+        if (timelineHBox == null) {
+            timelineHBox = new HBox(10);
+            timelineHBox.setStyle("-fx-background-color: #141414;");
+        } else {
+            timelineHBox.getChildren().clear();
+        }
         
-        alert.setContentText(contentInfo.toString());
-        alert.showAndWait();
+        contentList.stream()
+            .sorted(Comparator.comparing(Content::getContentChronologicalOrder))
+            .forEach(content -> {
+                try {
+                    ImageView posterView = new ImageView();
+                    String posterPath = content.getContentPoster();
+                    
+                    if (posterPath != null && !posterPath.isEmpty()) {
+                        File file = new File(posterPath);
+                        if (file.exists()) {
+                            Image image = new Image(file.toURI().toString());
+                            posterView.setImage(image);
+                            posterView.setFitHeight(150);
+                            posterView.setFitWidth(100);
+                            posterView.setPreserveRatio(true);
+                            
+                            posterView.setOnMouseClicked(event -> showContentDetails(content));
+                            
+                            timelineHBox.getChildren().add(posterView);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        
+        timelineScrollPane.setContent(timelineHBox);
+        timelineScrollPane.setHbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
+        timelineScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
+    }
+
+    private void showContentDetails(Content content) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserInformation.fxml"));
+            Parent root = loader.load();
+            
+            UserInformationController controller = loader.getController();
+            controller.setContent(content);
+            
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            stage.setUserData(username);
+            
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading content details screen");
+        }
     }
     
     private void showAlert(Alert.AlertType type, String message) {
@@ -281,4 +360,121 @@ public class UserHomeController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
+
+    @FXML
+    private void phaseOneButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+            
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 1", 1, username);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
+    @FXML
+    private void phaseTwoButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 2", 2, username);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
+    @FXML
+    private void phaseThreeButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 3", 3, username);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
+    @FXML
+    private void phaseFourButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 4", 4, username);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
+    @FXML
+    private void phaseFiveButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 5", 5, username);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
+    @FXML
+    private void phaseSixButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+
+            UserFilterController controller = loader.getController();
+            controller.setFilterData("Phase 6", 6, username);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
 }

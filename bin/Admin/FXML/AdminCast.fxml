@@ -78,7 +78,7 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="actorTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter actor name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                              <TextField fx:id="actorTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter actor name" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                  <font>
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
@@ -109,7 +109,7 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="roleTextField" layoutY="375.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter role name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                              <TextField fx:id="roleTextField" layoutY="375.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter role name" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                  <font>
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
@@ -148,19 +148,19 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="actorComboBox" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an actor" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                              <ComboBox fx:id="actorComboBox" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an actor" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                               <Label layoutX="2.0" layoutY="83.0" text="Role" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="roleComboBox" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a role" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                              <ComboBox fx:id="roleComboBox" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a role" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                               <Label layoutX="2.0" layoutY="166.0" text="Movie/TV Show" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="contentComboBox" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a movie or TV show" style="-fx-background-color: #272727; -fx-background-radius: 12;" />
+                              <ComboBox fx:id="contentComboBox" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a movie or TV show" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
                               <TableView fx:id="castTable" layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                                 <columns>
                                   <TableColumn fx:id="castIDColumn" prefWidth="128.62921142578125" text="CastID" />
@@ -197,7 +197,7 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="directorTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter director name" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                              <TextField fx:id="directorTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter director name" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                  <font>
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>

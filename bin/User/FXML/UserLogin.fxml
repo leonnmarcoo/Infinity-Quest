@@ -18,12 +18,12 @@
                   <Image url="@../../Images/Background/User%20Login.png" />
                </image>
             </ImageView>
-            <TextField fx:id="usernameTextField" layoutX="50.0" layoutY="725.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 10;">
+            <TextField fx:id="usernameTextField" layoutX="50.0" layoutY="725.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="passwordPasswordField" layoutX="50.0" layoutY="801.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 10;">
+            <PasswordField fx:id="passwordPasswordField" layoutX="50.0" layoutY="801.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
