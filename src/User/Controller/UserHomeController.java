@@ -75,7 +75,7 @@ public class UserHomeController implements Initializable {
     @FXML
     private Hyperlink trailerHyperlink;
 
-    // ============================== PHASE ================================
+    // ================================ PHASE ================================
 
     @FXML
     private Button phaseOneButton;
@@ -95,7 +95,7 @@ public class UserHomeController implements Initializable {
     @FXML
     private Button phaseSixButton;
 
-    // ============================== RELEASE DATE ORDER ================================
+    // ================================ RELEASE DATE ORDER ================================
 
     @FXML
     private ScrollPane releaseDateScrollPane;
@@ -106,7 +106,7 @@ public class UserHomeController implements Initializable {
     @FXML
     private Button releaseDateButton;
 
-    // ============================== TIMELINE ORDER ================================
+    // ================================ TIMELINE ORDER ================================
 
     @FXML
     private ScrollPane timelineScrollPane;
@@ -182,6 +182,8 @@ public class UserHomeController implements Initializable {
         }
     }
     
+    // ================================ DISPLAY LATEST RELEASE ================================
+
     private void displayLatestRelease() {
         if (contentList.isEmpty()) {
             return;
@@ -246,6 +248,8 @@ public class UserHomeController implements Initializable {
         }
     }
     
+    // ================================ DISPLAY RELEASE DATE ORDER ================================
+
     private void setupReleaseDateOrder() {
         if (contentList.isEmpty()) {
             return;
@@ -261,6 +265,7 @@ public class UserHomeController implements Initializable {
         contentList.stream()
             .filter(c -> c.getContentReleaseDate() != null)
             .sorted(Comparator.comparing(Content::getContentReleaseDate))
+            .limit(10)
             .forEach(content -> {
                 try {
                     ImageView posterView = new ImageView();
@@ -290,6 +295,8 @@ public class UserHomeController implements Initializable {
         releaseDateScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
     }
 
+    // ================================ DISPLAY TIMELINE ORDER ================================
+
     private void setupTimelineOrder() {
         if (contentList.isEmpty()) {
             return;
@@ -304,6 +311,7 @@ public class UserHomeController implements Initializable {
         
         contentList.stream()
             .sorted(Comparator.comparing(Content::getContentChronologicalOrder))
+            .limit(10)
             .forEach(content -> {
                 try {
                     ImageView posterView = new ImageView();
@@ -333,6 +341,8 @@ public class UserHomeController implements Initializable {
         timelineScrollPane.setVbarPolicy(javafx.scene.control.ScrollPane.ScrollBarPolicy.NEVER);
     }
 
+    // ================================ METHOD FOR SHOWING THE CONTENT ONCE POSTER IS CLICKED ================================
+
     private void showContentDetails(Content content) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserInformation.fxml"));
@@ -361,7 +371,7 @@ public class UserHomeController implements Initializable {
         alert.showAndWait();
     }
 
-
+    // ================================ PHASES BUTTON HANDLER ================================
 
     @FXML
     private void phaseOneButtonHandler(ActionEvent event) {
@@ -476,5 +486,46 @@ public class UserHomeController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
         }
     }
+    
+    // ================================ RELEASE DATE BUTTON HANDLER ================================
 
+    @FXML
+    private void releaseDateButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+            
+            UserFilterController controller = loader.getController();
+            controller.setSortData("Release Date Order", "release_date", username);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
+
+    // ================================ TIMELINE BUTTON HANDLER ================================
+
+    @FXML
+    private void timelineButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserFilter.fxml"));
+            Parent root = loader.load();
+            
+            UserFilterController controller = loader.getController();
+            controller.setSortData("Timeline Order", "chronological", username);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
+        }
+    }
 }
