@@ -60,7 +60,7 @@
                               <Font name="Geist Regular" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="synopsisLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="375.0" maxHeight="81.0" maxWidth="400.0" prefHeight="81.0" prefWidth="400.0" text="Synopsis" textAlignment="JUSTIFY" textFill="#d4d4d4" wrapText="true">
+                        <Label fx:id="synopsisLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="375.0" maxWidth="400.0" prefWidth="400.0" text="Synopsis" textAlignment="JUSTIFY" textFill="#d4d4d4" wrapText="true">
                            <font>
                               <Font name="Geist Regular" size="12.0" />
                            </font>
