@@ -33,7 +33,7 @@
                                  <children>
                                     <ImageView fx:id="contentImageView" fitHeight="225.0" fitWidth="150.0" layoutX="20.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
                                     <Hyperlink fx:id="trailerHyperlink" layoutX="20.0" layoutY="135.0" prefHeight="225.0" prefWidth="150.0" style="-fx-background-radius: 12;" />
-                                    <Label fx:id="titleLabel" layoutX="185.0" layoutY="140.0" text="Title" textFill="WHITE">
+                                    <Label fx:id="titleLabel" layoutX="185.0" layoutY="140.0" maxWidth="235.0" text="Title" textFill="WHITE">
                                        <font>
                                           <Font name="Geist Bold" size="20.0" />
                                        </font>
