@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,54 +24,197 @@
                </image>
             </ImageView>
             <ScrollPane hbarPolicy="NEVER" prefHeight="865.0" prefWidth="440.0" style="-fx-background-color: Transparent;" vbarPolicy="NEVER">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1280.0" prefWidth="438.0" style="-fx-background-color: #141414;">
+               <content>
+                  <VBox prefWidth="438.0" spacing="30.0" style="-fx-background-color: #141414;">
                      <children>
-                        <ImageView fx:id="contentImageView" fitHeight="225.0" fitWidth="150.0" layoutX="20.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
-                        <Hyperlink fx:id="trailerHyperlink" layoutX="20.0" layoutY="135.0" prefHeight="225.0" prefWidth="150.0" style="-fx-background-radius: 12;" />
-                        <Label fx:id="titleLabel" layoutX="185.0" layoutY="140.0" text="Title" textFill="WHITE">
-                           <font>
-                              <Font name="Geist Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="directorLabel" layoutX="185.0" layoutY="169.0" text="Director" textFill="WHITE">
-                           <font>
-                              <Font name="Geist Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="releaseDateLabel" layoutX="185.0" layoutY="194.0" text="Release Date" textFill="#d4d4d4">
-                           <font>
-                              <Font name="Geist Regular" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="runtimeLabel" layoutX="273.0" layoutY="194.0" text="Runtime" textFill="#d4d4d4">
-                           <font>
-                              <Font name="Geist Regular" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="ageRatingLabel" layoutX="335.0" layoutY="194.0" text="Age Rating" textFill="#d4d4d4">
-                           <font>
-                              <Font name="Geist Regular" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="seasonLabel" layoutX="185.0" layoutY="218.0" text="Season:" textFill="#d4d4d4">
-                           <font>
-                              <Font name="Geist Regular" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="episodeLabel" layoutX="303.0" layoutY="218.0" text="Episode:" textFill="#d4d4d4">
-                           <font>
-                              <Font name="Geist Regular" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="synopsisLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="375.0" maxHeight="81.0" maxWidth="400.0" prefHeight="81.0" prefWidth="400.0" text="Synopsis" textAlignment="JUSTIFY" textFill="#d4d4d4" wrapText="true">
-                           <font>
-                              <Font name="Geist Regular" size="12.0" />
-                           </font>
-                        </Label>
+                        <VBox prefWidth="438.0" spacing="15.0" style="-fx-background-color: #141414;">
+                           <children>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="438.0" style="-fx-background-color: #141414;">
+                                 <children>
+                                    <ImageView fx:id="contentImageView" fitHeight="225.0" fitWidth="150.0" layoutX="20.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Hyperlink fx:id="trailerHyperlink" layoutX="20.0" layoutY="135.0" prefHeight="225.0" prefWidth="150.0" style="-fx-background-radius: 12;" />
+                                    <Label fx:id="titleLabel" layoutX="185.0" layoutY="140.0" maxWidth="235.0" text="Title" textFill="WHITE">
+                                       <font>
+                                          <Font name="Geist Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="directorLabel" layoutX="185.0" layoutY="169.0" text="Director" textFill="WHITE">
+                                       <font>
+                                          <Font name="Geist Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="releaseDateLabel" layoutX="185.0" layoutY="194.0" text="Release Date" textFill="#d4d4d4">
+                                       <font>
+                                          <Font name="Geist Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="runtimeLabel" layoutX="273.0" layoutY="194.0" text="Runtime" textFill="#d4d4d4">
+                                       <font>
+                                          <Font name="Geist Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="ageRatingLabel" layoutX="335.0" layoutY="194.0" text="Age Rating" textFill="#d4d4d4">
+                                       <font>
+                                          <Font name="Geist Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="seasonLabel" layoutX="185.0" layoutY="218.0" text="Season:" textFill="#d4d4d4">
+                                       <font>
+                                          <Font name="Geist Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="episodeLabel" layoutX="303.0" layoutY="218.0" text="Episode:" textFill="#d4d4d4">
+                                       <font>
+                                          <Font name="Geist Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="synopsisLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="375.0" maxWidth="400.0" prefWidth="400.0" text="Synopsis" textAlignment="JUSTIFY" textFill="#d4d4d4" wrapText="true">
+                                       <font>
+                                          <Font name="Geist Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="watchlistButton" graphicTextGap="5.0" layoutX="185.0" layoutY="325.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #343434; -fx-background-radius: 8;" text="Watchlist" textFill="WHITE">
+                                       <font>
+                                          <Font name="Geist SemiBold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="15.0" fitWidth="15.0">
+                                             <image>
+                                                <Image url="@../../Images/Icons/Watchlist.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="watchButton" graphicTextGap="5.0" layoutX="308.0" layoutY="325.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #CE2431; -fx-background-radius: 8;" text="Watch" textFill="WHITE">
+                                       <font>
+                                          <Font name="Geist SemiBold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="12.0" fitWidth="21.0">
+                                             <image>
+                                                <Image url="@../../Images/Icons/Watched.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <ImageView fitHeight="1.0" fitWidth="400.0" layoutX="20.0">
+                                       <image>
+                                          <Image url="@../../Images/Background/Line.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children></AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="438.0" spacing="15.0" style="-fx-background-color: #141414;">
+                           <children>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <Label fx:id="ratingLabel" layoutX="20.0" prefHeight="19.0" prefWidth="176.0" text="Rating" textFill="WHITE">
+                                       <font>
+                                          <Font name="Geist Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <BarChart fx:id="ratingBarChart" alternativeRowFillVisible="false" barGap="5.0" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="20.0" maxHeight="110.0" maxWidth="440.0" prefHeight="110.0" prefWidth="400.0" style="-fx-background: #141414; -fx-alternative-column-fill-visible: #343434; -fx-alternative-row-fill-visible: #343434;" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+                                      <xAxis>
+                                        <CategoryAxis fx:id="starAxis" side="BOTTOM" tickLabelFill="#343434" tickLabelsVisible="false" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="numberAxis" side="LEFT" tickLabelFill="#343434" tickLabelGap="0.0" tickLabelsVisible="false">
+                                             <tickLabelFont>
+                                                <Font name="Geist Regular" size="8.0" />
+                                             </tickLabelFont>
+                                          </NumberAxis>
+                                      </yAxis>
+                                    </BarChart>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <ImageView fitHeight="16.79" fitWidth="16.79" layoutX="50.0">
+                                       <image>
+                                          <Image url="@../../Images/Icons/1%20STAR.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="16.79" fitWidth="31.56" layoutX="123.0">
+                                       <image>
+                                          <Image url="@../../Images/Icons/2%20STAR.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="16.79" fitWidth="46.33" layoutX="197.0">
+                                       <image>
+                                          <Image url="@../../Images/Icons/3%20STAR.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="16.79" fitWidth="61.11" layoutX="270.0">
+                                       <image>
+                                          <Image url="@../../Images/Icons/4%20STAR.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="16.79" fitWidth="75.88" layoutX="344.0">
+                                       <image>
+                                          <Image url="@../../Images/Icons/5%20STAR.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="220.0" prefWidth="438.0">
+                                 <children>
+                                    <ImageView fitHeight="1.0" fitWidth="400.0" layoutX="20.0">
+                                       <image>
+                                          <Image url="@../../Images/Background/Line.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="438.0" spacing="15.0">
+                           <children>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <Label fx:id="castLabel" layoutX="20.0" prefHeight="19.0" prefWidth="176.0" text="Cast" textFill="WHITE">
+                                       <font>
+                                          <Font name="Geist Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <ListView fx:id="castListView" layoutX="20.0" prefWidth="400.0" style="-fx-background-color: #141414; -fx-text-fill: #ffffff;" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="689.0" prefWidth="438.0" spacing="15.0">
+                           <children>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <Label fx:id="reviewLabel" layoutX="20.0" prefHeight="19.0" prefWidth="176.0" text="Review" textFill="WHITE">
+                                       <font>
+                                          <Font name="Geist Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefWidth="438.0">
+                                 <children>
+                                    <ListView fx:id="ratingListView" layoutX="20.0" prefWidth="400.0" style="-fx-background-color: #141414; -fx-text-fill: #ffffff;" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
                      </children>
-                  </AnchorPane>
-              </content>
+                  </VBox>
+               </content>
             </ScrollPane>
             <ImageView fitHeight="130.0" fitWidth="440.0">
                <image>

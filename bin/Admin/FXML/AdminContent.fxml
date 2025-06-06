@@ -106,13 +106,13 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <DatePicker fx:id="mReleaseDatePicker" editable="false" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a date" />
+                                          <DatePicker fx:id="mReleaseDatePicker" editable="false" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a date" style="-fx-control-inner-background: #272727;" />
                                           <Label layoutX="2.0" layoutY="249.0" text="Synopsis" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="mSynopsisTextfield" layoutY="282.0" prefHeight="40.0" prefWidth="350.0" promptText="Write a synopsis" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextArea fx:id="mSynopsisTextfield" layoutY="282.0" prefHeight="40.0" prefWidth="350.0" promptText="Write a synopsis" style="-fx-control-inner-background: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="12.0" />
                                              </font>
@@ -226,13 +226,13 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <DatePicker fx:id="tReleaseDatePicker" editable="false" layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a date" />
+                                          <DatePicker fx:id="tReleaseDatePicker" editable="false" layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a date" style="-fx-control-inner-background: #272727;" />
                                           <Label fx:id="tSynopsisLabel" layoutX="2.0" layoutY="415.0" text="Synopsis" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="tSynopsisTextfield" layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Write a synopsis" style="-fx-background-color: #272727; -fx-background-radius: 12;">
+                                          <TextArea fx:id="tSynopsisTextfield" layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Write a synopsis" style="-fx-control-inner-background: #272727; -fx-background-radius: 12;">
                                              <font>
                                                 <Font name="Geist Regular" size="12.0" />
                                              </font>
