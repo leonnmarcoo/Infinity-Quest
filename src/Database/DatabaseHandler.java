@@ -718,7 +718,5 @@ public static ResultSet getAllDirectors() {
                         System.out.println("Executing SQL Query for Dislike: [" + query + "]");  
         
         return handler.execQuery(query);
+    }
 }
-
-
-     }
