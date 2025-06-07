@@ -67,7 +67,7 @@
             <TableView fx:id="dislikeDataTable" layoutX="40.0" layoutY="173.0" prefHeight="684.0" prefWidth="1432.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                <columns>
                   <TableColumn fx:id="dislikeIDCol" prefWidth="137.8127899169922" text="DislikeID" />
-                  <TableColumn fx:id="dislikeUserCol" prefWidth="488.0771789550781" text="User" />
+                  <TableColumn fx:id="dislikeUserNameCol" prefWidth="488.0771789550781" text="User" />
                   <TableColumn fx:id="dislikeContentCol" prefWidth="602.9229736328125" text="Movie/TV Show" />
                </columns>
             </TableView>

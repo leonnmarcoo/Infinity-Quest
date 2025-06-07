@@ -1,11 +1,20 @@
 package Admin.Controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
+import Database.DatabaseHandler;
 import Objects.Review;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,9 +22,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class AdminReviewController {
+public class AdminReviewController   implements Initializable {
+    ObservableList<Review> reviewList = FXCollections.observableArrayList();
 
     @FXML
     private Button backButton;
@@ -44,40 +55,70 @@ public class AdminReviewController {
     @FXML
     private Button dislikeButton;
 
-    @FXML
-    private Label userLabel;
+    @FXML  private Label userLabel;
 
-    @FXML
-    private TableView<Review> reviewDataTable;
+    @FXML private TableView<Review> reviewDataTable;
 
-    @FXML
-    private TableColumn<Review, Integer> ReviewIDCol;
+    @FXML private TableColumn<Review, Integer> reviewIDCol;
 
-    @FXML
-    private TableColumn<Review, Integer> reviewUserCol;
+    @FXML private TableColumn<Review, String> reviewUserNameCol;
 
-    @FXML
-    private TableColumn<Review, Integer> reviewContentCol;
+    @FXML private TableColumn<Review, String> reviewContentCol;
 
-    @FXML
-    private TableColumn<Review, String> reviewCol;
+    @FXML private TableColumn<Review, String> reviewTextCol;
 
 
+// =====================================================================
 
-    @FXML
-    private Button reviewDeleteButton;
+ @Override
+    public void initialize(URL url, ResourceBundle rb){
+        initializeReviewCol();
+        reviewList.clear();
+        displayReview();
+    }
 
-    @FXML
-    private Button reviewUpdateButton;
+    private void initializeReviewCol(){
+        
+        reviewIDCol.setCellValueFactory(new PropertyValueFactory<>("reviewID"));
+        reviewUserNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        reviewContentCol.setCellValueFactory(new PropertyValueFactory<>("contentTitle"));
+        reviewTextCol.setCellValueFactory(new PropertyValueFactory<>("reviewText"));
+    
+        reviewDataTable.setItems(reviewList);
+        reviewDataTable.setEditable(false);  
+    }
 
-     @FXML
-    private Button reviewDeleteButtonHandler;
+    private void displayReview(){ 
+        
+        ResultSet result = null;
 
-    @FXML
-    private Button reviewUpdateButtonHandler;
+        try {
+            result = DatabaseHandler.getReview();
+            if (result != null) {
+                while (result.next()) {
+                    
+                    int reviewID = result.getInt("reviewID");
+                    String userName = result.getString("userName");
+                    String contentTitle = result.getString("contentTitle");
+                    String reviewText = result.getString("reviewText");
 
-
-
+                    Review revieww = new Review(reviewID, userName, contentTitle, reviewText);
+                    reviewList.add(revieww);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        } finally { 
+            try {
+                if (result != null) {
+                    result.close(); 
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
    // === Navigation ====================================================
     

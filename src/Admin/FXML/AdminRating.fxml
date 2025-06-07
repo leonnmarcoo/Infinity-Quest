@@ -67,8 +67,8 @@
             <TableView fx:id="ratingDataTable" layoutX="40.0" layoutY="173.0" prefHeight="684.0" prefWidth="1432.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
               <columns>
                 <TableColumn fx:id="ratingIDCol" prefWidth="137.8127899169922" text="RatingID" />
-                <TableColumn fx:id="ratingUserCol" prefWidth="394.20069885253906" text="User" />
-                  <TableColumn fx:id="ratingContentCOl" prefWidth="696.4732055664062" text="Movie/TV Show" />
+                <TableColumn fx:id="ratingUserNameCol" prefWidth="394.20069885253906" text="User" />
+                  <TableColumn fx:id="ratingContentCol" prefWidth="696.4732055664062" text="Movie/TV Show" />
                   <TableColumn fx:id="ratingCol" prefWidth="201.02685546875" text="Rating" />
               </columns>
             </TableView>

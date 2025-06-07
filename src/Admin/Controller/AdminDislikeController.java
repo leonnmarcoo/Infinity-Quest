@@ -1,11 +1,19 @@
 package Admin.Controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
+import Database.DatabaseHandler;
 import Objects.Dislike;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,40 +21,32 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class AdminDislikeController {
+public class AdminDislikeController implements Initializable {
+    ObservableList<Dislike> dislikeList = FXCollections.observableArrayList();
 
-    @FXML
-    private Button backButton;
+    @FXML private Button backButton;
 
-    @FXML
-    private Button castButton;
+    @FXML private Button castButton;
 
-    @FXML
-    private Button contentButton;
+    @FXML private Button contentButton;
 
-    @FXML
-    private Button dislikeButton;
+    @FXML private Button dislikeButton;
 
-    @FXML
-    private Button likeButton;
+    @FXML private Button likeButton;
 
-    @FXML
-    private Button ratingButton;
+    @FXML private Button reviewButton;
+    
+    @FXML private Button ratingButton;
 
-    @FXML
-    private Button reviewButton;
+    @FXML private Button userButton;
 
-    @FXML
-    private Button userButton;
+    @FXML private Label userLabel;
 
-    @FXML
-    private Label userLabel;
+    @FXML  private Button watchlistButton;
 
-    @FXML
-    private Button watchlistButton;
-// ==============================================================================
     @FXML
     private TableView<Dislike> dislikeDataTable;
 
@@ -54,29 +54,59 @@ public class AdminDislikeController {
     private TableColumn<Dislike, Integer> dislikeIDCol;
 
     @FXML
-    private TableColumn<Dislike, Integer> dislikeUserCol;
+    private TableColumn<Dislike, String> dislikeUserNameCol;
 
     @FXML
-    private TableColumn<Dislike, Integer> dislikeContentCol;
-
-// === Update Delete ===========================================================================
-
-    @FXML
-    private Button dislikeUpdateButton;
-
-    @FXML
-    private Button dislikeDeleteButton;
+    private TableColumn<Dislike, String> dislikeContentCol;
 
 
-    @FXML
-    void dislikeDeleteButtonHandler(ActionEvent event) {
-
+    @Override
+     public void initialize(URL url, ResourceBundle rb){
+        initializeDislikeCol();
+        dislikeList.clear();
+        displayDislike();
     }
 
-    @FXML
-    void dislikeUpdateButtonHandler(ActionEvent event) {
+     private void initializeDislikeCol(){
+        
+        dislikeIDCol.setCellValueFactory(new PropertyValueFactory<>("dislikeID"));
+        dislikeUserNameCol.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        dislikeContentCol.setCellValueFactory(new PropertyValueFactory<>("contentTitle"));
+    
+        dislikeDataTable.setItems(dislikeList);
+        dislikeDataTable.setEditable(false);  
     }
 
+    private void displayDislike(){ 
+        
+        ResultSet result = null;
+
+        try {
+            result = DatabaseHandler.getDislike();
+            if (result != null) {
+                while (result.next()) {
+                    
+                    int dislikeID = result.getInt("dislikeID");
+                    String userName = result.getString("userName");
+                    String contentTitle = result.getString("contentTitle");
+
+                    Dislike dislike = new Dislike(dislikeID, userName, contentTitle);
+                    dislikeList.add(dislike);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        } finally { 
+            try {
+                if (result != null) {
+                    result.close(); 
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 // === Navigation ===========================================================================
 

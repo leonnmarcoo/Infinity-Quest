@@ -1,37 +1,38 @@
 package Objects;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Review {
 
     private final SimpleIntegerProperty reviewID;
-    private final SimpleIntegerProperty userID;
-    private final SimpleIntegerProperty contentID;
-    private final SimpleIntegerProperty review;
+    private final SimpleStringProperty userName;
+    private final SimpleStringProperty contentTitle;
+    private final SimpleStringProperty reviewText;
 
 
-    public Review (int reviewID, int userID, int contentID, int review) {
+    public Review (int reviewID, String userName, String contentTitle, String reviewText) {
         this.reviewID = new SimpleIntegerProperty(reviewID);
-        this.userID = new SimpleIntegerProperty(userID);
-        this.contentID = new SimpleIntegerProperty(contentID);
-        this.review = new SimpleIntegerProperty(review);
+        this.userName = new SimpleStringProperty(userName);
+        this.contentTitle = new SimpleStringProperty(contentTitle);
+        this.reviewText = new SimpleStringProperty(reviewText);
 
     }
 
-    public int getreviewID() {
+    public int getReviewID() {
         return reviewID.get();
     }
 
-    public int getuserID() {
-        return userID.get();
+    public String getUserName() {
+        return userName.get();
     }
 
-    public int getcontentID() {
-        return contentID.get();
+    public String getContentTitle() {
+        return contentTitle.get();
     }
 
-    public int getreview() {
-        return review.get();
+    public String getReviewText() {
+        return reviewText.get();
     }
 
     
