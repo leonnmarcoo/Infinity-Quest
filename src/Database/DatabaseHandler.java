@@ -637,4 +637,88 @@ public static ResultSet getAllDirectors() {
         return handler.execQuery(query);
     }
 
+// ============================ (try) VIEW WATCHLIST (join) ===============================
+
+    public static ResultSet getWatchlist() {
+        getInstance();
+        String query = "SELECT wl.watchlistID, usr.userName, contnt.contentTitle, wl.watchlistDateTime " +
+                       "FROM Watchlist wl " +
+                       "JOIN User usr ON wl.userID = usr.userID " +
+                       "JOIN Content contnt ON wl.contentID = contnt.contentID;";
+        
+                       System.out.println("Executing SQL Query for watchlist: [" + query + "]"); 
+
+         return handler.execQuery(query);
+         }
+ 
+// ============================ (try) VIEW WATCHED (join) ===============================
+    
+    public static ResultSet getWatched() {
+        getInstance();
+        String query =  "SELECT w.watchedID, usr.userName, contnt.contentTitle, w.watchedDateTime" +
+                        " FROM Watched w " + 
+                        "JOIN User usr ON w.userID = usr.userID " +
+                        "JOIN Content contnt ON w.contentID = contnt.contentID;";
+
+                        System.out.println("Executing SQL Query for watched: [" + query + "]");
+
+         return handler.execQuery(query);
+
+         }
+
+// ============================ (try) VIEW RATING (join)  ===============================
+
+    public static ResultSet getRating() {
+        getInstance();
+        String query =  "SELECT r.ratingID, usr.userName, contnt.contentTitle, r.star" +
+                        " FROM Rating r " + 
+                        "JOIN User usr ON r.userID = usr.userID " +
+                        "JOIN Content contnt ON r.contentID = contnt.contentID;";
+
+                        System.out.println("Executing SQL Query for rating: [" + query + "]");
+
+        return handler.execQuery(query);
+        
+         }
+// ============================ (try) VIEW REVIEW (join)  ===============================
+
+    public static ResultSet getReview() {
+        getInstance();
+        String query =  "SELECT rev.reviewID, usr.userName, contnt.contentTitle, rev.reviewText " +
+                        "FROM Review rev " +
+                        "JOIN User usr ON rev.userID = usr.userID " +
+                        "JOIN Content contnt ON rev.contentID = contnt.contentID;";
+
+                        System.out.println("Executing SQL Query for Review: [" + query + "]");
+        
+        return handler.execQuery(query);
+        }
+// ============================ (try) VIEW LIKE (join)  ===============================
+
+    public static ResultSet getLike() {
+        getInstance();
+        String query =  "SELECT l.likeID, usr.userName, contnt.contentTitle " +  
+                        "FROM userLike l " +  
+                        "JOIN User usr ON l.userID = usr.userID " +  
+                        "JOIN Content contnt ON l.contentID = contnt.contentID; ";  
+
+                        System.out.println("Executing SQL Query for Like: [" + query + "]");  
+        
+        return handler.execQuery(query);
 }
+// ============================ (try) VIEW DISLIKE (join)  ===============================
+
+     public static ResultSet getDislike() {
+        getInstance();
+        String query =  "SELECT dl.dislikeID, usr.userName, contnt.contentTitle " +  
+                        "FROM userDislike dl " +  
+                        "JOIN User usr ON dl.userID = usr.userID " +  
+                        "JOIN Content contnt ON dl.contentID = contnt.contentID ";   
+
+                        System.out.println("Executing SQL Query for Dislike: [" + query + "]");  
+        
+        return handler.execQuery(query);
+}
+
+
+     }

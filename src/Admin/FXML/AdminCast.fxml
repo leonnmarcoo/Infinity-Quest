@@ -38,27 +38,27 @@
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="watchlistButton" layoutX="705.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="111.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="watchlistButton" layoutX="705.0" layoutY="32.0" mnemonicParsing="false" onAction="#watchlistButtonHandler" prefHeight="18.0" prefWidth="111.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="ratingButton" layoutX="828.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="ratingButton" layoutX="828.0" layoutY="32.0" mnemonicParsing="false" onAction="#ratingButtonHandler" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="reviewButton" layoutX="921.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="89.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="reviewButton" layoutX="921.0" layoutY="32.0" mnemonicParsing="false" onAction="#reviewButtonHandler" prefHeight="18.0" prefWidth="89.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="likeButton" layoutX="1022.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="54.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="likeButton" layoutX="1022.0" layoutY="32.0" mnemonicParsing="false" onAction="#likeButtonHandler" prefHeight="18.0" prefWidth="54.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="dislikeButton" layoutX="1088.0" layoutY="32.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
+            <Button fx:id="dislikeButton" layoutX="1088.0" layoutY="32.0" mnemonicParsing="false" onAction="#dislikeButtonHandler" prefHeight="18.0" prefWidth="81.0" style="-fx-background-color: Transparent;" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>

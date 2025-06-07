@@ -67,8 +67,9 @@
             <TableView fx:id="watchlistDataTable" layoutX="330.0" layoutY="120.0" prefHeight="341.0" prefWidth="1142.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
               <columns>
                 <TableColumn fx:id="watchlistIDCol" prefWidth="189.40313720703125" text="WatchlistID" />
-                <TableColumn fx:id="watchlistUserCol" prefWidth="359.54266357421875" text="User" />
-                  <TableColumn fx:id="watchlistContentCol" prefWidth="491.45733642578125" text="Movie/TV Show" />
+                <TableColumn fx:id="watchlistUserNameCol" prefWidth="359.54266357421875" text="User" />
+                  <TableColumn fx:id="watchlistContentCol" prefWidth="356.74267578125" text="Movie/TV Show" />
+                  <TableColumn fx:id="watchlistDateCol" prefWidth="235.0" text="Date" />
               </columns>
             </TableView>
             <Label layoutX="40.0" layoutY="491.0" text="Watched Data" textFill="#ce2431">
@@ -79,8 +80,9 @@
             <TableView fx:id="watchedDataTable" layoutX="330.0" layoutY="491.0" prefHeight="341.0" prefWidth="1142.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
                <columns>
                   <TableColumn fx:id="watchedIDCol" prefWidth="189.40313720703125" text="WatchedID" />
-                  <TableColumn fx:id="watchedUserCol" prefWidth="359.54266357421875" text="User" />
-                  <TableColumn fx:id="watchedContentCol" prefWidth="491.45733642578125" text="Movie/TV Show" />
+                  <TableColumn fx:id="watchedUserNameCol" prefWidth="359.54266357421875" text="User" />
+                  <TableColumn fx:id="watchedContentCol" prefWidth="356.3426513671875" text="Movie/TV Show" />
+                  <TableColumn fx:id="watchedDateCol" prefWidth="235.0" text="Date" />
                </columns>
             </TableView>
             <Button fx:id="backButton" graphicTextGap="8.0" layoutX="1322.0" layoutY="902.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Back" textFill="WHITE">

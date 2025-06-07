@@ -1,18 +1,19 @@
 package Objects;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Dislike {
 
     private final SimpleIntegerProperty dislikeID;
-    private final SimpleIntegerProperty userID;
-    private final SimpleIntegerProperty contentID;
+    private final SimpleStringProperty userName;
+    private final SimpleStringProperty contentTitle;
 
 
-    public Dislike (int dislikeID, int userID, int contentID) {
+    public Dislike (int dislikeID, String userName, String contentTitle) {
         this.dislikeID = new SimpleIntegerProperty(dislikeID);
-        this.userID = new SimpleIntegerProperty(userID);
-        this.contentID = new SimpleIntegerProperty(contentID);
+        this.userName = new SimpleStringProperty(userName);
+        this.contentTitle = new SimpleStringProperty(contentTitle);
 
     }
 
@@ -20,12 +21,12 @@ public class Dislike {
         return dislikeID.get();
     }
 
-    public int getuserID() {
-        return userID.get();
+    public String getUserName() {
+        return userName.get();
     }
 
-    public int getcontentID() {
-        return contentID.get();
+    public String getContentTitle() {
+        return contentTitle.get();
     }
 
 }
