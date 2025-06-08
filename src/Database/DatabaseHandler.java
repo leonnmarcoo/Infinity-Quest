@@ -787,6 +787,36 @@ public static ResultSet getAllDirectors() {
         return false;
     }
 
+// ============================ REMOVE FROM WATCHLIST ===============================
+
+    public static boolean removeFromWatchlist(String username, int contentID) {
+        getInstance();
+        
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Delete from the Watchlist table
+                String deleteQuery = "DELETE FROM Watchlist WHERE userID = ? AND contentID = ?";
+                PreparedStatement deleteStmt = getDBConnection().prepareStatement(deleteQuery);
+                deleteStmt.setInt(1, userID);
+                deleteStmt.setInt(2, contentID);
+                
+                int result = deleteStmt.executeUpdate();
+                return result > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 // ============================ ADD REVIEW ===============================
 
     public static boolean addReview(String username, int contentID, String reviewText) {

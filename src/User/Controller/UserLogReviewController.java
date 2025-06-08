@@ -150,16 +150,12 @@ public class UserLogReviewController implements Initializable{
     }
     
     private void handleRatingButton(ActionEvent event) {
-        // Reset styling for all buttons
         resetRatingButtonStyles();
         
-        // Get the button that was clicked
         Button clickedButton = (Button) event.getSource();
         
-        // Set the selected style
         clickedButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 12;");
         
-        // Determine the rating based on the button clicked
         if (clickedButton == oneStarButton) {
             rating = 1;
         } else if (clickedButton == twoStarButton) {
@@ -185,7 +181,7 @@ public class UserLogReviewController implements Initializable{
         if (liked != null && liked) {
             // Already liked, so remove like
             liked = null;
-            likeButton.setStyle("");
+            likeButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 12;");
         } else {
             // Set like
             liked = true;
@@ -199,7 +195,7 @@ public class UserLogReviewController implements Initializable{
         if (disliked != null && disliked) {
             // Already disliked, so remove dislike
             disliked = null;
-            dislikeButton.setStyle("");
+            dislikeButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 12;");
         } else {
             // Set dislike
             disliked = true;
@@ -216,17 +212,32 @@ public class UserLogReviewController implements Initializable{
             return;
         }
         
+        // Check that all feedback types are provided (review, rating, and like/dislike)
+        String reviewText = reviewTextArea.getText().trim();
+        boolean hasReview = !reviewText.isEmpty();
+        boolean hasRating = rating != null;
+        boolean hasLikeDislike = (liked != null && liked) || (disliked != null && disliked);
+        
+        // Validate that all required fields are filled
+        StringBuilder missingFields = new StringBuilder();
+        if (!hasReview) missingFields.append("- Review text\n");
+        if (!hasLikeDislike) missingFields.append("- Like or Dislike selection\n");
+        if (!hasRating) missingFields.append("- Rating (1-5 stars)\n");
+        
+        if (missingFields.length() > 0) {
+            showAlert(Alert.AlertType.WARNING, "Please complete all feedback fields:\n" + missingFields.toString());
+            return;
+        }
+        
         boolean success = true;
         
-        // Get the review text (if any)
-        String reviewText = reviewTextArea.getText().trim();
-        if (!reviewText.isEmpty()) {
-            // Add review to database
+        // Add review to database if provided
+        if (hasReview) {
             success = success && DatabaseHandler.addReview(username, content.getContentID(), reviewText);
         }
         
         // Add rating if selected
-        if (rating != null) {
+        if (hasRating) {
             success = success && DatabaseHandler.addRating(username, content.getContentID(), rating);
         }
         
@@ -239,6 +250,11 @@ public class UserLogReviewController implements Initializable{
         
         // Mark content as watched
         success = success && DatabaseHandler.addToWatched(username, content.getContentID());
+        
+        // Remove from watchlist if it was there
+        if (DatabaseHandler.isContentInWatchlist(username, content.getContentID())) {
+            DatabaseHandler.removeFromWatchlist(username, content.getContentID());
+        }
         
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Your feedback for \"" + title + "\" has been submitted!");
