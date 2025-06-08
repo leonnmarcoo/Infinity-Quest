@@ -22,6 +22,11 @@
                   <Image url="@../../Images/Background/Admin%20Home.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="1.0" fitWidth="1432.0" layoutX="40.0" layoutY="420.0">
+               <image>
+                  <Image url="@../../Images/Background/Line.png" />
+               </image>
+            </ImageView>
             <ScrollPane hbarPolicy="NEVER" layoutY="80.0" prefHeight="338.0" prefWidth="1512.0" style="-fx-background-color: #141414;" vbarPolicy="NEVER">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="2360.0" style="-fx-background-color: #141414;">
