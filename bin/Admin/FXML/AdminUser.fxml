@@ -45,22 +45,32 @@
                   <Font name="Geist Regular" size="18.0" />
                </font>
             </TextField>
-            <Label fx:id="emailLabel" layoutX="42.0" layoutY="339.0" text="Email" textFill="WHITE">
+            <Label fx:id="passwordLabel1" layoutX="43.0" layoutY="339.0" text="Profile Picture" textFill="WHITE">
                <font>
                   <Font name="Geist Medium" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="emailTextField" layoutX="40.0" layoutY="372.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your email" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
+            <TextField fx:id="profilePictureTextField" layoutX="40.0" layoutY="372.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter profile picture path" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="18.0" />
                </font>
             </TextField>
-            <Label fx:id="bioLabel" layoutX="42.0" layoutY="422.0" text="Bio" textFill="WHITE">
+            <Label fx:id="emailLabel" layoutX="42.0" layoutY="422.0" text="Email" textFill="WHITE">
                <font>
                   <Font name="Geist Medium" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="bioTextField" layoutX="40.0" layoutY="455.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your bio" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
+            <TextField fx:id="emailTextField" layoutX="40.0" layoutY="455.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your email" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
+               <font>
+                  <Font name="Geist Regular" size="18.0" />
+               </font>
+            </TextField>
+            <Label fx:id="bioLabel" layoutX="42.0" layoutY="505.0" text="Bio" textFill="WHITE">
+               <font>
+                  <Font name="Geist Medium" size="22.0" />
+               </font>
+            </Label>
+            <TextField fx:id="bioTextField" layoutX="40.0" layoutY="538.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your bio" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="18.0" />
                </font>
@@ -70,8 +80,9 @@
                 <TableColumn fx:id="userIDColumn" prefWidth="92.0" text="UserID" />
                 <TableColumn fx:id="usernameColumn" prefWidth="199.0" text="Username" />
                   <TableColumn fx:id="passwordColumn" prefWidth="153.0" text="Password" />
-                  <TableColumn fx:id="emailColumn" prefWidth="197.0" text="Email" />
-                  <TableColumn fx:id="bioColumn" prefWidth="400.0" text="Bio" />
+                  <TableColumn fx:id="profilePictureColumn" prefWidth="192.75640869140625" text="Profile Picture" />
+                  <TableColumn fx:id="emailColumn" prefWidth="241.75634765625" text="Email" />
+                  <TableColumn fx:id="bioColumn" prefWidth="158.592529296875" text="Bio" />
               </columns>
             </TableView>
             <Button fx:id="updateButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="40.0" prefWidth="504.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">

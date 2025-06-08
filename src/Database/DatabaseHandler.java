@@ -719,4 +719,307 @@ public static ResultSet getAllDirectors() {
         
         return handler.execQuery(query);
     }
+    
+// ============================ CHECK IF CONTENT IS IN WATCHLIST ===============================
+
+    public static boolean isContentInWatchlist(String username, int contentID) {
+        getInstance();
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Check if the content is already in the watchlist
+                String checkQuery = "SELECT COUNT(*) AS count FROM Watchlist WHERE userID = ? AND contentID = ?";
+                PreparedStatement checkStmt = getDBConnection().prepareStatement(checkQuery);
+                checkStmt.setInt(1, userID);
+                checkStmt.setInt(2, contentID);
+                ResultSet checkResult = checkStmt.executeQuery();
+                
+                if (checkResult.next()) {
+                    int count = checkResult.getInt("count");
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+// ============================ ADD TO WATCHLIST ===============================
+
+    public static boolean addToWatchlist(String username, int contentID) {
+        getInstance();
+        
+        // First check if the content is already in the watchlist
+        if (isContentInWatchlist(username, contentID)) {
+            return false; // Content already in watchlist
+        }
+        
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Now insert into the Watchlist table
+                String insertQuery = "INSERT INTO Watchlist (userID, contentID, watchlistDateTime) VALUES (?, ?, NOW())";
+                PreparedStatement insertStmt = getDBConnection().prepareStatement(insertQuery);
+                insertStmt.setInt(1, userID);
+                insertStmt.setInt(2, contentID);
+                
+                int result = insertStmt.executeUpdate();
+                return result > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+// ============================ ADD REVIEW ===============================
+
+    public static boolean addReview(String username, int contentID, String reviewText) {
+        getInstance();
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Insert into the Review table
+                String insertQuery = "INSERT INTO Review (userID, contentID, reviewText) VALUES (?, ?, ?)";
+                PreparedStatement insertStmt = getDBConnection().prepareStatement(insertQuery);
+                insertStmt.setInt(1, userID);
+                insertStmt.setInt(2, contentID);
+                insertStmt.setString(3, reviewText);
+                
+                int result = insertStmt.executeUpdate();
+                return result > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+// ============================ ADD RATING ===============================
+
+    public static boolean addRating(String username, int contentID, int rating) {
+        getInstance();
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Check if user already rated this content
+                String checkQuery = "SELECT ratingID FROM Rating WHERE userID = ? AND contentID = ?";
+                PreparedStatement checkStmt = getDBConnection().prepareStatement(checkQuery);
+                checkStmt.setInt(1, userID);
+                checkStmt.setInt(2, contentID);
+                ResultSet checkResult = checkStmt.executeQuery();
+                
+                if (checkResult.next()) {
+                    // Update existing rating
+                    int ratingID = checkResult.getInt("ratingID");
+                    String updateQuery = "UPDATE Rating SET star = ?, ratingDateTime = NOW() WHERE ratingID = ?";
+                    PreparedStatement updateStmt = getDBConnection().prepareStatement(updateQuery);
+                    updateStmt.setInt(1, rating);
+                    updateStmt.setInt(2, ratingID);
+                    
+                    int result = updateStmt.executeUpdate();
+                    return result > 0;
+                } else {
+                    // Insert new rating
+                    String insertQuery = "INSERT INTO Rating (userID, contentID, star) VALUES (?, ?, ?)";
+                    PreparedStatement insertStmt = getDBConnection().prepareStatement(insertQuery);
+                    insertStmt.setInt(1, userID);
+                    insertStmt.setInt(2, contentID);
+                    insertStmt.setInt(3, rating);
+                    
+                    int result = insertStmt.executeUpdate();
+                    return result > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+// ============================ ADD LIKE ===============================
+
+    public static boolean addLike(String username, int contentID) {
+        getInstance();
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Remove any existing dislike
+                String deleteDislikeQuery = "DELETE FROM userDislike WHERE userID = ? AND contentID = ?";
+                PreparedStatement deleteDislikeStmt = getDBConnection().prepareStatement(deleteDislikeQuery);
+                deleteDislikeStmt.setInt(1, userID);
+                deleteDislikeStmt.setInt(2, contentID);
+                deleteDislikeStmt.executeUpdate();
+                
+                // Check if user already liked this content
+                String checkQuery = "SELECT likeID FROM userLike WHERE userID = ? AND contentID = ?";
+                PreparedStatement checkStmt = getDBConnection().prepareStatement(checkQuery);
+                checkStmt.setInt(1, userID);
+                checkStmt.setInt(2, contentID);
+                ResultSet checkResult = checkStmt.executeQuery();
+                
+                if (checkResult.next()) {
+                    // Like already exists
+                    return true;
+                } else {
+                    // Insert new like
+                    String insertQuery = "INSERT INTO userLike (userID, contentID) VALUES (?, ?)";
+                    PreparedStatement insertStmt = getDBConnection().prepareStatement(insertQuery);
+                    insertStmt.setInt(1, userID);
+                    insertStmt.setInt(2, contentID);
+                    
+                    int result = insertStmt.executeUpdate();
+                    return result > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+// ============================ ADD DISLIKE ===============================
+
+    public static boolean addDislike(String username, int contentID) {
+        getInstance();
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Remove any existing like
+                String deleteLikeQuery = "DELETE FROM userLike WHERE userID = ? AND contentID = ?";
+                PreparedStatement deleteLikeStmt = getDBConnection().prepareStatement(deleteLikeQuery);
+                deleteLikeStmt.setInt(1, userID);
+                deleteLikeStmt.setInt(2, contentID);
+                deleteLikeStmt.executeUpdate();
+                
+                // Check if user already disliked this content
+                String checkQuery = "SELECT dislikeID FROM userDislike WHERE userID = ? AND contentID = ?";
+                PreparedStatement checkStmt = getDBConnection().prepareStatement(checkQuery);
+                checkStmt.setInt(1, userID);
+                checkStmt.setInt(2, contentID);
+                ResultSet checkResult = checkStmt.executeQuery();
+                
+                if (checkResult.next()) {
+                    // Dislike already exists
+                    return true;
+                } else {
+                    // Insert new dislike
+                    String insertQuery = "INSERT INTO userDislike (userID, contentID) VALUES (?, ?)";
+                    PreparedStatement insertStmt = getDBConnection().prepareStatement(insertQuery);
+                    insertStmt.setInt(1, userID);
+                    insertStmt.setInt(2, contentID);
+                    
+                    int result = insertStmt.executeUpdate();
+                    return result > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // ============================ ADD TO WATCHED ===============================
+
+    public static boolean addToWatched(String username, int contentID) {
+        getInstance();
+        
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Now insert into the Watched table
+                String insertQuery = "INSERT INTO Watched (userID, contentID, watchedDateTime) VALUES (?, ?, NOW())";
+                PreparedStatement insertStmt = getDBConnection().prepareStatement(insertQuery);
+                insertStmt.setInt(1, userID);
+                insertStmt.setInt(2, contentID);
+                
+                int result = insertStmt.executeUpdate();
+                return result > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean isContentWatched(String username, int contentID) {
+        getInstance();
+        try {
+            // Get the userID from the username
+            String userQuery = "SELECT userID FROM User WHERE userName = ?";
+            PreparedStatement userStmt = getDBConnection().prepareStatement(userQuery);
+            userStmt.setString(1, username);
+            ResultSet userResult = userStmt.executeQuery();
+            
+            if (userResult.next()) {
+                int userID = userResult.getInt("userID");
+                
+                // Check if the content has been watched by the user
+                String checkQuery = "SELECT COUNT(*) AS count FROM Watched WHERE userID = ? AND contentID = ?";
+                PreparedStatement checkStmt = getDBConnection().prepareStatement(checkQuery);
+                checkStmt.setInt(1, userID);
+                checkStmt.setInt(2, contentID);
+                ResultSet checkResult = checkStmt.executeQuery();
+                
+                if (checkResult.next()) {
+                    int count = checkResult.getInt("count");
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
 }

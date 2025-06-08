@@ -199,6 +199,7 @@ public class UserFilterController implements Initializable {
             
             UserInformationController controller = loader.getController();
             controller.setContent(content);
+            controller.setUsername(username);
             
             Stage stage = (Stage) filterLabel.getScene().getWindow();
             stage.setUserData(username);

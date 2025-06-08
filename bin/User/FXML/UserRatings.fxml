@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="956.0" prefWidth="440.0" style="-fx-background-color: #141414;">
+         <children>
+            <ImageView fitHeight="956.0" fitWidth="440.0">
+               <image>
+                  <Image url="@../../Images/Background/Background.png" />
+               </image>
+            </ImageView>
+            <ScrollPane fx:id="contentScrollPane" hbarPolicy="NEVER" prefHeight="866.0" prefWidth="440.0" style="-fx-background-color: Transparent; -fx-background: #141414;" vbarPolicy="NEVER">
+               <content>
+                  <GridPane fx:id="contentGridPane" hgap="12.0" prefWidth="438.0" style="-fx-background-color: #141414;" vgap="12.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="30.0" left="20.0" right="20.0" top="184.0" />
+                     </padding>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+            <ScrollPane fx:id="ratingScrollPane" hbarPolicy="NEVER" layoutY="127.0" prefHeight="55.0" prefWidth="440.0" style="-fx-background-color: #141414;" vbarPolicy="NEVER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="53.0" prefWidth="508.27" style="-fx-background-color: #141414;">
+                     <children>
+                        <Button fx:id="fiveStarButton" layoutX="20.0" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="127.52" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                           <font>
+                              <Font name="Geist Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="23.79" fitWidth="107.52">
+                                 <image>
+                                    <Image url="@../../Images/Icons/5%20STAR%20W.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="fourStarButton" layoutX="157.52" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="106.59" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                           <font>
+                              <Font name="Geist Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="23.79" fitWidth="86.59">
+                                 <image>
+                                    <Image url="@../../Images/Icons/4%20STAR%20W.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="threeStarButton" layoutX="274.11" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="85.65" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                           <font>
+                              <Font name="Geist Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="23.79" fitWidth="65.65">
+                                 <image>
+                                    <Image url="@../../Images/Icons/3%20STAR%20W.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="twoStarButton" layoutX="369.76" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="64.72" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                           <font>
+                              <Font name="Geist Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="23.79" fitWidth="44.72">
+                                 <image>
+                                    <Image url="@../../Images/Icons/2%20STAR%20W.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="oneStarButton" layoutX="444.48" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="43.79" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                           <font>
+                              <Font name="Geist Regular" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="23.79" fitWidth="23.79">
+                                 <image>
+                                    <Image url="@../../Images/Icons/1%20STAR%20W.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <ImageView fitHeight="130.0" fitWidth="440.0">
+               <image>
+                  <Image url="@../../Images/Background/Top%20Bar.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="65.0" fitWidth="440.0">
+               <image>
+                  <Image url="@../../Images/Background/Status%20Bar.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="10.5" layoutX="20.0" layoutY="83.0">
+               <image>
+                  <Image url="@../../Images/Icons/Left%20arrow.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="backButton" layoutX="5.0" layoutY="73.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: Transparent;" />
+            <Label fx:id="filterLabel" layoutX="50.0" layoutY="73.0" text="Ratings" textFill="WHITE">
+               <font>
+                  <Font name="Geist Bold" size="30.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="90.0" fitWidth="440.0" layoutY="866.0">
+               <image>
+                  <Image url="@../../Images/Background/Profile%20Navigation%20Bar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

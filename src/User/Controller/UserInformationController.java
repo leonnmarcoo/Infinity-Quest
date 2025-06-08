@@ -30,11 +30,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -43,6 +45,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 
 public class UserInformationController implements Initializable{
 
@@ -80,20 +84,45 @@ public class UserInformationController implements Initializable{
 
     @FXML
     private Label synopsisLabel;
+
+    @FXML
+    private Button watchlistButton;
+
+    @FXML
+    private Button watchButton;
+
+    @FXML
+    private BarChart<String, Number> ratingBarChart;
+
+    @FXML
+    private CategoryAxis starAxis;
+
+    @FXML
+    private NumberAxis numberAxis;
+
+    @FXML
+    private ListView<String> castListView;
+
+    @FXML
+    private ListView<String> reviewListView;
     
     private Content content;
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private String username;
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(this::backButtonHandler);
     }
     
     public void setContent(Content content) {
         this.content = content;
         displayContentDetails();
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
     }
     
     private void displayContentDetails() {
@@ -186,6 +215,71 @@ public class UserInformationController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Could not load home screen");
+        }
+    }
+    
+    @FXML
+    private void watchlistButtonHandler(ActionEvent event) {
+        if (content == null) {
+            showAlert(Alert.AlertType.ERROR, "No content selected");
+            return;
+        }
+        
+        String username = ((Node) event.getSource()).getScene().getWindow().getUserData().toString();
+        
+        // Check if content is already in watchlist
+        if (DatabaseHandler.isContentInWatchlist(username, content.getContentID())) {
+            showAlert(Alert.AlertType.ERROR, "\"" + content.getContentTitle() + "\" is already in your watchlist!");
+            return;
+        }
+        
+        // Check if content has already been watched
+        if (DatabaseHandler.isContentWatched(username, content.getContentID())) {
+            showAlert(Alert.AlertType.ERROR, "\"" + content.getContentTitle() + "\" has already been watched. No need to add to watchlist!");
+            return;
+        }
+        
+        if (DatabaseHandler.addToWatchlist(username, content.getContentID())) {
+            showAlert(Alert.AlertType.INFORMATION, "Successfully added \"" + content.getContentTitle() + "\" to your watchlist!");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Failed to add to watchlist. Please try again.");
+        }
+    }
+    
+    @FXML
+    private void watchButtonHandler(ActionEvent event) {
+        if (content == null) {
+            showAlert(Alert.AlertType.ERROR, "No content selected");
+            return;
+        }
+
+        // Check if content has already been watched
+        if (DatabaseHandler.isContentWatched(username, content.getContentID())) {
+            showAlert(Alert.AlertType.ERROR, "\"" + content.getContentTitle() + "\" has already been watched!");
+            return;
+        }
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserLogReview.fxml"));
+            Parent root = loader.load();
+            
+            UserLogReviewController controller = loader.getController();
+            controller.setContent(content);
+            
+            // Get username from window user data
+            String username = ((Node) event.getSource()).getScene().getWindow().getUserData().toString();
+            controller.setUsername(username);
+            
+            // Pass the content title to be displayed
+            controller.setTitle(content.getContentTitle());
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Could not load review screen");
         }
     }
     

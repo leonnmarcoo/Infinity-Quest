@@ -73,7 +73,7 @@
                                           <Font name="Geist Regular" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="watchlistButton" graphicTextGap="5.0" layoutX="185.0" layoutY="325.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #343434; -fx-background-radius: 8;" text="Watchlist" textFill="WHITE">
+                                    <Button fx:id="watchlistButton" graphicTextGap="5.0" layoutX="185.0" layoutY="325.0" mnemonicParsing="false" onAction="#watchlistButtonHandler" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #343434; -fx-background-radius: 8;" text="Watchlist" textFill="WHITE">
                                        <font>
                                           <Font name="Geist SemiBold" size="12.0" />
                                        </font>
@@ -85,7 +85,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="watchButton" graphicTextGap="5.0" layoutX="308.0" layoutY="325.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #CE2431; -fx-background-radius: 8;" text="Watch" textFill="WHITE">
+                                    <Button fx:id="watchButton" graphicTextGap="5.0" layoutX="308.0" layoutY="325.0" mnemonicParsing="false" onAction="#watchButtonHandler" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: #CE2431; -fx-background-radius: 8;" text="Watch" textFill="WHITE">
                                        <font>
                                           <Font name="Geist SemiBold" size="12.0" />
                                        </font>
@@ -207,7 +207,7 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <ListView fx:id="ratingListView" layoutX="20.0" prefWidth="400.0" style="-fx-background-color: #141414; -fx-text-fill: #ffffff;" />
+                                    <ListView fx:id="reviewListView" layoutX="20.0" prefWidth="400.0" style="-fx-background-color: #141414; -fx-text-fill: #ffffff;" />
                                  </children>
                               </AnchorPane>
                            </children>
