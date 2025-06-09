@@ -1081,7 +1081,7 @@ public static ResultSet getAllDirectors() {
         return null;
     }
 
-    public static List<String> getWatchedTitlesByUser(int userID) {
+    public static List<String> getWatchedTitles(int userID) {
         List<String> watched = new ArrayList<>();
         String query = "SELECT c.contentTitle FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
         try (Connection conn = getDBConnection();
@@ -1097,7 +1097,7 @@ public static ResultSet getAllDirectors() {
         return watched;
     }
 
-    public static List<String> getWatchlistTitlesByUser(int userID) {
+    public static List<String> getWatchlistTitles(int userID) {
         List<String> watchlist = new ArrayList<>();
         String query = "SELECT c.contentTitle FROM Watchlist w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
         try (Connection conn = getDBConnection();
@@ -1113,7 +1113,7 @@ public static ResultSet getAllDirectors() {
         return watchlist;
     }
 
-    public static List<String> getReviewsByUser(int userID) {
+    public static List<String> getReviews(int userID) {
         List<String> reviews = new ArrayList<>();
         String query = "SELECT r.reviewText, c.contentTitle FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
         try (Connection conn = getDBConnection();
@@ -1133,7 +1133,7 @@ public static ResultSet getAllDirectors() {
     // ============================ USER PROFILE SESSION HANDLER ===============================
 
     // ====== For HBox
-    public static List<Content> getRecentWatchedContentByUser(int userID, int limit) {
+    public static List<Content> getRecentWatchedContent(int userID, int limit) {
         List<Content> recentWatched = new ArrayList<>();
         String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ? ORDER BY w.watchedDateTime DESC LIMIT ?";
         try (Connection conn = getDBConnection();
@@ -1166,7 +1166,7 @@ public static ResultSet getAllDirectors() {
     }
 
     // ====== For clicking Watched Content Button
-    public static List<Content> getWatchedContentByUser(int userID) {
+    public static List<Content> getWatchedContent(int userID) {
         List<Content> watchedContent = new ArrayList<>();
         String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
         try (Connection conn = getDBConnection();
@@ -1198,7 +1198,7 @@ public static ResultSet getAllDirectors() {
     }
 
     // ====== For clicking Watchlist Content Button
-    public static List<Content> getWatchlistContentByUser(int userID) {
+    public static List<Content> getWatchlistContent(int userID) {
         List<Content> watchlistContent = new ArrayList<>();
         String query = "SELECT c.* FROM Watchlist w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
         try (Connection conn = getDBConnection();
@@ -1230,7 +1230,7 @@ public static ResultSet getAllDirectors() {
     }
 
     // ====== For clicking Review Content Button (Updated now to the proper fxml file, also with both content and review text)   
-    public static List<Object[]> getReviewedContentAndTextByUser(int userID) {
+    public static List<Object[]> getReviewedContentAndText(int userID) {
         List<Object[]> reviewed = new ArrayList<>();
         String query = "SELECT c.*, r.reviewText FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
         try (Connection conn = getDBConnection();
@@ -1263,7 +1263,7 @@ public static ResultSet getAllDirectors() {
     }
 
     // ====== For clicking Rating Content Button (Updated now with proper fxml file, also with both content and rating value )
-public static List<Object[]> getRatedContentAndRatingByUser(int userID) {
+public static List<Object[]> getRatedContentAndRating(int userID) {
     List<Object[]> rated = new ArrayList<>();
     String query = "SELECT c.*, r.star FROM Rating r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
     try (Connection conn = getDBConnection();
@@ -1296,7 +1296,7 @@ public static List<Object[]> getRatedContentAndRatingByUser(int userID) {
 }
 
     // ====== For clicking Liked Content Button
-    public static List<Content> getLikedContentByUser(int userID) {
+    public static List<Content> getLikedContent(int userID) {
         List<Content> likedContent = new ArrayList<>();
         String query = "SELECT c.* FROM userLike l JOIN Content c ON l.contentID = c.contentID WHERE l.userID = ?";
         try (Connection conn = getDBConnection();
@@ -1328,7 +1328,7 @@ public static List<Object[]> getRatedContentAndRatingByUser(int userID) {
     }
 
     // ====== For clicking Disliked Content Button
-    public static List<Content> getDislikedContentByUser(int userID) {
+    public static List<Content> getDislikedContent(int userID) {
         List<Content> dislikedContent = new ArrayList<>();
         String query = "SELECT c.* FROM userDislike dl JOIN Content c ON dl.contentID = c.contentID WHERE dl.userID = ?";
         try (Connection conn = getDBConnection();

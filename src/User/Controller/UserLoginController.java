@@ -70,9 +70,9 @@ public class UserLoginController {
     if (DatabaseHandler.validateUserLogin(username, password)) {
 
         User user = DatabaseHandler.getUserByUsername(username);
-        user.setWatched(DatabaseHandler.getWatchedTitlesByUser(user.getUserID()));
-        user.setWatchlist(DatabaseHandler.getWatchlistTitlesByUser(user.getUserID()));
-        user.setReviews(DatabaseHandler.getReviewsByUser(user.getUserID()));
+        user.setWatched(DatabaseHandler.getWatchedTitles(user.getUserID()));
+        user.setWatchlist(DatabaseHandler.getWatchlistTitles(user.getUserID()));
+        user.setReviews(DatabaseHandler.getReviews(user.getUserID()));
 
         SessionManager.setCurrentUser(user);
 

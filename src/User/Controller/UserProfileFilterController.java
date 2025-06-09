@@ -32,28 +32,28 @@ public class UserProfileFilterController {
     public void setWatchedFilter() {
         filterLabel.setText("Watched");
         User user = SessionManager.getCurrentUser();
-        contentList = DatabaseHandler.getWatchedContentByUser(user.getUserID());
+        contentList = DatabaseHandler.getWatchedContent(user.getUserID());
         displayFilteredContent();
     }
 
     public void setWatchlistFilter() {
         filterLabel.setText("Watchlist");
         User user = SessionManager.getCurrentUser();
-        contentList = DatabaseHandler.getWatchlistContentByUser(user.getUserID());
+        contentList = DatabaseHandler.getWatchlistContent(user.getUserID());
         displayFilteredContent();
     }
 
     public void setLikesFilter() {
         filterLabel.setText("Likes");
         User user = SessionManager.getCurrentUser();
-        contentList = DatabaseHandler.getLikedContentByUser(user.getUserID());
+        contentList = DatabaseHandler.getLikedContent(user.getUserID());
         displayFilteredContent();
     }
 
     public void setDislikesFilter() {
         filterLabel.setText("Dislikes");
         User user = SessionManager.getCurrentUser();
-        contentList = DatabaseHandler.getDislikedContentByUser(user.getUserID());
+        contentList = DatabaseHandler.getDislikedContent(user.getUserID());
         displayFilteredContent();
     }
 

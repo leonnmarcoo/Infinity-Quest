@@ -196,6 +196,7 @@
                               <Image url="@../../Images/Icons/Right%20arrow.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="userEditProfileButton" layoutX="248.0" layoutY="227.0" mnemonicParsing="false" onAction="#userEditProfileButtonHandler" prefHeight="40.0" prefWidth="48.0" style="-fx-background-color: TRANSPARENT;" />
                      </children>
                   </AnchorPane>
               </content>

@@ -54,7 +54,7 @@ private void loadUserReviews() {
     }
 
     // Use the new method that returns List<Object[]> with Content and reviewText
-    List<Object[]> reviewed = DatabaseHandler.getReviewedContentAndTextByUser(user.getUserID());
+    List<Object[]> reviewed = DatabaseHandler.getReviewedContentAndText(user.getUserID());
     for (Object[] arr : reviewed) {
         Content content = (Content) arr[0];
         String reviewTextStr = (String) arr[1];

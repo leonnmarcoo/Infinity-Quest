@@ -84,7 +84,7 @@ public class UserRatingsController {
     private void loadAllRatings() {
         User user = SessionManager.getCurrentUser();
         if (user == null) return;
-        allRatedContent = DatabaseHandler.getRatedContentAndRatingByUser(user.getUserID());
+        allRatedContent = DatabaseHandler.getRatedContentAndRating(user.getUserID());
     }
 
     private void displayRatings(int filterStar) {

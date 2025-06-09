@@ -74,6 +74,9 @@ public class UserProfileController {
     private Label usernameLabel11;
 
     @FXML
+    private Button userEditProfileButton;
+
+    @FXML
     public void initialize() {
         User user = SessionManager.getCurrentUser();
         if (user != null) {
@@ -96,7 +99,7 @@ public class UserProfileController {
         User user = SessionManager.getCurrentUser();
         if (user == null) return;
 
-        List<Content> recentWatched = DatabaseHandler.getRecentWatchedContentByUser(user.getUserID(), 4);
+        List<Content> recentWatched = DatabaseHandler.getRecentWatchedContent(user.getUserID(), 4);
 
         for (Content content : recentWatched) {
             // Show poster if available, otherwise show title
@@ -262,6 +265,21 @@ private void userRatingsButtonHandler(ActionEvent event) {
             showAlert(Alert.AlertType.ERROR, "Error loading dislikes list");
         }
     }
-    
 
+    @FXML
+    private void userEditProfileButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserEditProfile.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading edit profile screen");
+        }
+    }
+    
 }
