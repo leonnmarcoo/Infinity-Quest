@@ -1059,6 +1059,7 @@ public static ResultSet getAllDirectors() {
     // ============================ USER SESSION HANDLERS ===============================
 
 
+    // ====== For Displaying the User in Profile Page
     public static User getUserByUsername(String username) {
         getInstance();
         String query = "SELECT * FROM User WHERE userName = ?";
@@ -1079,7 +1080,6 @@ public static ResultSet getAllDirectors() {
         }
         return null;
     }
-
 
     public static List<String> getWatchedTitlesByUser(int userID) {
         List<String> watched = new ArrayList<>();
@@ -1121,7 +1121,7 @@ public static ResultSet getAllDirectors() {
             stmt.setInt(1, userID);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                // You can format as you like, e.g. "Title: Review"
+                // Editable, pede k maglagay ng title sa review, e.g. "Title: Review"
                 reviews.add(rs.getString("contentTitle") + ": " + rs.getString("reviewText"));
             }
         } catch (SQLException e) {
@@ -1132,6 +1132,7 @@ public static ResultSet getAllDirectors() {
 
     // ============================ USER PROFILE SESSION HANDLER ===============================
 
+    // ====== For HBox
     public static List<Content> getRecentWatchedContentByUser(int userID, int limit) {
         List<Content> recentWatched = new ArrayList<>();
         String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ? ORDER BY w.watchedDateTime DESC LIMIT ?";
@@ -1164,6 +1165,7 @@ public static ResultSet getAllDirectors() {
         return recentWatched;
     }
 
+    // ====== For clicking Watched Content Button
     public static List<Content> getWatchedContentByUser(int userID) {
         List<Content> watchedContent = new ArrayList<>();
         String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
@@ -1195,6 +1197,7 @@ public static ResultSet getAllDirectors() {
         return watchedContent;
     }
 
+    // ====== For clicking Watchlist Content Button
     public static List<Content> getWatchlistContentByUser(int userID) {
         List<Content> watchlistContent = new ArrayList<>();
         String query = "SELECT c.* FROM Watchlist w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
@@ -1226,6 +1229,7 @@ public static ResultSet getAllDirectors() {
         return watchlistContent;
     }
 
+    // ====== For clicking Review Content Button
     public static List<Content> getReviewedContentByUser(int userID) {
         List<Content> reviewedContent = new ArrayList<>();
         String query = "SELECT c.* FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
@@ -1257,6 +1261,7 @@ public static ResultSet getAllDirectors() {
         return reviewedContent;
     }
 
+    // ====== For clicking Rating Content Button
     public static List<Content> getRatedContentByUser(int userID) {
         List<Content> ratedContent = new ArrayList<>();
         String query = "SELECT c.* FROM Rating r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
@@ -1288,6 +1293,7 @@ public static ResultSet getAllDirectors() {
         return ratedContent;
     }
 
+    // ====== For clicking Liked Content Button
     public static List<Content> getLikedContentByUser(int userID) {
         List<Content> likedContent = new ArrayList<>();
         String query = "SELECT c.* FROM userLike l JOIN Content c ON l.contentID = c.contentID WHERE l.userID = ?";
@@ -1319,6 +1325,7 @@ public static ResultSet getAllDirectors() {
         return likedContent;
     }
 
+    // ====== For clicking Disliked Content Button
     public static List<Content> getDislikedContentByUser(int userID) {
         List<Content> dislikedContent = new ArrayList<>();
         String query = "SELECT c.* FROM userDislike dl JOIN Content c ON dl.contentID = c.contentID WHERE dl.userID = ?";

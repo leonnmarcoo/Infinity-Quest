@@ -155,7 +155,6 @@ public class UserProfileController {
         }
     }
 
-    // Helper to show content details (reuse your existing logic)
     private void showContentDetails(Content content) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserInformation.fxml"));
