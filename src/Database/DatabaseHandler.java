@@ -184,64 +184,21 @@ public class DatabaseHandler {
         return false;
     }
 
-    // public static boolean updateUser(User user) {
-    //     try {
-    //         pstatement = getDBConnection().prepareStatement("UPDATE User SET userPassword = ?, userEmail = ?, userBio = ? WHERE userName = ?");
-    //         pstatement.setString(1, user.getUserPassword());
-    //         pstatement.setString(2, user.getUserEmail());
-    //         pstatement.setString(3, user.getUserBio());
-    //         pstatement.setString(4, user.getUserName());
-            
-    //         int res = pstatement.executeUpdate();
-    //         if (res > 0) {
-    //             return true;
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return false;
-    // }
-
-//     public static boolean updateUser(User user) {
-//     try {
-//         pstatement = getDBConnection().prepareStatement(
-//             "UPDATE User SET userName = ?, userPassword = ?, userEmail = ?, userBio = ? WHERE userID = ?"
-//         );
-//         pstatement.setString(1, user.getUserName());
-//         pstatement.setString(2, user.getUserPassword());
-//         pstatement.setString(3, user.getUserEmail());
-//         pstatement.setString(4, user.getUserBio());
-//         pstatement.setInt(5, user.getUserID());
-        
-//         int res = pstatement.executeUpdate();
-//         return res > 0;
-//     } catch (Exception e) {
-//         e.printStackTrace();
-//     }
-//     return false;
-// }
-
     public static boolean updateUser(User user) {
-        String sql = "UPDATE `User` SET userName = ?, userPassword = ?, userEmail = ?, userBio = ? WHERE userID = ?";
+        String sql = "UPDATE User SET userPassword=?, userEmail=?, userBio=?, userProfile=? WHERE userID=?";
         try (Connection conn = getDBConnection();
-            PreparedStatement pstatement = conn.prepareStatement(sql)) {
-
-            pstatement.setString(1, user.getUserName());
-            pstatement.setString(2, user.getUserPassword());
-            pstatement.setString(3, user.getUserEmail());
-            pstatement.setString(4, user.getUserBio());
-            pstatement.setInt(5, user.getUserID());
-
-            int res = pstatement.executeUpdate();
-            return res > 0;
-
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUserPassword());
+            stmt.setString(2, user.getUserEmail());
+            stmt.setString(3, user.getUserBio());
+            stmt.setString(4, user.getUserProfile());
+            stmt.setInt(5, user.getUserID());
+            return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
-
-
 
 // ============================ CRUD CONTENT ===============================
 
@@ -1073,13 +1030,45 @@ public static ResultSet getAllDirectors() {
                 String userPassword = rs.getString("userPassword");
                 String userEmail = rs.getString("userEmail");
                 String userBio = rs.getString("userBio");
-                return new User(userID, userName, userPassword, userEmail, userBio);
+                String userProfile = rs.getString("userProfile");
+                return new User(userID, userName, userPassword, userEmail, userBio, userProfile);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    // ====== For Displaying the current User Watched in Profile Page
+        public static int getWatchedCount(int userID) {
+            String query = "SELECT COUNT(*) FROM Watched WHERE userID = ?";
+            try (Connection conn = getDBConnection();
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, userID);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
+
+    // ====== For Displaying the Current available Content in Profile Page
+        public static int getTotalContentCount() {
+            String query = "SELECT COUNT(*) FROM Content";
+            try (Connection conn = getDBConnection();
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
 
     public static List<String> getWatchedTitles(int userID) {
         List<String> watched = new ArrayList<>();

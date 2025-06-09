@@ -77,11 +77,39 @@ public class UserProfileController {
     private Button userEditProfileButton;
 
     @FXML
+    private ImageView userProfilePic;
+
+    @FXML
+    private ImageView tonyDefaultPic;
+
+    @FXML
     public void initialize() {
         User user = SessionManager.getCurrentUser();
         if (user != null) {
             usernameLabel.setText(user.getUserName());
             bioLabel.setText(user.getUserBio());
+
+            // Profile picture logic
+            if (user.getUserProfile() != null && !user.getUserProfile().isEmpty()) {
+                File file = new File(user.getUserProfile());
+                if (file.exists()) {
+                    profileImageView.setImage(new Image(file.toURI().toString()));
+                    profileImageView.setVisible(true);
+                    tonyDefaultPic.setVisible(false);
+                } else {
+                    profileImageView.setImage(null);
+                    profileImageView.setVisible(false);
+                    tonyDefaultPic.setVisible(true);
+                }
+            } else {
+                profileImageView.setImage(null);
+                profileImageView.setVisible(false);
+                tonyDefaultPic.setVisible(true);
+            }
+
+            int watchedCount = DatabaseHandler.getWatchedCount(user.getUserID());
+            int totalCount = DatabaseHandler.getTotalContentCount();
+            contentsWatchedLabel.setText(watchedCount + " out of " + totalCount + " contents watched");
         }
         loadRecentActivity();
     }
@@ -194,21 +222,21 @@ public class UserProfileController {
         }
     }
 
-@FXML
-private void userRatingsButtonHandler(ActionEvent event) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserRatings.fxml"));
-        Parent root = loader.load();
+    @FXML
+    private void userRatingsButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserRatings.fxml"));
+            Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-        showAlert(Alert.AlertType.ERROR, "Error loading ratings list");
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading ratings list");
+        }
     }
-}
 
     @FXML
     private void userReviewsButtonHandler(ActionEvent event) {

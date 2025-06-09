@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.Controller.UserEditProfileController">
    <children>
       <AnchorPane prefHeight="956.0" prefWidth="440.0" style="-fx-background-color: #141414;">
          <children>
@@ -19,7 +19,7 @@
                </image>
             </ImageView>
             <ImageView fx:id="profileImageView" fitHeight="125.0" fitWidth="125.0" layoutX="157.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="129.0" fitWidth="129.0" layoutX="155.0" layoutY="133.0">
+            <ImageView fx:id="tonyDefaultPic" fitHeight="129.0" fitWidth="129.0" layoutX="155.0" layoutY="133.0">
                <image>
                   <Image url="@../../Images/Background/Profile.png" />
                </image>
@@ -49,7 +49,7 @@
                   <Font name="Geist Medium" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField1" layoutX="227.5" layoutY="401.0" prefHeight="35.0" prefWidth="192.5" promptText="Password" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
+            <TextField fx:id="passwordTextField" layoutX="227.5" layoutY="401.0" prefHeight="35.0" prefWidth="192.5" promptText="Password" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
@@ -59,7 +59,7 @@
                   <Font name="Geist Medium" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField11" layoutX="20.0" layoutY="477.0" prefHeight="35.0" prefWidth="400.0" promptText="Profile Picture" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
+            <TextField fx:id="profileTextField" layoutX="20.0" layoutY="477.0" prefHeight="35.0" prefWidth="400.0" promptText="Profile Picture" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
@@ -69,7 +69,7 @@
                   <Font name="Geist Medium" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField111" layoutX="20.0" layoutY="553.0" prefHeight="35.0" prefWidth="400.0" promptText="Email" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
+            <TextField fx:id="emailTextField" layoutX="20.0" layoutY="553.0" prefHeight="35.0" prefWidth="400.0" promptText="Email" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
@@ -79,17 +79,17 @@
                   <Font name="Geist Medium" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField1111" layoutX="20.0" layoutY="629.0" prefHeight="35.0" prefWidth="400.0" promptText="Bio" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
+            <TextField fx:id="bioTextField" layoutX="20.0" layoutY="629.0" prefHeight="35.0" prefWidth="400.0" promptText="Bio" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
             </TextField>
-            <Button fx:id="updateButton" graphicTextGap="5.0" layoutX="155.0" layoutY="794.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="265.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Update" textFill="WHITE">
+            <Button fx:id="updateButton" graphicTextGap="5.0" layoutX="155.0" layoutY="794.0" mnemonicParsing="false" onAction="#updateButtonHandler" prefHeight="40.0" prefWidth="265.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12;" text="Update" textFill="WHITE">
                <font>
                   <Font name="Geist SemiBold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="cancelButton" graphicTextGap="5.0" layoutX="20.0" layoutY="794.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #343434; -fx-background-radius: 12;" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancelButton" graphicTextGap="5.0" layoutX="20.0" layoutY="794.0" mnemonicParsing="false" onAction="#cancelButtonHandler" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #343434; -fx-background-radius: 12;" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="Geist SemiBold" size="18.0" />
                </font>
@@ -109,7 +109,7 @@
                   <Image url="@../../Images/Icons/Left%20arrow.png" />
                </image>
             </ImageView>
-            <Button fx:id="backButton" layoutX="5.0" layoutY="73.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: Transparent;" />
+            <Button fx:id="backButton" layoutX="5.0" layoutY="73.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: Transparent;" />
             <Label fx:id="reviewLabel" layoutX="50.0" layoutY="73.0" prefHeight="40.0" text="Edit Profile" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="30.0" />

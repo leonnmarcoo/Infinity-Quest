@@ -12,17 +12,19 @@ public class User {
     private final SimpleStringProperty userPassword;
     private final SimpleStringProperty userEmail;
     private final SimpleStringProperty userBio;
+    private final SimpleStringProperty userProfile;
 
     private List<String> watched;
     private List<String> watchlist;
     private List<String> reviews;
 
-        public User(int userId,String userName, String userPassword, String userEmail, String userBio) {
+        public User(int userId,String userName, String userPassword, String userEmail, String userBio, String userProfile) {
         this.userID = new SimpleIntegerProperty(userId);
         this.userName = new SimpleStringProperty(userName);
         this.userPassword = new SimpleStringProperty(userPassword);
         this.userEmail = new SimpleStringProperty(userEmail);
         this.userBio = new SimpleStringProperty(userBio);
+        this.userProfile = new SimpleStringProperty(userProfile);
     }
 
     public int getUserID() {
@@ -43,6 +45,10 @@ public class User {
 
     public String getUserBio() {
         return userBio.get();
+    }
+
+    public String getUserProfile() {
+        return userProfile.get();
     }
 
     public void setUserPassword(String password) { this.userPassword.set(password); }
@@ -74,4 +80,8 @@ public class User {
     public void setReviews(List<String> reviews) {
         this.reviews = reviews;
     }
+
+    public void setUserProfile(String userProfile) {
+        this.userProfile.set(userProfile);
+}
 }
