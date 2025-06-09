@@ -1229,7 +1229,7 @@ public static ResultSet getAllDirectors() {
         return watchlistContent;
     }
 
-    // ====== For clicking Review Content Button (Updated now with both content and review text)   
+    // ====== For clicking Review Content Button (Updated now to the proper fxml file, also with both content and review text)   
     public static List<Object[]> getReviewedContentAndTextByUser(int userID) {
         List<Object[]> reviewed = new ArrayList<>();
         String query = "SELECT c.*, r.reviewText FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
@@ -1262,37 +1262,38 @@ public static ResultSet getAllDirectors() {
         return reviewed;
     }
 
-    // ====== For clicking Rating Content Button
-    public static List<Content> getRatedContentByUser(int userID) {
-        List<Content> ratedContent = new ArrayList<>();
-        String query = "SELECT c.* FROM Rating r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
-        try (Connection conn = getDBConnection();
-            PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, userID);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Content content = new Content(
-                    rs.getInt("contentID"),
-                    rs.getString("contentTitle"),
-                    rs.getString("contentRuntime"),
-                    rs.getObject("contentSeason", Integer.class),
-                    rs.getObject("contentEpisode", Integer.class),
-                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
-                    rs.getString("contentSynopsis"),
-                    rs.getInt("directorID"),
-                    rs.getInt("contentPhase"),
-                    rs.getString("contentAgeRating"),
-                    rs.getInt("contentChronologicalOrder"),
-                    rs.getString("contentPoster"),
-                    rs.getString("contentTrailer")
-                );
-                ratedContent.add(content);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    // ====== For clicking Rating Content Button (Updated now with proper fxml file, also with both content and rating value )
+public static List<Object[]> getRatedContentAndRatingByUser(int userID) {
+    List<Object[]> rated = new ArrayList<>();
+    String query = "SELECT c.*, r.star FROM Rating r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
+    try (Connection conn = getDBConnection();
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setInt(1, userID);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Content content = new Content(
+                rs.getInt("contentID"),
+                rs.getString("contentTitle"),
+                rs.getString("contentRuntime"),
+                rs.getObject("contentSeason", Integer.class),
+                rs.getObject("contentEpisode", Integer.class),
+                rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                rs.getString("contentSynopsis"),
+                rs.getInt("directorID"),
+                rs.getInt("contentPhase"),
+                rs.getString("contentAgeRating"),
+                rs.getInt("contentChronologicalOrder"),
+                rs.getString("contentPoster"),
+                rs.getString("contentTrailer")
+            );
+            int ratingValue = rs.getInt("star");
+            rated.add(new Object[]{content, ratingValue});
         }
-        return ratedContent;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return rated;
+}
 
     // ====== For clicking Liked Content Button
     public static List<Content> getLikedContentByUser(int userID) {

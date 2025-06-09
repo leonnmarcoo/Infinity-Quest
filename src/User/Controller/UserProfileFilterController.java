@@ -43,20 +43,6 @@ public class UserProfileFilterController {
         displayFilteredContent();
     }
 
-    public void setRatingsFilter() {
-        filterLabel.setText("Ratings");
-        User user = SessionManager.getCurrentUser();
-        contentList = DatabaseHandler.getRatedContentByUser(user.getUserID());
-        displayFilteredContent();
-    }
-
-    public void setReviewsFilter() {
-        filterLabel.setText("Reviews");
-        User user = SessionManager.getCurrentUser();
-        contentList = DatabaseHandler.getReviewedContentByUser(user.getUserID());
-        displayFilteredContent();
-    }
-
     public void setLikesFilter() {
         filterLabel.setText("Likes");
         User user = SessionManager.getCurrentUser();
@@ -132,7 +118,6 @@ public class UserProfileFilterController {
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
-            // Optionally show an alert here
         }
     }
 
