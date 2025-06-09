@@ -1132,6 +1132,38 @@ public static ResultSet getAllDirectors() {
 
     // ============================ USER PROFILE SESSION HANDLER ===============================
 
+    public static List<Content> getRecentWatchedContentByUser(int userID, int limit) {
+        List<Content> recentWatched = new ArrayList<>();
+        String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ? ORDER BY w.watchedDateTime DESC LIMIT ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            stmt.setInt(2, limit);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                recentWatched.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recentWatched;
+    }
+
     public static List<Content> getWatchedContentByUser(int userID) {
         List<Content> watchedContent = new ArrayList<>();
         String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";

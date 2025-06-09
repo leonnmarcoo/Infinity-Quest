@@ -3,6 +3,7 @@ package User.Controller;
 import java.io.IOException;
 
 import Objects.User;
+import Objects.Content;
 import User.Session.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +33,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Database.DatabaseHandler;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -115,6 +117,7 @@ public class UserProfileController {
             usernameLabel.setText(user.getUserName());
             bioLabel.setText(user.getUserBio());
         }
+        loadRecentActivity();
     }
 
     private void showAlert(Alert.AlertType alertType, String message) {
@@ -124,6 +127,51 @@ public class UserProfileController {
             alert.setContentText(message);
             alert.showAndWait();
 }
+
+    private void loadRecentActivity() {
+        recentActivityHBox.getChildren().clear();
+        User user = SessionManager.getCurrentUser();
+        if (user == null) return;
+
+        List<Content> recentWatched = DatabaseHandler.getRecentWatchedContentByUser(user.getUserID(), 4);
+
+        for (Content content : recentWatched) {
+            // Show poster if available, otherwise show title
+            if (content.getContentPoster() != null && !content.getContentPoster().isEmpty()) {
+                File file = new File(content.getContentPoster());
+                if (file.exists()) {
+                    ImageView posterView = new ImageView(new Image(file.toURI().toString()));
+                    posterView.setFitHeight(220);
+                    posterView.setFitWidth(96);
+                    posterView.setPreserveRatio(true);
+                    posterView.setOnMouseClicked(event -> showContentDetails(content));
+                    recentActivityHBox.getChildren().add(posterView);
+                }
+            } else {
+                Label titleLabel = new Label(content.getContentTitle());
+                titleLabel.setOnMouseClicked(event -> showContentDetails(content));
+                recentActivityHBox.getChildren().add(titleLabel);
+            }
+        }
+    }
+
+    // Helper to show content details (reuse your existing logic)
+    private void showContentDetails(Content content) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserInformation.fxml"));
+            Parent root = loader.load();
+            UserInformationController controller = loader.getController();
+            controller.setContent(content);
+            Stage stage = (Stage) recentActivityHBox.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading content details");
+        }
+    }
+
 
     @FXML
     private void userHomeButtonHandler(ActionEvent event) {
