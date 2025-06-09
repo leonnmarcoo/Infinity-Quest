@@ -1229,10 +1229,10 @@ public static ResultSet getAllDirectors() {
         return watchlistContent;
     }
 
-    // ====== For clicking Review Content Button
-    public static List<Content> getReviewedContentByUser(int userID) {
-        List<Content> reviewedContent = new ArrayList<>();
-        String query = "SELECT c.* FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
+    // ====== For clicking Review Content Button (Updated now with both content and review text)   
+    public static List<Object[]> getReviewedContentAndTextByUser(int userID) {
+        List<Object[]> reviewed = new ArrayList<>();
+        String query = "SELECT c.*, r.reviewText FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
         try (Connection conn = getDBConnection();
             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userID);
@@ -1253,12 +1253,13 @@ public static ResultSet getAllDirectors() {
                     rs.getString("contentPoster"),
                     rs.getString("contentTrailer")
                 );
-                reviewedContent.add(content);
+                String reviewText = rs.getString("reviewText");
+                reviewed.add(new Object[]{content, reviewText});
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return reviewedContent;
+        return reviewed;
     }
 
     // ====== For clicking Rating Content Button

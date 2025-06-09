@@ -141,8 +141,8 @@ public class UserProfileController {
                 File file = new File(content.getContentPoster());
                 if (file.exists()) {
                     ImageView posterView = new ImageView(new Image(file.toURI().toString()));
-                    posterView.setFitHeight(220);
-                    posterView.setFitWidth(96);
+                    posterView.setFitHeight(136.68);
+                    posterView.setFitWidth(91.12);
                     posterView.setPreserveRatio(true);
                     posterView.setOnMouseClicked(event -> showContentDetails(content));
                     recentActivityHBox.getChildren().add(posterView);
@@ -251,12 +251,8 @@ public class UserProfileController {
     @FXML
     private void userReviewsButtonHandler(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfileFilter.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserReviews.fxml"));
             Parent root = loader.load();
-
-            // Call the reviews filter setup
-            UserProfileFilterController controller = loader.getController();
-            controller.setReviewsFilter();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
