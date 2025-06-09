@@ -142,10 +142,34 @@ public class UserProfileController {
     }
 
     @FXML
+    private void userWatchedButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfileFilter.fxml"));
+            Parent root = loader.load();
+
+            // Call the watched filter setup
+            UserProfileFilterController controller = loader.getController();
+            controller.setWatchedFilter();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading watched list");
+        }
+    }
+
+    @FXML
     private void userWatchlistButtonHandler(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserWatchlist.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfileFilter.fxml"));
             Parent root = loader.load();
+
+            // Call the watchlist filter setup
+            UserProfileFilterController controller = loader.getController();
+            controller.setWatchlistFilter();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -156,5 +180,86 @@ public class UserProfileController {
             showAlert(Alert.AlertType.ERROR, "Error loading watchlist");
         }
     }
+
+    @FXML
+    private void userRatingsButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfileFilter.fxml"));
+            Parent root = loader.load();
+
+            // Call the ratings filter setup
+            UserProfileFilterController controller = loader.getController();
+            controller.setRatingsFilter();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading ratings list");
+        }
+    }
+
+    @FXML
+    private void userReviewsButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfileFilter.fxml"));
+            Parent root = loader.load();
+
+            // Call the reviews filter setup
+            UserProfileFilterController controller = loader.getController();
+            controller.setReviewsFilter();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading reviews list");
+        }
+    }
+
+    @FXML
+    private void userLikeButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfileFilter.fxml"));
+            Parent root = loader.load();
+
+            // Call the likes filter setup
+            UserProfileFilterController controller = loader.getController();
+            controller.setLikesFilter();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading likes list");
+        }
+    }
+
+    @FXML
+    private void userDislikeButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfileFilter.fxml"));
+            Parent root = loader.load();
+
+            // Call the dislikes filter setup
+            UserProfileFilterController controller = loader.getController();
+            controller.setDislikesFilter();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading dislikes list");
+        }
+    }
+    
 
 }

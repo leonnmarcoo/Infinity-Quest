@@ -297,6 +297,8 @@ public class UserInformationController implements Initializable{
     //     }
     // }
 
+
+    //  Updated code sa watchButtonHandler, nka session narin ung user, so no need na i-pass ung username sa controller.
         @FXML
     private void watchButtonHandler(ActionEvent event) {
         if (content == null) {

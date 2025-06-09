@@ -127,10 +127,10 @@ public class UserHomeController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // 1) Ni-remove ko to
         // if (username != null) {
         //     initializeUserHome();
         // }
-        // 1) Ni-remove ko to
 
         // 2) To nmn ung na-add ko
         User user = SessionManager.getCurrentUser();
@@ -148,8 +148,9 @@ public class UserHomeController implements Initializable {
         // Working na ung username, d na nawawala 
 
     public void initializeUserHome() {
-        // welcomeLabel.setText("On your left, " + username);
         // 3) No need for this
+        // welcomeLabel.setText("On your left, " + username);
+
         loadContent();
         displayLatestRelease();
         setupReleaseDateOrder();
