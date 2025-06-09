@@ -2,6 +2,8 @@ package User.Controller;
 
 import Objects.Content;
 import Objects.Director;
+import Objects.User;
+import User.Session.SessionManager;
 import Database.DatabaseHandler;
 
 import java.awt.Desktop;
@@ -204,9 +206,11 @@ public class UserInformationController implements Initializable{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
             root = loader.load();
             
-            UserHomeController controller = loader.getController();
-            controller.setUsername(((Node) event.getSource()).getScene().getWindow().getUserData().toString());
-            controller.initializeUserHome();
+            // UserHomeController controller = loader.getController();
+            // controller.setUsername(((Node) event.getSource()).getScene().getWindow().getUserData().toString());
+            // controller.initializeUserHome();
+
+            // No need, ksi naka session na so pag bbalik ng user home, nsa session na ung username.
             
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -225,7 +229,17 @@ public class UserInformationController implements Initializable{
             return;
         }
         
-        String username = ((Node) event.getSource()).getScene().getWindow().getUserData().toString();
+        // String username = ((Node) event.getSource()).getScene().getWindow().getUserData().toString();
+        // Again naka session na tyo.
+
+        // New code pra makuha ung current user session.
+        User user = SessionManager.getCurrentUser();
+        if (user == null) {
+            showAlert(Alert.AlertType.ERROR, "No user session found.");
+            return;
+        }
+        String username = user.getUserName();
+
         
         // Check if content is already in watchlist
         if (DatabaseHandler.isContentInWatchlist(username, content.getContentID())) {
@@ -246,33 +260,72 @@ public class UserInformationController implements Initializable{
         }
     }
     
-    @FXML
+    // @FXML
+    // private void watchButtonHandler(ActionEvent event) {
+    //     if (content == null) {
+    //         showAlert(Alert.AlertType.ERROR, "No content selected");
+    //         return;
+    //     }
+
+    //     // Check if content has already been watched
+    //     if (DatabaseHandler.isContentWatched(username, content.getContentID())) {
+    //         showAlert(Alert.AlertType.ERROR, "\"" + content.getContentTitle() + "\" has already been watched!");
+    //         return;
+    //     }
+        
+    //     try {
+    //         FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserLogReview.fxml"));
+    //         Parent root = loader.load();
+            
+    //         UserLogReviewController controller = loader.getController();
+    //         controller.setContent(content);
+            
+    //         // Get username from window user data
+    //         String username = ((Node) event.getSource()).getScene().getWindow().getUserData().toString();
+    //         controller.setUsername(username);
+            
+    //         // Pass the content title to be displayed
+    //         controller.setTitle(content.getContentTitle());
+            
+    //         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    //         Scene scene = new Scene(root);
+    //         stage.setScene(scene);
+    //         stage.show();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //         showAlert(Alert.AlertType.ERROR, "Could not load review screen");
+    //     }
+    // }
+
+        @FXML
     private void watchButtonHandler(ActionEvent event) {
         if (content == null) {
             showAlert(Alert.AlertType.ERROR, "No content selected");
             return;
         }
 
+        User user = SessionManager.getCurrentUser();
+        if (user == null) {
+            showAlert(Alert.AlertType.ERROR, "No user session found.");
+            return;
+        }
+        String username = user.getUserName();
+
         // Check if content has already been watched
         if (DatabaseHandler.isContentWatched(username, content.getContentID())) {
             showAlert(Alert.AlertType.ERROR, "\"" + content.getContentTitle() + "\" has already been watched!");
             return;
         }
-        
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserLogReview.fxml"));
             Parent root = loader.load();
-            
+
             UserLogReviewController controller = loader.getController();
             controller.setContent(content);
-            
-            // Get username from window user data
-            String username = ((Node) event.getSource()).getScene().getWindow().getUserData().toString();
             controller.setUsername(username);
-            
-            // Pass the content title to be displayed
             controller.setTitle(content.getContentTitle());
-            
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

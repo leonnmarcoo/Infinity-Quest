@@ -2,6 +2,8 @@ package User.Controller;
 
 import Objects.Content;
 import Objects.Director;
+import Objects.User;
+import User.Session.SessionManager;
 import Database.DatabaseHandler;
 
 import java.awt.Desktop;
@@ -116,19 +118,38 @@ public class UserHomeController implements Initializable {
 
     @FXML
     private Button timelineButton;
+
+    @FXML
+    private Button userProfileButton;
     
     private String username;
     private List<Content> contentList = new ArrayList<>();
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (username != null) {
-            initializeUserHome();
-        }
+        // if (username != null) {
+        //     initializeUserHome();
+        // }
+        // 1) Ni-remove ko to
+
+        // 2) To nmn ung na-add ko
+        User user = SessionManager.getCurrentUser();
+            if (user != null) {
+                welcomeLabel.setText("On your left, " + user.getUserName());
+            } else {
+                welcomeLabel.setText("Welcome!");
+            }   
+        loadContent();
+        displayLatestRelease();
+        setupReleaseDateOrder();
+        setupTimelineOrder();
+        // 4) Need pala neto sa initialize, pra mag display ung latest release
     }
-    
+        // Working na ung username, d na nawawala 
+
     public void initializeUserHome() {
-        welcomeLabel.setText("On your left, " + username);
+        // welcomeLabel.setText("On your left, " + username);
+        // 3) No need for this
         loadContent();
         displayLatestRelease();
         setupReleaseDateOrder();
@@ -529,4 +550,25 @@ public class UserHomeController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Error loading filter screen");
         }
     }
+
+    // ================================  NEW ADDED - MIKEY ================================
+    // ================================  APP NAVIGATION BUTTON HANDLER ================================
+
+    @FXML
+    private void userProfileButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfile.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading user profile screen");
+        }
+    }
+
+
 }

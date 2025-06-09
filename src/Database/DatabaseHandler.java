@@ -1,6 +1,8 @@
 package Database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import Objects.Admin;
 import Objects.User;
@@ -1051,5 +1053,78 @@ public static ResultSet getAllDirectors() {
         }
         return false;
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    public static User getUserByUsername(String username) {
+        getInstance();
+        String query = "SELECT * FROM User WHERE userName = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int userID = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String userPassword = rs.getString("userPassword");
+                String userEmail = rs.getString("userEmail");
+                String userBio = rs.getString("userBio");
+                return new User(userID, userName, userPassword, userEmail, userBio);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public static List<String> getWatchedTitlesByUser(int userID) {
+        List<String> watched = new ArrayList<>();
+        String query = "SELECT c.contentTitle FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                watched.add(rs.getString("contentTitle"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return watched;
+    }
+
+    public static List<String> getWatchlistTitlesByUser(int userID) {
+        List<String> watchlist = new ArrayList<>();
+        String query = "SELECT c.contentTitle FROM Watchlist w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                watchlist.add(rs.getString("contentTitle"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return watchlist;
+    }
+
+    public static List<String> getReviewsByUser(int userID) {
+        List<String> reviews = new ArrayList<>();
+        String query = "SELECT r.reviewText, c.contentTitle FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                // You can format as you like, e.g. "Title: Review"
+                reviews.add(rs.getString("contentTitle") + ": " + rs.getString("reviewText"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reviews;
+    }
+
 }
