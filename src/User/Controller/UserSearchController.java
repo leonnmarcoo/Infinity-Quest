@@ -29,6 +29,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,6 +48,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class UserSearchController implements Initializable {
 
@@ -115,16 +118,97 @@ public class UserSearchController implements Initializable {
 
     @FXML
     private void searchButtonHandler(ActionEvent event) {
-        // Get the search text
         String searchText = searchTextField.getText().trim();
         if (searchText.isEmpty()) {
             showAlert(Alert.AlertType.INFORMATION, "Please enter a search term");
             return;
         }
         
-        // Implement your search functionality here
-        // For example, search for content titles matching the search text
-        // and display them in the contentGridPane
+        List<Content> searchResults = DatabaseHandler.searchContent(searchText);
+        
+        displaySearchResults(searchResults);
     }
     
+    private void displaySearchResults(List<Content> results) {
+        contentGridPane.getChildren().clear();
+        contentGridPane.getRowConstraints().clear();
+
+    
+    if (results.isEmpty()) {
+        Label noResults = new Label("No results found for your search");
+        noResults.setPrefWidth(400);
+        noResults.setAlignment(Pos.CENTER);
+        noResults.setFont(Font.font("Geist", FontWeight.BOLD, 16));
+        noResults.setStyle("-fx-text-fill: white;");
+        
+        contentGridPane.setAlignment(Pos.CENTER);
+        
+        VBox centeringBox = new VBox(noResults);
+        centeringBox.setAlignment(Pos.CENTER);
+        centeringBox.setPrefHeight(500);
+        
+        contentGridPane.add(centeringBox, 0, 0, 3, 1);
+        return;
+    }
+    contentGridPane.setAlignment(Pos.TOP_LEFT);
+
+        
+    // if (results.isEmpty()) {
+    //     Label noResults = new Label("No results found for your search");
+    //     noResults.setPrefWidth(400);
+    //     noResults.setAlignment(Pos.CENTER);
+    //     noResults.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: Geist;");
+    //     contentGridPane.add(noResults, 0, 0);
+    //     return;
+    // }
+        
+        int col = 0;
+        int row = 0;
+        int maxCols = 3;
+        
+        for (Content content : results) {
+            VBox posterBox = new VBox();
+            posterBox.setSpacing(5);
+            posterBox.setAlignment(javafx.geometry.Pos.CENTER);
+            
+            if (content.getContentPoster() != null && !content.getContentPoster().isEmpty()) {
+                File file = new File(content.getContentPoster());
+                if (file.exists()) {
+                    ImageView posterView = new ImageView(new Image(file.toURI().toString()));
+                    posterView.setFitHeight(188);
+                    posterView.setFitWidth(125);
+                    posterView.setPreserveRatio(true);
+                    
+                    posterView.setOnMouseClicked(e -> showContentDetails(content));
+                    posterBox.getChildren().add(posterView);
+                }
+            }
+                
+            contentGridPane.add(posterBox, col, row);
+            
+            col++;
+            if (col >= maxCols) {
+                col = 0;
+                row++;
+            }
+        }
+    }
+    
+    private void showContentDetails(Content content) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserInformation.fxml"));
+            Parent root = loader.load();
+            
+            UserInformationController controller = loader.getController();
+            controller.setContent(content);
+            
+            Stage stage = (Stage) contentGridPane.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading content details");
+        }
+    }
 }

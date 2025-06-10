@@ -50,7 +50,7 @@
                   <Image url="@../../Images/Background/Status%20Bar.png" />
                </image>
             </ImageView>
-            <Button fx:id="searchButton" layoutX="380.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: #CE2431; -fx-background-radius: 0 12 12 0;">
+            <Button fx:id="searchButton" layoutX="380.0" layoutY="120.0" mnemonicParsing="false" onAction="#searchButtonHandler" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: #CE2431; -fx-background-radius: 0 12 12 0;">
                <font>
                   <Font name="Geist Regular" size="14.0" />
                </font>

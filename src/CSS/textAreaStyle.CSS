@@ -1,0 +1,27 @@
+.text-area {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 12;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: #343434;
+    -fx-background-radius: 12;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 8;
+}
+
+.text-area .content {
+    -fx-background-color: #343434;
+    -fx-background-radius: 0;
+}
+
+.text-area .text {
+    -fx-font-family: "Geist";
+    -fx-font-size: 12px;
+}

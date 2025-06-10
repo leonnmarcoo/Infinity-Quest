@@ -5,7 +5,7 @@
 }
 
 .tab-pane .tab-header-area {
-    -fx-background-color: transparent;
+    -fx-background-color: #343434;
     -fx-background-radius: 10 10 0 0;
 }
 
@@ -22,6 +22,7 @@
 
 .tab-pane .tab-header-area .tab:selected {
     -fx-background-color: #CE2431;
+    -fx-background-radius: 6 6 0 0;
 }
 
 .tab-pane .tab-header-area .tab:selected .tab-label {

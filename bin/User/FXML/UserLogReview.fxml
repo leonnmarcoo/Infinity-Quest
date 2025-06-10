@@ -29,7 +29,7 @@
                   <Font name="Geist SemiBold" size="18.0" />
                </font>
             </Label>
-            <TextArea fx:id="reviewTextArea" layoutX="20.0" layoutY="215.0" prefHeight="200.0" prefWidth="400.0" promptText="Write your review here..." style="-fx-background-color: #343434; -fx-control-inner-background: #343434; -fx-background-insets: 0; -fx-background-radius: 12; -fx-border-color: Transparent; -fx-focus-color: Transparent; -fx-faint-focus-color: Transparent;">
+            <TextArea fx:id="reviewTextArea" layoutX="20.0" layoutY="215.0" prefHeight="200.0" prefWidth="400.0" promptText="Write your review here..." stylesheets="@../../CSS/textAreaStyle.CSS">
                <font>
                   <Font name="Geist Regular" size="12.0" />
                </font>

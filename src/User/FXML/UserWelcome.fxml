@@ -16,12 +16,12 @@
                   <Image url="@../../Images/Background/User%20Welcome.png" />
                </image>
             </ImageView>
-            <Button fx:id="loginButton" layoutX="50.0" layoutY="792.0" mnemonicParsing="false" onAction="#loginButtonHandler" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="LOGIN" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="50.0" layoutY="792.0" mnemonicParsing="false" onAction="#loginButtonHandler" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" stylesheets="@../../CSS/buttonStyle.CSS" text="LOGIN" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="signUpButton" layoutX="50.0" layoutY="866.0" mnemonicParsing="false" onAction="#signUpButtonHandler" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #343434; -fx-border-radius: 100; -fx-background-radius: 100;" text="SIGN UP" textFill="WHITE">
+            <Button fx:id="signUpButton" layoutX="50.0" layoutY="866.0" mnemonicParsing="false" onAction="#signUpButtonHandler" prefHeight="40.0" prefWidth="340.0" style="-fx-background-color: #343434; -fx-border-radius: 100; -fx-background-radius: 100;" stylesheets="@../../CSS/secondaryButtonStyle.CSS" text="SIGN UP" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="20.0" />
                </font>

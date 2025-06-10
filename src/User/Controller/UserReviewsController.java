@@ -90,7 +90,7 @@ public class UserReviewsController {
         titleLabel.setMaxWidth(260);
         titleLabel.setWrapText(true);
         Label reviewsLabel = new Label(reviewsLabelStr);
-        reviewsLabel.setStyle("-fx-text-fill: #D4D4D4; -fx-font-size: 12px;");
+        reviewsLabel.setStyle("-fx-text-fill: #D4D4D4;");
         reviewsLabel.setFont(Font.font("Geist Regular", 12));
         reviewsLabel.setMaxWidth(260);
         reviewsLabel.setMaxHeight(135);

@@ -1,6 +1,7 @@
 package Database;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1254,37 +1255,37 @@ public static ResultSet getAllDirectors() {
     }
 
     // ====== For clicking Rating Content Button (Updated now with proper fxml file, also with both content and rating value )
-public static List<Object[]> getRatedContentAndRating(int userID) {
-    List<Object[]> rated = new ArrayList<>();
-    String query = "SELECT c.*, r.star FROM Rating r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
-    try (Connection conn = getDBConnection();
-         PreparedStatement stmt = conn.prepareStatement(query)) {
-        stmt.setInt(1, userID);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            Content content = new Content(
-                rs.getInt("contentID"),
-                rs.getString("contentTitle"),
-                rs.getString("contentRuntime"),
-                rs.getObject("contentSeason", Integer.class),
-                rs.getObject("contentEpisode", Integer.class),
-                rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
-                rs.getString("contentSynopsis"),
-                rs.getInt("directorID"),
-                rs.getInt("contentPhase"),
-                rs.getString("contentAgeRating"),
-                rs.getInt("contentChronologicalOrder"),
-                rs.getString("contentPoster"),
-                rs.getString("contentTrailer")
-            );
-            int ratingValue = rs.getInt("star");
-            rated.add(new Object[]{content, ratingValue});
+    public static List<Object[]> getRatedContentAndRating(int userID) {
+        List<Object[]> rated = new ArrayList<>();
+        String query = "SELECT c.*, r.star FROM Rating r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                int ratingValue = rs.getInt("star");
+                rated.add(new Object[]{content, ratingValue});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return rated;
     }
-    return rated;
-}
 
     // ====== For clicking Liked Content Button
     public static List<Content> getLikedContent(int userID) {
@@ -1425,5 +1426,110 @@ public static List<Object[]> getRatedContentAndRating(int userID) {
             e.printStackTrace();
         }
         return reviews;
+    }
+
+    // ============================ SEARCH CONTENT ===============================
+    
+    /**
+     * Search for content based on search text, matching against title, director name, actor name, or role name
+     * @param searchText The text to search for
+     * @return List of Content objects that match the search criteria
+     */
+    public static List<Content> searchContent(String searchText) {
+        List<Content> results = new ArrayList<>();
+        String searchPattern = "%" + searchText + "%";
+        
+        try {
+            // Create a query that searches across different tables using joins
+            String query = "SELECT DISTINCT c.* FROM Content c " +
+                          "LEFT JOIN Director d ON c.directorID = d.directorID " +
+                          "LEFT JOIN Cast ca ON c.contentID = ca.contentID " +
+                          "LEFT JOIN Actor a ON ca.actorID = a.actorID " +
+                          "LEFT JOIN Role r ON ca.roleID = r.roleID " +
+                          "WHERE c.contentTitle LIKE ? " +
+                          "OR d.directorName LIKE ? " +
+                          "OR a.actorName LIKE ? " +
+                          "OR r.roleName LIKE ?";
+            
+            pstatement = getDBConnection().prepareStatement(query);
+            pstatement.setString(1, searchPattern);
+            pstatement.setString(2, searchPattern);
+            pstatement.setString(3, searchPattern);
+            pstatement.setString(4, searchPattern);
+            
+            ResultSet rs = pstatement.executeQuery();
+            
+            while (rs.next()) {
+                int contentID = rs.getInt("contentID");
+                String contentTitle = rs.getString("contentTitle");
+                String contentRuntime = rs.getString("contentRuntime");
+                
+                // Handle nullable fields
+                Integer contentSeason = null;
+                try {
+                    contentSeason = rs.getObject("contentSeason") != null ? rs.getInt("contentSeason") : null;
+                } catch (SQLException e) {
+                    // Column might not exist or have a different name
+                }
+                
+                Integer contentEpisode = null;
+                try {
+                    contentEpisode = rs.getObject("contentEpisode") != null ? rs.getInt("contentEpisode") : null;
+                } catch (SQLException e) {
+                    // Column might not exist or have a different name
+                }
+                
+                // Handle date
+                LocalDate contentReleaseDate = null;
+                try {
+                    java.sql.Date date = rs.getDate("contentReleaseDate");
+                    contentReleaseDate = date != null ? date.toLocalDate() : null;
+                } catch (SQLException e) {
+                    // Column might not exist or have a different name
+                }
+                
+                String contentSynopsis = rs.getString("contentSynopsis");
+                
+                // Handle nullable director ID
+                int directorID = 0;
+                try {
+                    directorID = rs.getInt("directorID");
+                } catch (SQLException e) {
+                    // Column might not exist or have a different name
+                }
+                
+                // Handle other fields
+                int contentPhase = 0;
+                try {
+                    contentPhase = rs.getInt("contentPhase");
+                } catch (SQLException e) {
+                    // Column might not exist or have a different name
+                }
+                
+                String contentAgeRating = rs.getString("contentAgeRating");
+                
+                int contentChronologicalOrder = 0;
+                try {
+                    contentChronologicalOrder = rs.getInt("contentChronologicalOrder");
+                } catch (SQLException e) {
+                    // Column might not exist or have a different name
+                }
+                
+                String contentPoster = rs.getString("contentPoster");
+                String contentTrailer = rs.getString("contentTrailer");
+                
+                Content content = new Content(
+                    contentID, contentTitle, contentRuntime, contentSeason, contentEpisode,
+                    contentReleaseDate, contentSynopsis, directorID, contentPhase,
+                    contentAgeRating, contentChronologicalOrder, contentPoster, contentTrailer
+                );
+                
+                results.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return results;
     }
 }
