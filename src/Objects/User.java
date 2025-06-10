@@ -1,5 +1,7 @@
 package Objects;
 
+import java.util.List;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -10,13 +12,19 @@ public class User {
     private final SimpleStringProperty userPassword;
     private final SimpleStringProperty userEmail;
     private final SimpleStringProperty userBio;
+    private final SimpleStringProperty userProfile;
 
-        public User(int userId,String userName, String userPassword, String userEmail, String userBio) {
+    private List<String> watched;
+    private List<String> watchlist;
+    private List<String> reviews;
+
+        public User(int userId,String userName, String userPassword, String userEmail, String userBio, String userProfile) {
         this.userID = new SimpleIntegerProperty(userId);
         this.userName = new SimpleStringProperty(userName);
         this.userPassword = new SimpleStringProperty(userPassword);
         this.userEmail = new SimpleStringProperty(userEmail);
         this.userBio = new SimpleStringProperty(userBio);
+        this.userProfile = new SimpleStringProperty(userProfile);
     }
 
     public int getUserID() {
@@ -39,9 +47,41 @@ public class User {
         return userBio.get();
     }
 
+    public String getUserProfile() {
+        return userProfile.get();
+    }
+
     public void setUserPassword(String password) { this.userPassword.set(password); }
 
     public void setUserEmail(String email) { this.userEmail.set(email); }
     
     public void setUserBio(String bio) { this.userBio.set(bio); }
+
+    public List<String> getWatched() {
+        return watched;
+    }
+
+    public void setWatched(List<String> watched) {
+        this.watched = watched;
+    }
+
+    public List<String> getWatchlist() {
+        return watchlist;
+    }
+
+    public void setWatchlist(List<String> watchlist) {
+        this.watchlist = watchlist;
+    }
+
+    public List<String> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<String> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setUserProfile(String userProfile) {
+        this.userProfile.set(userProfile);
+}
 }

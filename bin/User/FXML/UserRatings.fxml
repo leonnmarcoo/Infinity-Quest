@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.Controller.UserRatingsController">
    <children>
       <AnchorPane prefHeight="956.0" prefWidth="440.0" style="-fx-background-color: #141414;">
          <children>
@@ -44,7 +43,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="53.0" prefWidth="508.27" style="-fx-background-color: #141414;">
                      <children>
-                        <Button fx:id="fiveStarButton" layoutX="20.0" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="127.52" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                        <Button fx:id="fiveStarButton" layoutX="20.0" layoutY="8.0" mnemonicParsing="false" onAction="#fiveStarButtonHandler" prefHeight="33.79" prefWidth="127.52" style="-fx-background-color: #343434; -fx-background-radius: 8;">
                            <font>
                               <Font name="Geist Regular" size="12.0" />
                            </font>
@@ -56,7 +55,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="fourStarButton" layoutX="157.52" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="106.59" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                        <Button fx:id="fourStarButton" layoutX="157.52" layoutY="8.0" mnemonicParsing="false" onAction="#fourStarButtonHandler" prefHeight="33.79" prefWidth="106.59" style="-fx-background-color: #343434; -fx-background-radius: 8;">
                            <font>
                               <Font name="Geist Regular" size="12.0" />
                            </font>
@@ -68,7 +67,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="threeStarButton" layoutX="274.11" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="85.65" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                        <Button fx:id="threeStarButton" layoutX="274.11" layoutY="8.0" mnemonicParsing="false" onAction="#threeStarButtonHandler" prefHeight="33.79" prefWidth="85.65" style="-fx-background-color: #343434; -fx-background-radius: 8;">
                            <font>
                               <Font name="Geist Regular" size="12.0" />
                            </font>
@@ -80,7 +79,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="twoStarButton" layoutX="369.76" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="64.72" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                        <Button fx:id="twoStarButton" layoutX="369.76" layoutY="8.0" mnemonicParsing="false" onAction="#twoStarButtonHandler" prefHeight="33.79" prefWidth="64.72" style="-fx-background-color: #343434; -fx-background-radius: 8;">
                            <font>
                               <Font name="Geist Regular" size="12.0" />
                            </font>
@@ -92,7 +91,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="oneStarButton" layoutX="444.48" layoutY="8.0" mnemonicParsing="false" prefHeight="33.79" prefWidth="43.79" style="-fx-background-color: #343434; -fx-background-radius: 8;">
+                        <Button fx:id="oneStarButton" layoutX="444.48" layoutY="8.0" mnemonicParsing="false" onAction="#oneStarButtonHandler" prefHeight="33.79" prefWidth="43.79" style="-fx-background-color: #343434; -fx-background-radius: 8;">
                            <font>
                               <Font name="Geist Regular" size="12.0" />
                            </font>
@@ -108,7 +107,7 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <ImageView fitHeight="130.0" fitWidth="440.0">
+            <ImageView fitHeight="130.0" fitWidth="440.0" layoutY="-41.0">
                <image>
                   <Image url="@../../Images/Background/Top%20Bar.png" />
                </image>
@@ -123,7 +122,7 @@
                   <Image url="@../../Images/Icons/Left%20arrow.png" />
                </image>
             </ImageView>
-            <Button fx:id="backButton" layoutX="5.0" layoutY="73.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: Transparent;" />
+            <Button fx:id="backButton" layoutX="5.0" layoutY="73.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: Transparent;" />
             <Label fx:id="filterLabel" layoutX="50.0" layoutY="73.0" text="Ratings" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="30.0" />

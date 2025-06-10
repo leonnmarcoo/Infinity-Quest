@@ -239,8 +239,9 @@ public class AdminUserController implements Initializable {
                 String password = result.getString("userPassword");
                 String email = result.getString("userEmail");
                 String bio = result.getString("userBio");
+                String profile = result.getString("userProfile");
 
-                User user = new User(userID, username, password, email, bio);
+                User user = new User(userID, username, password, email, bio, profile);
                 userList.add(user);
             }
         } catch (SQLException e) {
@@ -273,7 +274,7 @@ public class AdminUserController implements Initializable {
         String email = emailTextField.getText();
         String bio = bioTextField.getText();
 
-        User user = new User(0, username, password, email, bio);
+        User user = new User(0, username, password, email, bio,"");
 
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || bio.isEmpty()) {
             showAlert(AlertType.ERROR, "Error", "Please fill in all fields");

@@ -1,6 +1,8 @@
 package Database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import Objects.Admin;
 import Objects.User;
@@ -182,64 +184,21 @@ public class DatabaseHandler {
         return false;
     }
 
-    // public static boolean updateUser(User user) {
-    //     try {
-    //         pstatement = getDBConnection().prepareStatement("UPDATE User SET userPassword = ?, userEmail = ?, userBio = ? WHERE userName = ?");
-    //         pstatement.setString(1, user.getUserPassword());
-    //         pstatement.setString(2, user.getUserEmail());
-    //         pstatement.setString(3, user.getUserBio());
-    //         pstatement.setString(4, user.getUserName());
-            
-    //         int res = pstatement.executeUpdate();
-    //         if (res > 0) {
-    //             return true;
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return false;
-    // }
-
-//     public static boolean updateUser(User user) {
-//     try {
-//         pstatement = getDBConnection().prepareStatement(
-//             "UPDATE User SET userName = ?, userPassword = ?, userEmail = ?, userBio = ? WHERE userID = ?"
-//         );
-//         pstatement.setString(1, user.getUserName());
-//         pstatement.setString(2, user.getUserPassword());
-//         pstatement.setString(3, user.getUserEmail());
-//         pstatement.setString(4, user.getUserBio());
-//         pstatement.setInt(5, user.getUserID());
-        
-//         int res = pstatement.executeUpdate();
-//         return res > 0;
-//     } catch (Exception e) {
-//         e.printStackTrace();
-//     }
-//     return false;
-// }
-
     public static boolean updateUser(User user) {
-        String sql = "UPDATE `User` SET userName = ?, userPassword = ?, userEmail = ?, userBio = ? WHERE userID = ?";
+        String sql = "UPDATE User SET userPassword=?, userEmail=?, userBio=?, userProfile=? WHERE userID=?";
         try (Connection conn = getDBConnection();
-            PreparedStatement pstatement = conn.prepareStatement(sql)) {
-
-            pstatement.setString(1, user.getUserName());
-            pstatement.setString(2, user.getUserPassword());
-            pstatement.setString(3, user.getUserEmail());
-            pstatement.setString(4, user.getUserBio());
-            pstatement.setInt(5, user.getUserID());
-
-            int res = pstatement.executeUpdate();
-            return res > 0;
-
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUserPassword());
+            stmt.setString(2, user.getUserEmail());
+            stmt.setString(3, user.getUserBio());
+            stmt.setString(4, user.getUserProfile());
+            stmt.setInt(5, user.getUserID());
+            return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
-
-
 
 // ============================ CRUD CONTENT ===============================
 
@@ -1051,5 +1010,341 @@ public static ResultSet getAllDirectors() {
         }
         return false;
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    // ============================ USER SESSION HANDLERS ===============================
+
+
+    // ====== For Displaying the User in Profile Page
+    public static User getUserByUsername(String username) {
+        getInstance();
+        String query = "SELECT * FROM User WHERE userName = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int userID = rs.getInt("userID");
+                String userName = rs.getString("userName");
+                String userPassword = rs.getString("userPassword");
+                String userEmail = rs.getString("userEmail");
+                String userBio = rs.getString("userBio");
+                String userProfile = rs.getString("userProfile");
+                return new User(userID, userName, userPassword, userEmail, userBio, userProfile);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // ====== For Displaying the current User Watched in Profile Page
+        public static int getWatchedCount(int userID) {
+            String query = "SELECT COUNT(*) FROM Watched WHERE userID = ?";
+            try (Connection conn = getDBConnection();
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, userID);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
+
+    // ====== For Displaying the Current available Content in Profile Page
+        public static int getTotalContentCount() {
+            String query = "SELECT COUNT(*) FROM Content";
+            try (Connection conn = getDBConnection();
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+        }
+
+    public static List<String> getWatchedTitles(int userID) {
+        List<String> watched = new ArrayList<>();
+        String query = "SELECT c.contentTitle FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                watched.add(rs.getString("contentTitle"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return watched;
+    }
+
+    public static List<String> getWatchlistTitles(int userID) {
+        List<String> watchlist = new ArrayList<>();
+        String query = "SELECT c.contentTitle FROM Watchlist w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                watchlist.add(rs.getString("contentTitle"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return watchlist;
+    }
+
+    public static List<String> getReviews(int userID) {
+        List<String> reviews = new ArrayList<>();
+        String query = "SELECT r.reviewText, c.contentTitle FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                // Editable, pede k maglagay ng title sa review, e.g. "Title: Review"
+                reviews.add(rs.getString("contentTitle") + ": " + rs.getString("reviewText"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reviews;
+    }
+
+    // ============================ USER PROFILE SESSION HANDLER ===============================
+
+    // ====== For HBox
+    public static List<Content> getRecentWatchedContent(int userID, int limit) {
+        List<Content> recentWatched = new ArrayList<>();
+        String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ? ORDER BY w.watchedDateTime DESC LIMIT ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            stmt.setInt(2, limit);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                recentWatched.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recentWatched;
+    }
+
+    // ====== For clicking Watched Content Button
+    public static List<Content> getWatchedContent(int userID) {
+        List<Content> watchedContent = new ArrayList<>();
+        String query = "SELECT c.* FROM Watched w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                watchedContent.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return watchedContent;
+    }
+
+    // ====== For clicking Watchlist Content Button
+    public static List<Content> getWatchlistContent(int userID) {
+        List<Content> watchlistContent = new ArrayList<>();
+        String query = "SELECT c.* FROM Watchlist w JOIN Content c ON w.contentID = c.contentID WHERE w.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                watchlistContent.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return watchlistContent;
+    }
+
+    // ====== For clicking Review Content Button (Updated now to the proper fxml file, also with both content and review text)   
+    public static List<Object[]> getReviewedContentAndText(int userID) {
+        List<Object[]> reviewed = new ArrayList<>();
+        String query = "SELECT c.*, r.reviewText FROM Review r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                String reviewText = rs.getString("reviewText");
+                reviewed.add(new Object[]{content, reviewText});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reviewed;
+    }
+
+    // ====== For clicking Rating Content Button (Updated now with proper fxml file, also with both content and rating value )
+public static List<Object[]> getRatedContentAndRating(int userID) {
+    List<Object[]> rated = new ArrayList<>();
+    String query = "SELECT c.*, r.star FROM Rating r JOIN Content c ON r.contentID = c.contentID WHERE r.userID = ?";
+    try (Connection conn = getDBConnection();
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setInt(1, userID);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Content content = new Content(
+                rs.getInt("contentID"),
+                rs.getString("contentTitle"),
+                rs.getString("contentRuntime"),
+                rs.getObject("contentSeason", Integer.class),
+                rs.getObject("contentEpisode", Integer.class),
+                rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                rs.getString("contentSynopsis"),
+                rs.getInt("directorID"),
+                rs.getInt("contentPhase"),
+                rs.getString("contentAgeRating"),
+                rs.getInt("contentChronologicalOrder"),
+                rs.getString("contentPoster"),
+                rs.getString("contentTrailer")
+            );
+            int ratingValue = rs.getInt("star");
+            rated.add(new Object[]{content, ratingValue});
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return rated;
+}
+
+    // ====== For clicking Liked Content Button
+    public static List<Content> getLikedContent(int userID) {
+        List<Content> likedContent = new ArrayList<>();
+        String query = "SELECT c.* FROM userLike l JOIN Content c ON l.contentID = c.contentID WHERE l.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                likedContent.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return likedContent;
+    }
+
+    // ====== For clicking Disliked Content Button
+    public static List<Content> getDislikedContent(int userID) {
+        List<Content> dislikedContent = new ArrayList<>();
+        String query = "SELECT c.* FROM userDislike dl JOIN Content c ON dl.contentID = c.contentID WHERE dl.userID = ?";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Content content = new Content(
+                    rs.getInt("contentID"),
+                    rs.getString("contentTitle"),
+                    rs.getString("contentRuntime"),
+                    rs.getObject("contentSeason", Integer.class),
+                    rs.getObject("contentEpisode", Integer.class),
+                    rs.getDate("contentReleaseDate") != null ? rs.getDate("contentReleaseDate").toLocalDate() : null,
+                    rs.getString("contentSynopsis"),
+                    rs.getInt("directorID"),
+                    rs.getInt("contentPhase"),
+                    rs.getString("contentAgeRating"),
+                    rs.getInt("contentChronologicalOrder"),
+                    rs.getString("contentPoster"),
+                    rs.getString("contentTrailer")
+                );
+                dislikedContent.add(content);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dislikedContent;
+    } 
 }

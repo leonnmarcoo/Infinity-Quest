@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.Controller.UserProfileFilterController">
    <children>
       <AnchorPane prefHeight="956.0" prefWidth="440.0" style="-fx-background-color: #141414;">
          <children>
@@ -55,7 +54,7 @@
                   <Image url="@../../Images/Icons/Left%20arrow.png" />
                </image>
             </ImageView>
-            <Button fx:id="backButton" layoutX="5.0" layoutY="73.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: Transparent;" />
+            <Button fx:id="backButton" layoutX="5.0" layoutY="73.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: Transparent;" />
             <Label fx:id="filterLabel" layoutX="50.0" layoutY="73.0" text="Profile Filter" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="30.0" />

@@ -167,6 +167,7 @@
                   <Image url="@../../Images/Background/Home%20Navigation%20Bar.png" />
                </image>
             </ImageView>
+            <Button fx:id="userProfileButton" layoutX="327.0" layoutY="877.0" mnemonicParsing="false" onAction="#userProfileButtonHandler" prefHeight="65.0" prefWidth="67.0" style="-fx-background-color: transparent;" />
          </children>
       </AnchorPane>
    </children>

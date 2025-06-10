@@ -3,6 +3,8 @@ package User.Controller;
 import java.io.IOException;
 
 import Database.DatabaseHandler;
+import Objects.User;
+import User.Session.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,31 +34,63 @@ public class UserLoginController {
     private TextField usernameTextField;
 
 
-        public void loginButtonHandler(ActionEvent event) throws IOException {
+    //     public void loginButtonHandler(ActionEvent event) throws IOException {
 
-        String username = usernameTextField.getText();
-        String password = passwordPasswordField.getText();
+    //     String username = usernameTextField.getText();
+    //     String password = passwordPasswordField.getText();
 
-        if (DatabaseHandler.validateUserLogin(username, password)) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
-            root = loader.load();
+    //     if (DatabaseHandler.validateUserLogin(username, password)) {
+    //         FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
+    //         root = loader.load();
             
-            // Pass username to UserHomeController
-            UserHomeController homeController = loader.getController();
-            homeController.setUsername(username);
-            homeController.initializeUserHome();
+    //         // Pass username to UserHomeController
+    //         UserHomeController homeController = loader.getController();
+    //         homeController.setUsername(username);
+    //         homeController.initializeUserHome();
             
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Login Failed");
-            alert.setHeaderText(null);
-            alert.setContentText("Invalid username or password.");
-            alert.showAndWait();
-        }
+    //         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    //         scene = new Scene(root);
+    //         stage.setScene(scene);
+    //         stage.show();
+    //     } else {
+    //         Alert alert = new Alert(AlertType.ERROR);
+    //         alert.setTitle("Login Failed");
+    //         alert.setHeaderText(null);
+    //         alert.setContentText("Invalid username or password.");
+    //         alert.showAndWait();
+    //     }
 
+    // }
+
+    public void loginButtonHandler(ActionEvent event) throws IOException {
+
+    String username = usernameTextField.getText();
+    String password = passwordPasswordField.getText();
+
+    if (DatabaseHandler.validateUserLogin(username, password)) {
+
+        User user = DatabaseHandler.getUserByUsername(username);
+        user.setWatched(DatabaseHandler.getWatchedTitles(user.getUserID()));
+        user.setWatchlist(DatabaseHandler.getWatchlistTitles(user.getUserID()));
+        user.setReviews(DatabaseHandler.getReviews(user.getUserID()));
+
+        SessionManager.setCurrentUser(user);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    } else {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Login Failed");
+        alert.setHeaderText(null);
+        alert.setContentText("Invalid username or password.");
+        alert.showAndWait();
     }
+}
+
+
 }
