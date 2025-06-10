@@ -122,7 +122,7 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <BarChart fx:id="ratingBarChart" alternativeRowFillVisible="false" barGap="5.0" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="20.0" maxHeight="110.0" maxWidth="440.0" prefHeight="110.0" prefWidth="400.0" style="-fx-background: #141414; -fx-alternative-column-fill-visible: #343434; -fx-alternative-row-fill-visible: #343434;" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+                                    <BarChart fx:id="ratingBarChart" alternativeRowFillVisible="false" barGap="5.0" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" maxHeight="110.0" maxWidth="440.0" prefHeight="110.0" prefWidth="440.0" style="-fx-background: #141414; -fx-alternative-column-fill-visible: #343434; -fx-alternative-row-fill-visible: #343434;" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
                                       <xAxis>
                                         <CategoryAxis fx:id="starAxis" side="BOTTOM" tickLabelFill="#343434" tickLabelsVisible="false" />
                                       </xAxis>

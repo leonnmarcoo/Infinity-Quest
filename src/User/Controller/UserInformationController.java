@@ -94,13 +94,13 @@ public class UserInformationController implements Initializable{
     private Button watchButton;
 
     @FXML
-    private BarChart<String, Number> ratingBarChart;
+    private BarChart<Number, Number> ratingBarChart;
 
     @FXML
-    private CategoryAxis starAxis;
+    private CategoryAxis xAxis;
 
     @FXML
-    private NumberAxis numberAxis;
+    private NumberAxis yAxis;
 
     @FXML
     private ListView<String> castListView;
@@ -299,7 +299,7 @@ public class UserInformationController implements Initializable{
 
 
     //  Updated code sa watchButtonHandler, nka session narin ung user, so no need na i-pass ung username sa controller.
-        @FXML
+    @FXML
     private void watchButtonHandler(ActionEvent event) {
         if (content == null) {
             showAlert(Alert.AlertType.ERROR, "No content selected");
