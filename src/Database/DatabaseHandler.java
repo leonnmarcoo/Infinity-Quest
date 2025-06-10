@@ -1405,4 +1405,25 @@ public static List<Object[]> getRatedContentAndRating(int userID) {
         }
         return castList;
     }
+    
+    // ====== Get reviews for a specific content
+    public static List<Object[]> getReviewsByContentID(int contentID) {
+        List<Object[]> reviews = new ArrayList<>();
+        String query = "SELECT r.reviewText, u.userName FROM Review r " +
+                       "JOIN User u ON r.userID = u.userID " +
+                       "WHERE r.contentID = ? ";
+        try (Connection conn = getDBConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, contentID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String reviewText = rs.getString("reviewText");
+                String userName = rs.getString("userName");
+                reviews.add(new Object[]{userName, reviewText});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reviews;
+    }
 }

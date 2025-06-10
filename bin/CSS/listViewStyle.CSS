@@ -1,0 +1,40 @@
+.list-view {
+    -fx-background-color: #343434;
+    -fx-control-inner-background: #343434;
+    -fx-background-radius: 12;
+    -fx-control-inner-background-radius: 12;
+    -fx-padding: 5;
+}
+
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 8px;
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: #272727;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #343434;
+}
+
+.list-view .list-cell:focused {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: #444;
+    -fx-background-radius: 5;
+}

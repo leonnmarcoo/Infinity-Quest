@@ -190,7 +190,7 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <ListView fx:id="castListView" layoutX="20.0" prefHeight="200.0" prefWidth="400.0" style="-fx-control-inner-background: #343434; -fx-text-fill: #ffffff; -fx-background-radius: 12; -fx-background-color: #343434; -fx-control-inner-background-radius: 12;" />
+                                    <ListView fx:id="castListView" layoutX="20.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@../../CSS/listViewStyle.CSS" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -208,7 +208,7 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <ListView fx:id="reviewListView" layoutX="20.0" prefHeight="200.0" prefWidth="400.0" style="-fx-control-inner-background: #343434; -fx-text-fill: #ffffff; -fx-background-radius: 12; -fx-background-color: #343434; -fx-control-inner-background-radius: 12;" />
+                                    <ListView fx:id="reviewListView" layoutX="20.0" prefHeight="600.0" prefWidth="400.0" stylesheets="@../../CSS/listViewStyle.CSS" />
                                  </children>
                               </AnchorPane>
                            </children>

@@ -33,4 +33,10 @@
     -fx-background-radius: 8 8 8 8;
 }
 
+.combo-box .scroll-bar .thumb {
+    -fx-background-color: #444;
+    -fx-background-radius: 5;
+}
+
+
 

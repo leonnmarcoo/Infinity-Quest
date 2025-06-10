@@ -205,7 +205,8 @@ public class UserInformationController implements Initializable{
         }
         
         displayRatingBarChart();
-        displayCastList(); // Added line to display cast list
+        displayCastList();
+        displayReviewList();
     }
     
     private void displayRatingBarChart() {
@@ -247,30 +248,49 @@ public class UserInformationController implements Initializable{
         }
     }
     
-    /**
-     * Displays the cast members for the current content in the castListView.
-     * Each row shows the actor name and their role.
-     */
     private void displayCastList() {
         if (content == null || castListView == null) {
             return;
         }
         
-        // Clear existing items
         castListView.getItems().clear();
         
-        // Get cast for this content
         List<Cast> castMembers = DatabaseHandler.getCastByContentID(content.getContentID());
         
-        // Create formatted strings for the ListView
         ObservableList<String> castItems = FXCollections.observableArrayList();
         for (Cast cast : castMembers) {
             String castEntry = cast.getActorName() + " as " + cast.getRoleName();
             castItems.add(castEntry);
         }
         
-        // Set the items in the ListView
         castListView.setItems(castItems);
+    }
+    
+    private void displayReviewList() {
+        if (content == null || reviewListView == null) {
+            return;
+        }
+        
+        reviewListView.getItems().clear();
+        
+        List<Object[]> reviews = DatabaseHandler.getReviewsByContentID(content.getContentID());
+        
+        ObservableList<String> reviewItems = FXCollections.observableArrayList();
+        for (Object[] review : reviews) {
+            String userName = (String) review[0];
+            String reviewText = (String) review[1];
+            
+            String reviewEntry = userName + ":\n\n" + reviewText;
+            reviewItems.add(reviewEntry);
+        }
+        
+        reviewListView.setItems(reviewItems);
+        
+        // If there are no reviews, show a message
+        if (reviews.isEmpty()) {
+            reviewItems.add("No reviews yet for this content.");
+            reviewListView.setItems(reviewItems);
+        }
     }
     
     @FXML
