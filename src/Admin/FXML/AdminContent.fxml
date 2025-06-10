@@ -186,17 +186,17 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tShowTitleTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter movie title" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
+                                          <TextField fx:id="tShowTitleTextField" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter TV show title" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>
                                           </TextField>
-                                          <Label fx:id="tAverageRuntimeLabel" layoutX="2.0" layoutY="83.0" text="Average Runtime" textFill="WHITE">
+                                          <Label fx:id="tAverageRuntimeLabel" layoutX="2.0" layoutY="83.0" text="Total Runtime" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="tAverageRuntimeTextField" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter average runtime" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
+                                          <TextField fx:id="tAverageRuntimeTextField" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter total runtime" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
                                              <font>
                                                 <Font name="Geist Regular" size="18.0" />
                                              </font>

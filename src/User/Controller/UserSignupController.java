@@ -58,6 +58,9 @@ public class UserSignupController {
     @FXML
     private TextField usernameTextField;
 
+    @FXML
+    private TextField profilePictureTextField;
+
     private Stage stage;
     private Scene scene;
     private Parent root;

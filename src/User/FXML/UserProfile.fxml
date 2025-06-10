@@ -136,7 +136,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="userLike" graphicTextGap="8.0" layoutX="20.0" layoutY="826.0" mnemonicParsing="false" onAction="#userLikeButtonHandler" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #343434; -fx-background-radius: 12 12 0 0; -fx-alignment: Left;" text="Like" textFill="WHITE">
+                        <Button fx:id="userLike" graphicTextGap="8.0" layoutX="20.0" layoutY="826.0" mnemonicParsing="false" onAction="#userLikeButtonHandler" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #343434; -fx-background-radius: 12 12 0 0; -fx-alignment: Left;" text="Likes" textFill="WHITE">
                            <font>
                               <Font name="Geist SemiBold" size="16.0" />
                            </font>
@@ -151,7 +151,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="userDislike" graphicTextGap="9.0" layoutX="20.0" layoutY="869.0" mnemonicParsing="false" onAction="#userDislikeButtonHandler" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #343434; -fx-background-radius: 0 0 12 12; -fx-alignment: Left;" text="Dislike" textFill="WHITE">
+                        <Button fx:id="userDislike" graphicTextGap="9.0" layoutX="20.0" layoutY="869.0" mnemonicParsing="false" onAction="#userDislikeButtonHandler" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #343434; -fx-background-radius: 0 0 12 12; -fx-alignment: Left;" text="Dislikes" textFill="WHITE">
                            <font>
                               <Font name="Geist SemiBold" size="16.0" />
                            </font>

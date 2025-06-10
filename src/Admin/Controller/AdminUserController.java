@@ -120,6 +120,9 @@ public class AdminUserController implements Initializable {
     @FXML
     private TextField usernameTextField;
 
+    @FXML
+    private TextField profilePictureTextField;
+
     private Stage stage;
     private Scene scene;
     private Parent root;

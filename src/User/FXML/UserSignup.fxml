@@ -18,16 +18,21 @@
                   <Image url="@../../Images/Background/User%20Sign%20up.png" />
                </image>
             </ImageView>
-            <TextField fx:id="usernameTextField" layoutX="50.0" layoutY="573.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
+            <TextField fx:id="usernameTextField" layoutX="50.0" layoutY="497.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="passwordPasswordField" layoutX="50.0" layoutY="649.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
+            <PasswordField fx:id="passwordPasswordField" layoutX="50.0" layoutY="573.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
                </font>
             </PasswordField>
+            <TextField fx:id="profilePictureTextField" layoutX="50.0" layoutY="649.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your profile picture path" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
+               <font>
+                  <Font name="Geist Regular" size="16.0" />
+               </font>
+            </TextField>
             <TextField fx:id="emailTextField" layoutX="50.0" layoutY="725.0" prefHeight="35.0" prefWidth="340.0" promptText="Enter your email" style="-fx-background-color: #272727; -fx-background-radius: 10; -fx-text-fill: #ffffff;">
                <font>
                   <Font name="Geist Regular" size="16.0" />
