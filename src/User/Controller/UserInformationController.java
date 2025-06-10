@@ -18,7 +18,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -33,6 +35,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -41,6 +44,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -94,7 +98,7 @@ public class UserInformationController implements Initializable{
     private Button watchButton;
 
     @FXML
-    private BarChart<Number, Number> ratingBarChart;
+    private BarChart<String, Number> ratingBarChart;
 
     @FXML
     private CategoryAxis xAxis;
@@ -197,6 +201,47 @@ public class UserInformationController implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error loading poster image: " + e.getMessage());
+        }
+        
+        displayRatingBarChart();
+    }
+    
+    private void displayRatingBarChart() {
+        if (content == null || ratingBarChart == null) {
+            return;
+        }
+        
+        ratingBarChart.getData().clear();
+        
+        Map<Integer, Integer> ratingDistribution = DatabaseHandler.getContentRatingDistribution(content.getContentID());
+        
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        
+        for (int rating = 1; rating <= 5; rating++) {
+            int count = ratingDistribution.getOrDefault(rating, 0);
+            series.getData().add(new XYChart.Data<>(String.valueOf(rating), count));
+        }
+        
+        ratingBarChart.getData().add(series);
+        
+        if (xAxis != null) {
+            xAxis.setLabel(null);
+        }
+        if (yAxis != null) {
+            yAxis.setLabel(null);
+        }
+        
+        for (XYChart.Data<String, Number> data : series.getData()) {
+            Node node = data.getNode();
+            if (node != null) {
+                node.setStyle("-fx-bar-fill: #CE2431; -fx-background-radius: 8 8 0 0;");
+                
+                Tooltip tooltip = new Tooltip(
+                    "Rating: " + data.getXValue() + " stars\n" +
+                    "Count: " + data.getYValue() + " users"
+                );
+                Tooltip.install(node, tooltip);
+            }
         }
     }
     

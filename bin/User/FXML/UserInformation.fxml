@@ -122,12 +122,12 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <BarChart fx:id="ratingBarChart" alternativeRowFillVisible="false" barGap="5.0" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" maxHeight="110.0" maxWidth="440.0" prefHeight="110.0" prefWidth="440.0" style="-fx-background: #141414; -fx-alternative-column-fill-visible: #343434; -fx-alternative-row-fill-visible: #343434;" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+                                    <BarChart fx:id="ratingBarChart" alternativeRowFillVisible="false" barGap="0.0" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutY="-40.0" maxHeight="110.0" maxWidth="440.0" prefHeight="110.0" prefWidth="440.0" style="-fx-background: Transparent;" titleSide="BOTTOM" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
                                       <xAxis>
-                                        <CategoryAxis fx:id="starAxis" side="BOTTOM" tickLabelFill="#343434" tickLabelsVisible="false" />
+                                        <CategoryAxis endMargin="0.0" side="BOTTOM" startMargin="0.0" tickLabelFill="#343434" tickLabelGap="0.0" tickLabelsVisible="false" tickLength="0.0" fx:id="xAxis" />
                                       </xAxis>
                                       <yAxis>
-                                        <NumberAxis fx:id="numberAxis" side="LEFT" tickLabelFill="#343434" tickLabelGap="0.0" tickLabelsVisible="false">
+                                        <NumberAxis fx:id="yAxis" minorTickCount="0" minorTickLength="0.0" side="LEFT" tickLabelFill="#343434" tickLabelGap="0.0" tickLabelsVisible="false" tickLength="0.0" tickUnit="0.0" upperBound="0.0">
                                              <tickLabelFont>
                                                 <Font name="Geist Regular" size="8.0" />
                                              </tickLabelFont>

@@ -2,7 +2,9 @@ package Database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Objects.Admin;
 import Objects.User;
@@ -1347,4 +1349,28 @@ public static List<Object[]> getRatedContentAndRating(int userID) {
         }
         return dislikedContent;
     } 
+    
+    // ====== For getting rating distribution for a specific content
+public static Map<Integer, Integer> getContentRatingDistribution(int contentID) {
+    Map<Integer, Integer> ratingDistribution = new HashMap<>();
+    // Initialize all ratings with 0 count
+    for (int i = 1; i <= 5; i++) {
+        ratingDistribution.put(i, 0);
+    }
+    
+    String query = "SELECT star, COUNT(*) as count FROM Rating WHERE contentID = ? GROUP BY star ORDER BY star";
+    try (Connection conn = getDBConnection();
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setInt(1, contentID);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            int rating = rs.getInt("star");
+            int count = rs.getInt("count");
+            ratingDistribution.put(rating, count);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return ratingDistribution;
+}
 }
