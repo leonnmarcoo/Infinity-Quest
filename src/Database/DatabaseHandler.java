@@ -1351,26 +1351,58 @@ public static List<Object[]> getRatedContentAndRating(int userID) {
     } 
     
     // ====== For getting rating distribution for a specific content
-public static Map<Integer, Integer> getContentRatingDistribution(int contentID) {
-    Map<Integer, Integer> ratingDistribution = new HashMap<>();
-    // Initialize all ratings with 0 count
-    for (int i = 1; i <= 5; i++) {
-        ratingDistribution.put(i, 0);
-    }
-    
-    String query = "SELECT star, COUNT(*) as count FROM Rating WHERE contentID = ? GROUP BY star ORDER BY star";
-    try (Connection conn = getDBConnection();
-         PreparedStatement stmt = conn.prepareStatement(query)) {
-        stmt.setInt(1, contentID);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            int rating = rs.getInt("star");
-            int count = rs.getInt("count");
-            ratingDistribution.put(rating, count);
+    public static Map<Integer, Integer> getContentRatingDistribution(int contentID) {
+        Map<Integer, Integer> ratingDistribution = new HashMap<>();
+        
+        for (int i = 1; i <= 5; i++) {
+            ratingDistribution.put(i, 0);
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        
+        String query = "SELECT star, COUNT(*) as count FROM Rating WHERE contentID = ? GROUP BY star ORDER BY star";
+        try (Connection conn = getDBConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, contentID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int rating = rs.getInt("star");
+                int count = rs.getInt("count");
+                ratingDistribution.put(rating, count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ratingDistribution;
     }
-    return ratingDistribution;
-}
+
+    // ====== Get cast members for a specific content
+    public static List<Cast> getCastByContentID(int contentID) {
+        List<Cast> castList = new ArrayList<>();
+        String query = "SELECT c.castID, c.actorID, c.roleID, c.contentID, " +
+                    "a.actorName, r.roleName, con.contentTitle " +
+                    "FROM Cast c " +
+                    "JOIN Actor a ON c.actorID = a.actorID " +
+                    "JOIN Role r ON c.roleID = r.roleID " +
+                    "JOIN Content con ON c.contentID = con.contentID " +
+                    "WHERE c.contentID = ?";
+        try (Connection conn = getDBConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, contentID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Cast cast = new Cast(
+                    rs.getInt("castID"),
+                    rs.getInt("actorID"),
+                    rs.getInt("roleID"),
+                    rs.getInt("contentID"),
+                    rs.getString("actorName"),
+                    rs.getString("roleName"),
+                    rs.getString("contentTitle")
+                );
+                castList.add(cast);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return castList;
+    }
 }

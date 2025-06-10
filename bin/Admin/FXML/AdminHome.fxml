@@ -135,7 +135,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TableView fx:id="adminTable" editable="true" layoutX="432.0" layoutY="470.0" prefHeight="472.0" prefWidth="1029.0" style="-fx-background-radius: 25; -fx-background-color: #272727;">
+            <TableView fx:id="adminTable" editable="true" layoutX="432.0" layoutY="470.0" prefHeight="472.0" prefWidth="1029.0" stylesheets="@../../CSS/tableStyle.CSS">
               <columns>
                 <TableColumn fx:id="adminIDColumn" prefWidth="330.433349609375" text="Admin ID" />
                 <TableColumn fx:id="adminNameColumn" minWidth="0.0" prefWidth="696.0" text="Admin Username" />

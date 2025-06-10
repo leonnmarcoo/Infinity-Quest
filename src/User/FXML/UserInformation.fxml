@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -122,7 +123,7 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <BarChart fx:id="ratingBarChart" alternativeRowFillVisible="false" barGap="0.0" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutY="-40.0" maxHeight="110.0" maxWidth="440.0" prefHeight="110.0" prefWidth="440.0" style="-fx-background: Transparent;" titleSide="BOTTOM" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+                                    <BarChart fx:id="ratingBarChart" alternativeRowFillVisible="false" barGap="0.0" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutY="-40.0" maxHeight="180.0" maxWidth="440.0" prefHeight="180.0" prefWidth="440.0" style="-fx-background: Transparent;" titleSide="BOTTOM" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
                                       <xAxis>
                                         <CategoryAxis endMargin="0.0" side="BOTTOM" startMargin="0.0" tickLabelFill="#343434" tickLabelGap="0.0" tickLabelsVisible="false" tickLength="0.0" fx:id="xAxis" />
                                       </xAxis>
@@ -138,27 +139,27 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <ImageView fitHeight="16.79" fitWidth="16.79" layoutX="50.0">
+                                    <ImageView fitHeight="16.79" fitWidth="16.79" layoutX="50.0" layoutY="-10.0">
                                        <image>
                                           <Image url="@../../Images/Icons/1%20STAR.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="16.79" fitWidth="31.56" layoutX="123.0">
+                                    <ImageView fitHeight="16.79" fitWidth="31.56" layoutX="123.0" layoutY="-10.0">
                                        <image>
                                           <Image url="@../../Images/Icons/2%20STAR.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="16.79" fitWidth="46.33" layoutX="197.0">
+                                    <ImageView fitHeight="16.79" fitWidth="46.33" layoutX="197.0" layoutY="-10.0">
                                        <image>
                                           <Image url="@../../Images/Icons/3%20STAR.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="16.79" fitWidth="61.11" layoutX="270.0">
+                                    <ImageView fitHeight="16.79" fitWidth="61.11" layoutX="270.0" layoutY="-10.0">
                                        <image>
                                           <Image url="@../../Images/Icons/4%20STAR.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="16.79" fitWidth="75.88" layoutX="344.0">
+                                    <ImageView fitHeight="16.79" fitWidth="75.88" layoutX="344.0" layoutY="-10.0">
                                        <image>
                                           <Image url="@../../Images/Icons/5%20STAR.png" />
                                        </image>
@@ -189,7 +190,7 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <ListView fx:id="castListView" layoutX="20.0" prefWidth="400.0" style="-fx-background-color: #141414; -fx-text-fill: #ffffff;" />
+                                    <ListView fx:id="castListView" layoutX="20.0" prefHeight="200.0" prefWidth="400.0" style="-fx-control-inner-background: #343434; -fx-text-fill: #ffffff; -fx-background-radius: 12; -fx-background-color: #343434; -fx-control-inner-background-radius: 12;" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -207,12 +208,15 @@
                               </AnchorPane>
                               <AnchorPane prefWidth="438.0">
                                  <children>
-                                    <ListView fx:id="reviewListView" layoutX="20.0" prefWidth="400.0" style="-fx-background-color: #141414; -fx-text-fill: #ffffff;" />
+                                    <ListView fx:id="reviewListView" layoutX="20.0" prefHeight="200.0" prefWidth="400.0" style="-fx-control-inner-background: #343434; -fx-text-fill: #ffffff; -fx-background-radius: 12; -fx-background-color: #343434; -fx-control-inner-background-radius: 12;" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </VBox>
                      </children>
+                     <padding>
+                        <Insets bottom="30.0" />
+                     </padding>
                   </VBox>
                </content>
             </ScrollPane>

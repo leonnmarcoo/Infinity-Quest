@@ -71,9 +71,9 @@
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <TabPane fx:id="contentTabPane" layoutX="40.0" layoutY="173.0" prefHeight="769.0" prefWidth="352.0" style="-fx-background-color: Transparent;" tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" tabMinWidth="155.0">
+            <TabPane fx:id="contentTabPane" layoutX="40.0" layoutY="173.0" prefHeight="769.0" prefWidth="352.0" stylesheets="@../../CSS/tabStyle.CSS" tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" tabMinWidth="155.0">
               <tabs>
-                <Tab fx:id="movieTab" style="-fx-background-color: #CE2431;" text="Movie">
+                <Tab fx:id="movieTab" text="Movie">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="744.0" prefWidth="352.0">
                            <children>
@@ -122,19 +122,19 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="mDirectorCombobox" layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                                          <ComboBox fx:id="mDirectorCombobox" layoutY="365.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                                           <Label layoutX="2.0" layoutY="415.0" text="Phase" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="mPhaseCombobox" layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                                          <ComboBox fx:id="mPhaseCombobox" layoutY="448.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                                           <Label layoutX="2.0" layoutY="498.0" text="Age Rating" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="mAgeRatingCombobox" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                                          <ComboBox fx:id="mAgeRatingCombobox" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                                           <Label layoutX="2.0" layoutY="581.0" text="Chronological Order" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
@@ -173,7 +173,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab fx:id="tvshowTab" style="-fx-background-color: #CE2431;" text="TV Show">
+                <Tab fx:id="tvshowTab" text="TV Show">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="898.0" prefWidth="352.0">
                            <children>
@@ -242,19 +242,19 @@
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="tDirectorTextfield" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                                          <ComboBox fx:id="tDirectorTextfield" layoutY="531.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a director" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                                           <Label fx:id="tPhaseLabel" layoutX="2.0" layoutY="581.0" text="Phase" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="tPhaseTextfield" layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                                          <ComboBox fx:id="tPhaseTextfield" layoutY="614.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a phase" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                                           <Label fx:id="tAgeRatingLabel" layoutX="2.0" layoutY="664.0" text="Age Rating" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="tAgeRatingTextfield" layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                                          <ComboBox fx:id="tAgeRatingTextfield" layoutY="697.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an age rating" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                                           <Label fx:id="tChronologicalOrderLabel" layoutX="2.0" layoutY="747.0" text="Chronological Order" textFill="WHITE">
                                              <font>
                                                 <Font name="Geist Medium" size="22.0" />
@@ -295,7 +295,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <TableView fx:id="contentTable" layoutX="430.0" layoutY="120.0" prefHeight="662.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+            <TableView fx:id="contentTable" layoutX="430.0" layoutY="120.0" prefHeight="662.0" prefWidth="1042.0" stylesheets="@../../CSS/tableStyle.CSS">
               <columns>
                 <TableColumn fx:id="ContentIDColumn" prefWidth="75.0" text="ContentID" />
                 <TableColumn fx:id="TitleColumn" prefWidth="75.0" text="Title" />
@@ -309,7 +309,7 @@
                   <TableColumn fx:id="AgeRatingColumn" prefWidth="74.4090576171875" text="Age Rating" />
                   <TableColumn fx:id="ChronologicalOrderColumn" prefWidth="120.7802734375" text="Chronological Order" />
                   <TableColumn fx:id="PosterColumn" prefWidth="44.977294921875" text="Poster" />
-                  <TableColumn fx:id="TrailerColumn" prefWidth="88.9696044921875" text="Trailer" />
+                  <TableColumn fx:id="TrailerColumn" prefWidth="67.0" text="Trailer" />
               </columns>
             </TableView>
             <Button fx:id="createButton" layoutX="430.0" layoutY="817.0" mnemonicParsing="false" onAction="#createContentHandler" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">

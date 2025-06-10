@@ -67,9 +67,9 @@
                <font>
                   <Font name="Geist Bold" size="32.0" />
                </font></Label>
-            <TabPane layoutX="40.0" layoutY="173.0" prefHeight="709.0" prefWidth="1432.0" style="-fx-background-color: Transparent;" tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" tabMinWidth="100.0">
+            <TabPane layoutX="40.0" layoutY="173.0" prefHeight="709.0" prefWidth="1432.0" stylesheets="@../../CSS/tabStyle.CSS" tabClosingPolicy="UNAVAILABLE" tabMinHeight="25.0" tabMinWidth="100.0">
               <tabs>
-                <Tab fx:id="actorAndRoleTab" style="-fx-background-color: #CE2431;" text="Actor &amp; Role">
+                <Tab fx:id="actorAndRoleTab" text="Actor &amp; Role">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="1432.0">
                            <children>
@@ -83,10 +83,10 @@
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
                               </TextField>
-                              <TableView fx:id="actorTable" layoutX="390.0" prefHeight="317.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+                              <TableView fx:id="actorTable" layoutX="390.0" prefHeight="317.0" prefWidth="1042.0" stylesheets="@../../CSS/tableStyle.CSS">
                                 <columns>
                                   <TableColumn fx:id="actorIDColumn" prefWidth="518.8897705078125" text="ActorID" />
-                                  <TableColumn fx:id="actorNameColumn" prefWidth="520.9364013671875" text="Actor Name" />
+                                  <TableColumn fx:id="actorNameColumn" prefWidth="502.0" text="Actor Name" />
                                 </columns>
                               </TableView>
                               <Button fx:id="createActorButton" graphicTextGap="2.0" layoutY="93.0" mnemonicParsing="false" onAction="#createActor" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
@@ -114,10 +114,10 @@
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
                               </TextField>
-                              <TableView fx:id="roleTable" layoutX="390.0" layoutY="342.0" prefHeight="317.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+                              <TableView fx:id="roleTable" layoutX="390.0" layoutY="342.0" prefHeight="317.0" prefWidth="1042.0" stylesheets="@../../CSS/tableStyle.CSS">
                                  <columns>
                                     <TableColumn fx:id="roleIDColumn" prefWidth="518.8897705078125" text="RoleID" />
-                                    <TableColumn fx:id="roleNameColumn" prefWidth="520.9364013671875" text="Role Name" />
+                                    <TableColumn fx:id="roleNameColumn" prefWidth="502.0" text="Role Name" />
                                  </columns>
                               </TableView>
                               <Button fx:id="createRoleButton" graphicTextGap="2.0" layoutY="435.0" mnemonicParsing="false" onAction="#createRole" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
@@ -139,7 +139,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab fx:id="castTab" style="-fx-background-color: #CE2431;" text="Cast">
+                  <Tab fx:id="castTab" text="Cast">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="1432.0">
                            <children>
@@ -148,25 +148,25 @@
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="actorComboBox" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an actor" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                              <ComboBox fx:id="actorComboBox" layoutY="33.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick an actor" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                               <Label layoutX="2.0" layoutY="83.0" text="Role" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="roleComboBox" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a role" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
+                              <ComboBox fx:id="roleComboBox" layoutY="116.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a role" stylesheets="@../../CSS/comboBoxStyle.CSS" />
                               <Label layoutX="2.0" layoutY="166.0" text="Movie/TV Show" textFill="WHITE">
                                  <font>
                                     <Font name="Geist Medium" size="22.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="contentComboBox" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a movie or TV show" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" />
-                              <TableView fx:id="castTable" layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+                              <ComboBox fx:id="contentComboBox" layoutY="199.0" prefHeight="40.0" prefWidth="350.0" promptText="Pick a movie or TV show" stylesheets="@../../CSS/comboBoxStyle.CSS" />
+                              <TableView fx:id="castTable" layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" stylesheets="@../../CSS/tableStyle.CSS">
                                 <columns>
                                   <TableColumn fx:id="castIDColumn" prefWidth="128.62921142578125" text="CastID" />
                                   <TableColumn fx:id="actorColumn" prefWidth="288.62530517578125" text="Actor" />
                                     <TableColumn fx:id="roleColumn" prefWidth="288.37469482421875" text="Role" />
-                                    <TableColumn fx:id="contentColumn" prefWidth="335.0013427734375" text="Movie/TV Show" />
+                                    <TableColumn fx:id="contentColumn" prefWidth="314.5" text="Movie/TV Show" />
                                 </columns>
                               </TableView>
                               <Button fx:id="createCastButton" layoutX="390.0" layoutY="619.0" mnemonicParsing="false" onAction="#createCast" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
@@ -188,7 +188,7 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab fx:id="directorTab" style="-fx-background-color: #CE2431;" text="Director">
+                  <Tab fx:id="directorTab" text="Director">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="659.0" prefWidth="1432.0">
                            <children>
@@ -202,10 +202,10 @@
                                     <Font name="Geist Regular" size="18.0" />
                                  </font>
                               </TextField>
-                              <TableView fx:id="directorTable" layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" style="-fx-background-color: #272727; -fx-background-radius: 25;">
+                              <TableView fx:id="directorTable" layoutX="390.0" prefHeight="584.0" prefWidth="1042.0" stylesheets="@../../CSS/tableStyle.CSS">
                                 <columns>
                                   <TableColumn fx:id="directorIDColumn" prefWidth="516.4096069335938" text="DirectorID" />
-                                  <TableColumn fx:id="directorNameColumn" prefWidth="522.0903930664062" text="Director Name" />
+                                  <TableColumn fx:id="directorNameColumn" prefWidth="504.5" text="Director Name" />
                                 </columns>
                               </TableView>
                               <Button fx:id="createDirectorButton" layoutX="390.0" layoutY="619.0" mnemonicParsing="false" onAction="#createDirector" prefHeight="40.0" prefWidth="325.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">

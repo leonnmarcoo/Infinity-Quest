@@ -20,7 +20,7 @@
          <children>
             <ImageView fitHeight="956.0" fitWidth="440.0">
                <image>
-                  <Image url="@../Programming/Infinity%20Quest/src/Images/Background/Background.png" />
+                  <Image url="@../../Images/Background/Background.png" />
                </image>
             </ImageView>
             <ScrollPane fx:id="contentScrollPane" hbarPolicy="NEVER" prefHeight="866.0" prefWidth="440.0" style="-fx-background-color: Transparent; -fx-background: #141414;" vbarPolicy="NEVER">
@@ -42,31 +42,31 @@
             </ScrollPane>
             <ImageView fitHeight="170.0" fitWidth="440.0">
                <image>
-                  <Image url="@../Programming/Infinity%20Quest/src/Images/Background/Top%20Bar.png" />
+                  <Image url="@../../Images/Background/Top%20Bar.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="65.0" fitWidth="440.0">
                <image>
-                  <Image url="@../Programming/Infinity%20Quest/src/Images/Background/Status%20Bar.png" />
+                  <Image url="@../../Images/Background/Status%20Bar.png" />
                </image>
             </ImageView>
-            <TextField fx:id="searchTextField" layoutX="20.0" layoutY="120.0" prefHeight="36.0" prefWidth="360.0" promptText="Search movies or TV shows" style="-fx-background-color: #272727; -fx-background-radius: 12 0 0 12; -fx-text-fill: #ffffff;">
-               <font>
-                  <Font name="Geist Regular" size="14.0" />
-               </font>
-            </TextField>
             <Button fx:id="searchButton" layoutX="380.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: #CE2431; -fx-background-radius: 0 12 12 0;">
                <font>
                   <Font name="Geist Regular" size="14.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="18.0">
+                  <ImageView fitHeight="16.0" fitWidth="16.0">
                      <image>
-                        <Image url="@../Programming/Infinity%20Quest/src/Images/Icons/Search.png" />
+                        <Image url="@../../Images/Icons/Search.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
+            <TextField fx:id="searchTextField" layoutX="20.0" layoutY="120.0" prefHeight="36.0" prefWidth="360.0" promptText="Search movies or TV shows" style="-fx-background-color: #272727; -fx-background-radius: 12 0 0 12; -fx-text-fill: #ffffff;">
+               <font>
+                  <Font name="Geist Regular" size="14.0" />
+               </font>
+            </TextField>
             <Label fx:id="filterLabel" layoutX="20.0" layoutY="73.0" text="Search" textFill="WHITE">
                <font>
                   <Font name="Geist Bold" size="30.0" />
@@ -74,7 +74,7 @@
             </Label>
             <ImageView fitHeight="90.0" fitWidth="440.0" layoutY="866.0">
                <image>
-                  <Image url="@../Programming/Infinity%20Quest/src/Images/Background/Search%20Navigation%20Bar.png" />
+                  <Image url="@../../Images/Background/Search%20Navigation%20Bar.png" />
                </image>
             </ImageView>
          </children>

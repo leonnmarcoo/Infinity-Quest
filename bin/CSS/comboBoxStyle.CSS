@@ -1,0 +1,36 @@
+.combo-box {
+    -fx-background-color: #272727;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 0.25em 0.5em;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: white;
+}
+
+.combo-box .button-cell {
+    -fx-text-fill: white;
+}
+
+.combo-box .list-view {
+    -fx-background-color: #272727;
+    -fx-background-radius: 0 0 12 12;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #272727;
+}
+
+.combo-box .list-cell:hover,
+.combo-box .list-cell:focused {
+    -fx-background-color: #343434;
+    -fx-background-radius: 8 8 8 8;
+}
+
+

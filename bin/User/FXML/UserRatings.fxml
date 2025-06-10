@@ -107,7 +107,7 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <ImageView fitHeight="130.0" fitWidth="440.0" layoutY="-41.0">
+            <ImageView fitHeight="130.0" fitWidth="440.0">
                <image>
                   <Image url="@../../Images/Background/Top%20Bar.png" />
                </image>

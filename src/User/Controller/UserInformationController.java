@@ -3,6 +3,7 @@ package User.Controller;
 import Objects.Content;
 import Objects.Director;
 import Objects.User;
+import Objects.Cast;
 import User.Session.SessionManager;
 import Database.DatabaseHandler;
 
@@ -204,6 +205,7 @@ public class UserInformationController implements Initializable{
         }
         
         displayRatingBarChart();
+        displayCastList(); // Added line to display cast list
     }
     
     private void displayRatingBarChart() {
@@ -243,6 +245,32 @@ public class UserInformationController implements Initializable{
                 Tooltip.install(node, tooltip);
             }
         }
+    }
+    
+    /**
+     * Displays the cast members for the current content in the castListView.
+     * Each row shows the actor name and their role.
+     */
+    private void displayCastList() {
+        if (content == null || castListView == null) {
+            return;
+        }
+        
+        // Clear existing items
+        castListView.getItems().clear();
+        
+        // Get cast for this content
+        List<Cast> castMembers = DatabaseHandler.getCastByContentID(content.getContentID());
+        
+        // Create formatted strings for the ListView
+        ObservableList<String> castItems = FXCollections.observableArrayList();
+        for (Cast cast : castMembers) {
+            String castEntry = cast.getActorName() + " as " + cast.getRoleName();
+            castItems.add(castEntry);
+        }
+        
+        // Set the items in the ListView
+        castListView.setItems(castItems);
     }
     
     @FXML

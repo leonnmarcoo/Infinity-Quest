@@ -40,7 +40,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label fx:id="usernameLabel" layoutX="181.0" layoutY="280.0" text="Username" textFill="WHITE">
+                        <Label fx:id="usernameLabel" layoutX="181.0" layoutY="280.0" text="Username" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Geist SemiBold" size="16.0" />
                            </font>

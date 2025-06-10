@@ -1,0 +1,64 @@
+.table-view {
+    -fx-background-color: #272727;
+    -fx-control-inner-background: #272727;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 16;
+    -fx-padding: 5;
+    -fx-text-fill: white;
+    -fx-border-radius: 16;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #CE2431;
+    -fx-background-radius: 11 11 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-size: 38px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #343434;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #272727;
+}
+
+.table-row-cell {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #444;
+    -fx-background-radius: 8;
+}
