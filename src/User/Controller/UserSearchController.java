@@ -75,6 +75,12 @@ public class UserSearchController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+    
+    public void restoreSearchState(String searchTerm) {
+        searchTextField.setText(searchTerm);
+        List<Content> searchResults = DatabaseHandler.searchContent(searchTerm);
+        displaySearchResults(searchResults);
+    }
 
     @FXML
     private void profileButtonHandler(ActionEvent event) {
@@ -201,6 +207,13 @@ public class UserSearchController implements Initializable {
             
             UserInformationController controller = loader.getController();
             controller.setContent(content);
+            controller.setPreviousFXMLPath("/User/FXML/UserSearch.fxml");
+            
+            // Pass the current search term to preserve state
+            String currentSearchTerm = searchTextField.getText().trim();
+            if (!currentSearchTerm.isEmpty()) {
+                controller.setSearchTerm(currentSearchTerm);
+            }
             
             Stage stage = (Stage) contentGridPane.getScene().getWindow();
             Scene scene = new Scene(root);

@@ -379,6 +379,7 @@ public class UserHomeController implements Initializable {
             UserInformationController controller = loader.getController();
             controller.setContent(content);
             controller.setUsername(username);
+            controller.setPreviousFXMLPath("/User/FXML/UserHome.fxml");
             
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
             stage.setUserData(username);

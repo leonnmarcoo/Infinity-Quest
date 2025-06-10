@@ -155,6 +155,7 @@ public class UserProfileController {
             Parent root = loader.load();
             UserInformationController controller = loader.getController();
             controller.setContent(content);
+            controller.setPreviousFXMLPath("/User/FXML/UserProfile.fxml");
             Stage stage = (Stage) recentActivityHBox.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

@@ -46,8 +46,10 @@ public class UserProfileFilterController {
     private Button homeButton;
 
     private List<Content> contentList = new ArrayList<>();
+    private String currentFilterType; // Store the current filter type
 
     public void setWatchedFilter() {
+        currentFilterType = "watched";
         filterLabel.setText("Watched");
         User user = SessionManager.getCurrentUser();
         contentList = DatabaseHandler.getWatchedContent(user.getUserID());
@@ -55,6 +57,7 @@ public class UserProfileFilterController {
     }
 
     public void setWatchlistFilter() {
+        currentFilterType = "watchlist";
         filterLabel.setText("Watchlist");
         User user = SessionManager.getCurrentUser();
         contentList = DatabaseHandler.getWatchlistContent(user.getUserID());
@@ -62,6 +65,7 @@ public class UserProfileFilterController {
     }
 
     public void setLikesFilter() {
+        currentFilterType = "likes";
         filterLabel.setText("Likes");
         User user = SessionManager.getCurrentUser();
         contentList = DatabaseHandler.getLikedContent(user.getUserID());
@@ -69,6 +73,7 @@ public class UserProfileFilterController {
     }
 
     public void setDislikesFilter() {
+        currentFilterType = "dislikes";
         filterLabel.setText("Dislikes");
         User user = SessionManager.getCurrentUser();
         contentList = DatabaseHandler.getDislikedContent(user.getUserID());
@@ -129,6 +134,8 @@ public class UserProfileFilterController {
 
             UserInformationController controller = loader.getController();
             controller.setContent(content);
+            controller.setPreviousFXMLPath("/User/FXML/UserProfileFilter.fxml");
+            controller.setFilterType(currentFilterType);
 
             javafx.stage.Stage stage = (javafx.stage.Stage) filterLabel.getScene().getWindow();
             javafx.scene.Scene scene = new javafx.scene.Scene(root);

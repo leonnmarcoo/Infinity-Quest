@@ -127,6 +127,12 @@ public class UserInformationController implements Initializable{
     private Scene scene;
     private Parent root;
     private String username;
+    private String previousFXMLPath;
+    private String searchTerm; // For preserving search state
+    private String filterType; // For preserving filter state
+    private String filterTitle; // For UserFilterController
+    private Integer phaseNumber; // For UserFilterController  
+    private String sortType; // For UserFilterController
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -139,6 +145,24 @@ public class UserInformationController implements Initializable{
     
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public void setPreviousFXMLPath(String previousFXMLPath) {
+        this.previousFXMLPath = previousFXMLPath;
+    }
+    
+    public void setSearchTerm(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
+    
+    public void setFilterType(String filterType) {
+        this.filterType = filterType;
+    }
+    
+    public void setFilterData(String filterTitle, Integer phaseNumber, String sortType) {
+        this.filterTitle = filterTitle;
+        this.phaseNumber = phaseNumber;
+        this.sortType = sortType;
     }
     
     private void displayContentDetails() {
@@ -305,14 +329,34 @@ public class UserInformationController implements Initializable{
     @FXML
     private void backButtonHandler(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
+            // If no previous FXML path is set, default to UserHome.fxml
+            String fxmlPath = (previousFXMLPath != null && !previousFXMLPath.isEmpty()) 
+                ? previousFXMLPath 
+                : "/User/FXML/UserHome.fxml";
+                
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             root = loader.load();
             
-            // UserHomeController controller = loader.getController();
-            // controller.setUsername(((Node) event.getSource()).getScene().getWindow().getUserData().toString());
-            // controller.initializeUserHome();
-
-            // No need, ksi naka session na so pag bbalik ng user home, nsa session na ung username.
+            // Restore state based on the controller type
+            if (fxmlPath.equals("/User/FXML/UserSearch.fxml") && searchTerm != null) {
+                UserSearchController controller = loader.getController();
+                controller.restoreSearchState(searchTerm);
+            } else if (fxmlPath.equals("/User/FXML/UserFilter.fxml")) {
+                UserFilterController controller = loader.getController();
+                if (phaseNumber != null && phaseNumber > 0) {
+                    controller.setFilterData(filterTitle, phaseNumber, username);
+                } else if (sortType != null) {
+                    controller.setSortData(filterTitle, sortType, username);
+                }
+            } else if (fxmlPath.equals("/User/FXML/UserProfileFilter.fxml") && filterType != null) {
+                UserProfileFilterController controller = loader.getController();
+                switch (filterType) {
+                    case "watched": controller.setWatchedFilter(); break;
+                    case "watchlist": controller.setWatchlistFilter(); break;
+                    case "likes": controller.setLikesFilter(); break;
+                    case "dislikes": controller.setDislikesFilter(); break;
+                }
+            }
             
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -320,7 +364,7 @@ public class UserInformationController implements Initializable{
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Could not load home screen");
+            showAlert(Alert.AlertType.ERROR, "Could not load previous screen");
         }
     }
     

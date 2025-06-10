@@ -209,6 +209,10 @@ public class UserFilterController implements Initializable {
             UserInformationController controller = loader.getController();
             controller.setContent(content);
             controller.setUsername(username);
+            controller.setPreviousFXMLPath("/User/FXML/UserFilter.fxml");
+            
+            // Pass filter data to preserve state
+            controller.setFilterData(filterTitle, phaseNumber, sortType);
             
             Stage stage = (Stage) filterLabel.getScene().getWindow();
             stage.setUserData(username);
