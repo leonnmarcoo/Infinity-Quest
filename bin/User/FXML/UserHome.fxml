@@ -167,7 +167,15 @@
                   <Image url="@../../Images/Background/Home%20Navigation%20Bar.png" />
                </image>
             </ImageView>
-            <Button fx:id="userProfileButton" layoutX="327.0" layoutY="877.0" mnemonicParsing="false" onAction="#userProfileButtonHandler" prefHeight="65.0" prefWidth="67.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="profileButton" layoutX="322.0" layoutY="874.0" mnemonicParsing="false" onAction="#profileButtonHandler" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
+               <font>
+                  <Font name="Geist Regular" size="13.0" />
+               </font></Button>
+            <Button fx:id="searchButton" layoutX="185.0" layoutY="874.0" mnemonicParsing="false" onAction="#searchButtonHandler" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
+               <font>
+                  <Font name="Geist Regular" size="13.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

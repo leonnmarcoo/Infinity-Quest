@@ -120,7 +120,13 @@ public class UserHomeController implements Initializable {
     private Button timelineButton;
 
     @FXML
-    private Button userProfileButton;
+    private Button profileButton;
+
+    @FXML
+    private Button searcButton;
+
+    @FXML
+    private Button homeButton;
     
     private String username;
     private List<Content> contentList = new ArrayList<>();
@@ -556,7 +562,7 @@ public class UserHomeController implements Initializable {
     // ================================  APP NAVIGATION BUTTON HANDLER ================================
 
     @FXML
-    private void userProfileButtonHandler(ActionEvent event) {
+    private void profileButtonHandler(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfile.fxml"));
             Parent root = loader.load();
@@ -567,9 +573,40 @@ public class UserHomeController implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error loading user profile screen");
+            showAlert(Alert.AlertType.ERROR, "Error loading profile screen");
         }
     }
 
+    @FXML
+    private void searchButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserSearch.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading search screen");
+        }
+    }
+
+    @FXML
+    private void homeButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading home screen");
+        }
+    }
 
 }

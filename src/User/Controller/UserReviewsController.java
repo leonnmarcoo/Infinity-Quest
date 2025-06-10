@@ -23,6 +23,8 @@ import Objects.Content;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import java.io.File;
+import java.io.IOException;
+
 import javafx.scene.image.Image;
 
 public class UserReviewsController {
@@ -38,6 +40,15 @@ public class UserReviewsController {
 
     @FXML
     private Label reviewsLabel;
+
+    @FXML
+    private Button profileButton;
+
+    @FXML
+    private Button searcButton;
+
+    @FXML
+    private Button homeButton;
 
 
     @FXML
@@ -111,6 +122,54 @@ public class UserReviewsController {
         }
     }
 
+    @FXML
+    private void profileButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserProfile.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading profile screen");
+        }
+    }
+
+    @FXML
+    private void searchButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserSearch.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading search screen");
+        }
+    }
+
+    @FXML
+    private void homeButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading home screen");
+        }
+    }
+
     private void showAlert(Alert.AlertType type, String message) {
         Alert alert = new Alert(type);
         alert.setTitle("Infinity Quest");
@@ -118,5 +177,7 @@ public class UserReviewsController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
 
 }

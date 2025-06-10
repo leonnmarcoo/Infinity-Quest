@@ -40,7 +40,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label fx:id="usernameLabel" layoutX="20.0" layoutY="270.0" maxWidth="400.0" prefWidth="400.0" style="-fx-alignment: Center;" text="Username" textFill="WHITE">
+                        <Label fx:id="usernameLabel" layoutX="20.0" layoutY="270.0" maxWidth="400.0" prefWidth="400.0" style="-fx-alignment: CENTER; -fx-text-alignment: CENTER;" text="Username" textFill="WHITE">
                            <font>
                               <Font name="Geist SemiBold" size="16.0" />
                            </font>
@@ -231,12 +231,21 @@
                   <Font name="Geist Bold" size="30.0" />
                </font>
             </Label>
-            <ImageView fitHeight="90.0" fitWidth="440.0" layoutY="860.0">
+            <ImageView fitHeight="90.0" fitWidth="440.0" layoutY="866.0">
                <image>
                   <Image url="@../../Images/Background/Profile%20Navigation%20Bar.png" />
                </image>
             </ImageView>
-            <Button fx:id="userHomeButton" layoutX="46.0" layoutY="868.0" mnemonicParsing="false" onAction="#userHomeButtonHandler" prefHeight="65.0" prefWidth="76.0" style="-fx-background-color: TRANSPARENT;" />
+            <Button fx:id="searchButton" layoutX="185.0" layoutY="874.0" mnemonicParsing="false" onAction="#searchButtonHandler" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
+               <font>
+                  <Font name="Geist Regular" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="homeButton" layoutX="48.0" layoutY="874.0" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
+               <font>
+                  <Font name="Geist Regular" size="13.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

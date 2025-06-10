@@ -47,7 +47,10 @@ public class UserProfileController {
     private Button userDislike;
 
     @FXML
-    private Button userHomeButton;
+    private Button homeButton;
+
+    @FXML
+    private Button searchButton;
 
     @FXML
     private Button userLike;
@@ -164,7 +167,7 @@ public class UserProfileController {
 
 
     @FXML
-    private void userHomeButtonHandler(ActionEvent event) {
+    private void homeButtonHandler(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserHome.fxml"));
             Parent root = loader.load();
@@ -176,6 +179,22 @@ public class UserProfileController {
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error loading user home screen");
+        }
+    }
+
+    @FXML
+    private void searchButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserSearch.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading search screen");
         }
     }
 

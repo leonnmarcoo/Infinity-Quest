@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="956.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="User.Controller.UserSearchController">
    <children>
       <AnchorPane prefHeight="956.0" prefWidth="440.0" style="-fx-background-color: #141414;">
          <children>
@@ -77,6 +77,16 @@
                   <Image url="@../../Images/Background/Search%20Navigation%20Bar.png" />
                </image>
             </ImageView>
+            <Button fx:id="profileButton" layoutX="322.0" layoutY="876.0" mnemonicParsing="false" onAction="#profileButtonHandler" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
+               <font>
+                  <Font name="Geist Regular" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="homeButton" layoutX="48.0" layoutY="876.0" mnemonicParsing="false" onAction="#homeButtonHandler" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;">
+               <font>
+                  <Font name="Geist Regular" size="13.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
