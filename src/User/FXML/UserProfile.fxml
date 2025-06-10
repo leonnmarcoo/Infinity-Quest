@@ -23,7 +23,7 @@
             </ImageView>
             <ScrollPane hbarPolicy="NEVER" prefHeight="865.0" prefWidth="440.0" style="-fx-background-color: Transparent;" vbarPolicy="NEVER">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="949.0" prefWidth="438.0" style="-fx-background-color: #141414;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="999.0" prefWidth="438.0" style="-fx-background-color: #141414;">
                      <children>
                         <ImageView fx:id="profileImageView" fitHeight="125.0" fitWidth="125.0" layoutX="157.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="tonyDefaultPic" fitHeight="129.0" fitWidth="129.0" layoutX="155.0" layoutY="133.0">
@@ -40,12 +40,12 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label fx:id="usernameLabel" layoutX="181.0" layoutY="280.0" text="Username" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="usernameLabel" layoutX="20.0" layoutY="270.0" maxWidth="400.0" prefWidth="400.0" style="-fx-alignment: Center;" text="Username" textFill="WHITE">
                            <font>
                               <Font name="Geist SemiBold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="bioLabel" graphicTextGap="0.0" layoutX="20.0" layoutY="301.0" maxWidth="400.0" prefWidth="400.0" style="-fx-alignment: Center;" text="Bio" textAlignment="CENTER" textFill="#d4d4d4">
+                        <Label fx:id="bioLabel" graphicTextGap="0.0" layoutX="20.0" layoutY="291.0" maxWidth="400.0" prefWidth="400.0" style="-fx-alignment: Center;" text="Bio" textFill="#d4d4d4">
                            <font>
                               <Font name="Geist Regular" size="12.0" />
                            </font>
@@ -162,6 +162,21 @@
                               <ImageView fitHeight="16.0" fitWidth="14.0">
                                  <image>
                                     <Image url="@../../Images/Icons/Dislike.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="logOutButton" graphicTextGap="5.0" layoutX="20.0" layoutY="929.0" mnemonicParsing="false" onAction="#logOutButtonHandler" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #CE2431; -fx-background-radius: 12; -fx-alignment: Left;" text="Log out" textFill="WHITE">
+                           <font>
+                              <Font name="Geist SemiBold" size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets left="12.0" />
+                           </padding>
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="19.0">
+                                 <image>
+                                    <Image url="@../../Images/Icons/Log%20out.png" />
                                  </image>
                               </ImageView>
                            </graphic>

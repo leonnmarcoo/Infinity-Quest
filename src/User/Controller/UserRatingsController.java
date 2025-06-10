@@ -73,12 +73,18 @@ public class UserRatingsController {
 
     @FXML
     private ImageView twoStarButtonImage;
+    
+    @FXML
+    private Button showAllButton;
 
     private List<Object[]> allRatedContent;
     @FXML
     public void initialize() {
         loadAllRatings();
-        displayRatings(-1); // -1 means show all, how tf right?
+        // Set the "Show All" button as active initially
+        resetButtonColors();
+        showAllButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 8; -fx-text-fill: white;");
+        displayRatings(-1); // -1 means show all
     }
 
     private void loadAllRatings() {
@@ -91,6 +97,8 @@ public class UserRatingsController {
         contentGridPane.getChildren().clear();
         int col = 0, row = 0;
         int maxCols = 3;
+        
+        contentGridPane.getRowConstraints().clear();
 
         List<Object[]> filtered = (filterStar == -1)
                 ? allRatedContent
@@ -103,22 +111,24 @@ public class UserRatingsController {
             VBox box = new VBox();
             box.setSpacing(5);
 
-            // Kuha ng Poster
             if (content.getContentPoster() != null && !content.getContentPoster().isEmpty()) {
                 File file = new File(content.getContentPoster());
                 if (file.exists()) {
                     ImageView posterView = new ImageView(new Image(file.toURI().toString()));
-                    posterView.setFitHeight(120);
-                    posterView.setFitWidth(80);
+                    posterView.setFitHeight(188);
+                    posterView.setFitWidth(125);
                     posterView.setPreserveRatio(true);
                     box.getChildren().add(posterView);
                 }
             }
 
-            // for Title and Rating nmn
-            Text title = new Text(content.getContentTitle());
-            Text ratingText = new Text("Your Rating: " + rating + "★");
-            box.getChildren().addAll(title, ratingText);
+            StringBuilder stars = new StringBuilder();
+            for (int i = 0; i < rating; i++) {
+                stars.append("★");
+            }
+            Text ratingText = new Text(stars.toString());
+            ratingText.setStyle("-fx-fill: #CE2431;");
+            box.getChildren().add(ratingText);
 
             contentGridPane.add(box, col, row);
             col++;
@@ -127,20 +137,50 @@ public class UserRatingsController {
                 row++;
             }
         }
+        
+        if (filterStar == -1) {
+            filterLabel.setText("All Ratings");
+        } else {
+            filterLabel.setText(filterStar + " Star");
+        }
     }
 
     @FXML
-    private void oneStarButtonHandler() { displayRatings(1); }
+    private void oneStarButtonHandler() { 
+        resetButtonColors();
+        oneStarButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 8;");
+        displayRatings(1); 
+    }
     @FXML
-    private void twoStarButtonHandler() { displayRatings(2); }
+    private void twoStarButtonHandler() { 
+        resetButtonColors();
+        twoStarButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 8;");
+        displayRatings(2); 
+    }
     @FXML
-    private void threeStarButtonHandler() { displayRatings(3); }
+    private void threeStarButtonHandler() { 
+        resetButtonColors();
+        threeStarButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 8;");
+        displayRatings(3); 
+    }
     @FXML
-    private void fourStarButtonHandler() { displayRatings(4); }
+    private void fourStarButtonHandler() { 
+        resetButtonColors();
+        fourStarButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 8;");
+        displayRatings(4); 
+    }
     @FXML
-    private void fiveStarButtonHandler() { displayRatings(5); }
+    private void fiveStarButtonHandler() { 
+        resetButtonColors();
+        fiveStarButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 8;");
+        displayRatings(5); 
+    }
     @FXML
-    private void showAllButtonHandler() { displayRatings(-1); }
+    private void showAllButtonHandler() { 
+        resetButtonColors();
+        showAllButton.setStyle("-fx-background-color: #CE2431; -fx-background-radius: 8; -fx-text-fill: white;");
+        displayRatings(-1); 
+    }
 
     @FXML
     private void backButtonHandler(ActionEvent event) {
@@ -165,4 +205,12 @@ public class UserRatingsController {
             alert.showAndWait();
     }
 
+    private void resetButtonColors() {
+        oneStarButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 8;");
+        twoStarButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 8;");
+        threeStarButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 8;");
+        fourStarButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 8;");
+        fiveStarButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 8;");
+        showAllButton.setStyle("-fx-background-color: #343434; -fx-background-radius: 8; -fx-text-fill: white;");
+    }
 }

@@ -68,12 +68,6 @@ public class UserProfileController {
     private Label usernameLabel;
 
     @FXML
-    private Label usernameLabel1;
-
-    @FXML
-    private Label usernameLabel11;
-
-    @FXML
     private Button userEditProfileButton;
 
     @FXML
@@ -81,6 +75,9 @@ public class UserProfileController {
 
     @FXML
     private ImageView tonyDefaultPic;
+
+    @FXML
+    private Button logOutButton;
 
     @FXML
     public void initialize() {
@@ -307,6 +304,23 @@ public class UserProfileController {
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error loading edit profile screen");
+        }
+    }
+
+    @FXML
+    private void logOutButtonHandler(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/FXML/AdminLogin.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading user login screen");
         }
     }
     

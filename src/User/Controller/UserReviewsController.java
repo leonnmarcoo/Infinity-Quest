@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import Objects.Content;
@@ -23,7 +24,6 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import java.io.File;
 import javafx.scene.image.Image;
-import javafx.scene.text.Text;
 
 public class UserReviewsController {
 
@@ -45,44 +45,46 @@ public class UserReviewsController {
         loadUserReviews();
     }
 
-private void loadUserReviews() {
-    contentVBox.getChildren().clear();
-    User user = SessionManager.getCurrentUser();
-    if (user == null) {
-        showAlert(Alert.AlertType.ERROR, "No user session found.");
-        return;
-    }
+    private void loadUserReviews() {
+        contentVBox.getChildren().clear();
+        User user = SessionManager.getCurrentUser();
+        if (user == null) {
+            showAlert(Alert.AlertType.ERROR, "No user session found.");
+            return;
+        }
 
-    // Use the new method that returns List<Object[]> with Content and reviewText
     List<Object[]> reviewed = DatabaseHandler.getReviewedContentAndText(user.getUserID());
     for (Object[] arr : reviewed) {
         Content content = (Content) arr[0];
-        String reviewTextStr = (String) arr[1];
-        System.out.println(content.getContentTitle() + ": " + reviewTextStr);
+        String reviewsLabelStr = (String) arr[1];
 
         HBox reviewBox = new HBox();
         reviewBox.setSpacing(10);
 
-        // Poster
         if (content.getContentPoster() != null && !content.getContentPoster().isEmpty()) {
             File file = new File(content.getContentPoster());
             if (file.exists()) {
                 ImageView posterView = new ImageView(new Image(file.toURI().toString()));
-                posterView.setFitHeight(320);
-                posterView.setFitWidth(86);
+                posterView.setFitHeight(188);
+                posterView.setFitWidth(125);
                 posterView.setPreserveRatio(true);
                 reviewBox.getChildren().add(posterView);
             }
         }
 
-        // Title and Review Text
         VBox textBox = new VBox();
         textBox.setSpacing(5);
         Label titleLabel = new Label(content.getContentTitle());
-        titleLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
-        Text reviewText = new Text(reviewTextStr);
-        reviewText.setStyle("-fx-fill: white;");
-        textBox.getChildren().addAll(titleLabel, reviewText);
+        titleLabel.setStyle("-fx-font-weight: Bold; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-family: 'Geist';");
+        titleLabel.setMaxWidth(260);
+        titleLabel.setWrapText(true);
+        Label reviewsLabel = new Label(reviewsLabelStr);
+        reviewsLabel.setStyle("-fx-text-fill: #D4D4D4; -fx-font-size: 12px;");
+        reviewsLabel.setFont(Font.font("Geist Regular", 12));
+        reviewsLabel.setMaxWidth(260);
+        reviewsLabel.setMaxHeight(135);
+        reviewsLabel.setWrapText(true);
+        textBox.getChildren().addAll(titleLabel, reviewsLabel);
 
         reviewBox.getChildren().add(textBox);
         contentVBox.getChildren().add(reviewBox);
