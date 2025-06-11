@@ -123,6 +123,9 @@ public class AdminUserController implements Initializable {
     @FXML
     private TextField profilePictureTextField;
 
+    @FXML
+    private TableColumn<User, String> profilePictureColumn;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -136,9 +139,11 @@ public class AdminUserController implements Initializable {
         passwordColumn.setCellValueFactory(new PropertyValueFactory<>("userPassword"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("userEmail"));
         bioColumn.setCellValueFactory(new PropertyValueFactory<>("userBio"));
+        profilePictureColumn.setCellValueFactory(new PropertyValueFactory<>("userProfile"));
 
         userTable.setEditable(true);
         usernameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
         passwordColumn.setCellFactory(column -> {
             TextFieldTableCell<User, String> cell = new TextFieldTableCell<>(new javafx.util.converter.DefaultStringConverter()) {
                 @Override
@@ -157,6 +162,7 @@ public class AdminUserController implements Initializable {
             };
             return cell;
         });
+
         emailColumn.setCellFactory(column -> {
             TextFieldTableCell<User, String> cell = new TextFieldTableCell<>(new javafx.util.converter.DefaultStringConverter()) {
                 @Override
@@ -195,6 +201,27 @@ public class AdminUserController implements Initializable {
             return cell;
         });
 
+
+        profilePictureColumn.setCellFactory(column -> {
+            TextFieldTableCell<User, String> cell = new TextFieldTableCell<>(new javafx.util.converter.DefaultStringConverter()) {
+                @Override
+                public void startEdit() {
+                    super.startEdit();
+                    if (isEditing() && getGraphic() instanceof TextField) {
+                        TextField editor = (TextField) getGraphic();
+                        editor.textProperty().addListener((obs, oldVal, newVal) -> {
+                            User user = getTableView().getItems().get(getIndex());
+                            if (selectedUser != null && user.getUserID() == selectedUser.getUserID()) {
+                                profilePictureTextField.setText(newVal);
+                            }
+                        });
+                    }
+                }
+            };
+            return cell;
+        });
+
+
         // Handle selection - update the class field!
         userTable.setOnMouseClicked(event -> {
             selectedUser = userTable.getSelectionModel().getSelectedItem();
@@ -203,7 +230,16 @@ public class AdminUserController implements Initializable {
                 passwordTextField.setText(selectedUser.getUserPassword());
                 emailTextField.setText(selectedUser.getUserEmail());
                 bioTextField.setText(selectedUser.getUserBio());
+                profilePictureTextField.setText(selectedUser.getUserProfile());
             }
+        });
+
+        usernameColumn.setOnEditCommit(event -> {
+            User user = event.getRowValue();
+            user.setUserName(event.getNewValue());
+            DatabaseHandler.updateUser(user);
+            usernameTextField.setText(event.getNewValue());
+            displayUsers();
         });
 
         // Sync edited values to DB and text fields
@@ -228,6 +264,14 @@ public class AdminUserController implements Initializable {
             user.setUserBio(event.getNewValue());
             DatabaseHandler.updateUser(user);
             bioTextField.setText(event.getNewValue());
+            displayUsers();
+        });
+
+        profilePictureColumn.setOnEditCommit(event -> {
+            User user = event.getRowValue();
+            user.setUserProfile(event.getNewValue());
+            DatabaseHandler.updateUser(user);
+            profilePictureTextField.setText(event.getNewValue());
             displayUsers();
         });
     }
@@ -258,6 +302,7 @@ public class AdminUserController implements Initializable {
         passwordTextField.clear();
         emailTextField.clear();
         bioTextField.clear();
+        profilePictureTextField.clear();
         selectedUser = null;
         updateButton.setDisable(true);
     }
@@ -276,8 +321,9 @@ public class AdminUserController implements Initializable {
         String password = passwordTextField.getText();
         String email = emailTextField.getText();
         String bio = bioTextField.getText();
+        String profile = profilePictureTextField.getText();
 
-        User user = new User(0, username, password, email, bio,"");
+        User user = new User(0, username, password, email, bio, profile);
 
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || bio.isEmpty()) {
             showAlert(AlertType.ERROR, "Error", "Please fill in all fields");
@@ -311,11 +357,11 @@ public class AdminUserController implements Initializable {
     private void updateUser(ActionEvent event) {
         if (selectedUser != null) {
             // Update selectedUser with text field values
+            selectedUser.setUserName(usernameTextField.getText());
             selectedUser.setUserPassword(passwordTextField.getText());
             selectedUser.setUserEmail(emailTextField.getText());
             selectedUser.setUserBio(bioTextField.getText());
-            // If you want to allow username editing, uncomment the next line:
-            // selectedUser.setUserName(usernameTextField.getText());
+            selectedUser.setUserProfile(profilePictureTextField.getText());
 
             if (DatabaseHandler.updateUser(selectedUser)) {
                 showAlert(Alert.AlertType.INFORMATION, "User Updated", "User information updated successfully.");

@@ -24,4 +24,8 @@ public class Actor {
     public String toString() {
         return actorName.get();
     }
+
+    public void setActorName(String actorName) {
+        this.actorName.set(actorName);
+}
 }

@@ -24,4 +24,8 @@ public class Role {
     public String toString() {
         return roleName.get();
     }
+
+    public void setRoleName(String roleName) {
+        this.roleName.set(roleName);
+    }
 }
