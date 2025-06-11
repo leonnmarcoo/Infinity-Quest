@@ -18,7 +18,7 @@ public class User {
     private List<String> watchlist;
     private List<String> reviews;
 
-        public User(int userId,String userName, String userPassword, String userEmail, String userBio, String userProfile) {
+    public User(int userId,String userName, String userPassword, String userEmail, String userBio, String userProfile) {
         this.userID = new SimpleIntegerProperty(userId);
         this.userName = new SimpleStringProperty(userName);
         this.userPassword = new SimpleStringProperty(userPassword);
@@ -50,6 +50,8 @@ public class User {
     public String getUserProfile() {
         return userProfile.get();
     }
+
+    public void setUserName(String userName) { this.userName.set(userName); }
 
     public void setUserPassword(String password) { this.userPassword.set(password); }
 

@@ -160,11 +160,12 @@ public class DatabaseHandler {
 
     public static boolean createUser(User user) {
         try {
-            pstatement = getDBConnection().prepareStatement("INSERT INTO User (userName, userPassword, userEmail, userBio) VALUES (?, ?, ?, ?)");
+            pstatement = getDBConnection().prepareStatement("INSERT INTO User (userName, userPassword, userEmail, userBio, userProfile) VALUES (?, ?, ?, ?, ?,)");
             pstatement.setString(1, user.getUserName());
             pstatement.setString(2, user.getUserPassword());
             pstatement.setString(3, user.getUserEmail());
             pstatement.setString(4, user.getUserBio());
+            pstatement.setString(5, user.getUserProfile());
             return pstatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -188,14 +189,15 @@ public class DatabaseHandler {
     }
 
     public static boolean updateUser(User user) {
-        String sql = "UPDATE User SET userPassword=?, userEmail=?, userBio=?, userProfile=? WHERE userID=?";
+        String sql = "UPDATE User SET userPassword=?, userEmail=?, userBio=?, userProfile=?, userName=? WHERE userID=?";
         try (Connection conn = getDBConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getUserPassword());
             stmt.setString(2, user.getUserEmail());
             stmt.setString(3, user.getUserBio());
             stmt.setString(4, user.getUserProfile());
-            stmt.setInt(5, user.getUserID());
+            stmt.setString(5, user.getUserName());
+            stmt.setInt(6, user.getUserID());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -382,22 +384,21 @@ public static ResultSet getAllDirectors() {
         return false;
     }
 
-    // public static boolean updateActor(Actor actor) {
-    //     try {
-    //         pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
-    //         pstatement.setString(1, admin.getAdminName());
-    //         pstatement.setString(2, admin.getAdminPassword());
-    //         pstatement.setInt(3, admin.getAdminID());
+    public static boolean updateActor(Actor actor) {
+        try {
+            pstatement = getDBConnection().prepareStatement("UPDATE Actor SET actorName = ? WHERE actorID = ?");
+            pstatement.setString(1, actor.getActorName());
+            pstatement.setInt(2, actor.getActorID());
 
-    //         int res = pstatement.executeUpdate();
-    //         if (res > 0) {
-    //             return true;
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return false;
-    // }
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     // ============================ CRUD ROLE ===============================
 
@@ -441,22 +442,21 @@ public static ResultSet getAllDirectors() {
         return false;
     }
 
-    // public static boolean updateRole(Role role) {
-    //     try {
-    //         pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
-    //         pstatement.setString(1, admin.getAdminName());
-    //         pstatement.setString(2, admin.getAdminPassword());
-    //         pstatement.setInt(3, admin.getAdminID());
+    public static boolean updateRole(Role role) {
+        try {
+            pstatement = getDBConnection().prepareStatement("UPDATE Role SET roleName = ? WHERE roleID = ?");
+            pstatement.setString(1, role.getRoleName());
+            pstatement.setInt(2, role.getRoleID());
 
-    //         int res = pstatement.executeUpdate();
-    //         if (res > 0) {
-    //             return true;
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return false;
-    // }
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 // ============================ CRUD CAST ===============================
 
@@ -513,6 +513,26 @@ public static ResultSet getAllDirectors() {
         return false;
     }
 
+    public static boolean updateCast(Cast cast) {
+        try {
+            pstatement = getDBConnection().prepareStatement(
+                "UPDATE Cast SET actorID = ?, roleID = ?, contentID = ? WHERE castID = ?");
+            pstatement.setInt(1, cast.getActorID());
+            pstatement.setInt(2, cast.getRoleID());
+            pstatement.setInt(3, cast.getContentID());
+            pstatement.setInt(4, cast.getCastID());
+
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }   
+
+
 // ============================ CRUD DIRECTOR ===============================
 
     public static ResultSet getDirector() {
@@ -555,22 +575,21 @@ public static ResultSet getAllDirectors() {
         return false;
     }
 
-    // public static boolean updateDirector(Director director) {
-    //     try {
-    //         pstatement = getDBConnection().prepareStatement("UPDATE Admin SET adminName = ?, adminPassword = ? WHERE adminID = ?");
-    //         pstatement.setString(1, admin.getAdminName());
-    //         pstatement.setString(2, admin.getAdminPassword());
-    //         pstatement.setInt(3, admin.getAdminID());
+    public static boolean updateDirector(Director director) {
+        try {
+            pstatement = getDBConnection().prepareStatement("UPDATE Director SET directorName = ? WHERE directorID = ?");
+            pstatement.setString(1, director.getDirectorName());
+            pstatement.setInt(2, director.getDirectorID());
 
-    //         int res = pstatement.executeUpdate();
-    //         if (res > 0) {
-    //             return true;
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    //     return false;
-    // }
+            int res = pstatement.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 // ============================ VALIDATE USER-LOGIN ===============================
 

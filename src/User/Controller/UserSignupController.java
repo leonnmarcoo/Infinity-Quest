@@ -79,8 +79,9 @@ public class UserSignupController {
         String email = emailTextField.getText();
         String password = passwordPasswordField.getText();
         String bio = bioTextField.getText();
+        String profilePicture = profilePictureTextField.getText();
 
-        User user = new User(0, username, password, email, bio, "");
+        User user = new User(0, username, password, email, bio, profilePicture);
 
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || bio.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);

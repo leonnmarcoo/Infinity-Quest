@@ -2,6 +2,7 @@ package Admin.Controller;
 
 import Objects.Actor;
 import Objects.Role;
+import Objects.User;
 import Objects.Cast;
 import Objects.Director;
 import Objects.Content;
@@ -44,10 +45,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.naming.spi.DirStateFactory;
-import javax.xml.transform.Templates;
-
-import com.mysql.cj.xdevapi.Table;
 
 public class AdminCastController implements Initializable {
 
@@ -201,6 +198,10 @@ public class AdminCastController implements Initializable {
     @FXML
     private Button backButton;
 
+    private Actor selectedActor = null;
+    private Role selectedRole = null;
+    private Cast selectedCast = null;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -221,7 +222,59 @@ public class AdminCastController implements Initializable {
         loadContents();
         loadCasts();
         bindComboBoxes();
-    }
+
+        actorTable.setOnMouseClicked(event -> {
+            selectedActor = actorTable.getSelectionModel().getSelectedItem();
+            if (selectedActor != null) {
+                actorTextField.setText(selectedActor.getActorName());
+            }
+        });
+
+        roleTable.setOnMouseClicked(event -> {
+            selectedRole = roleTable.getSelectionModel().getSelectedItem();
+            if (selectedRole != null) {
+                roleTextField.setText(selectedRole.getRoleName());
+            }
+        });
+
+
+        castTable.setOnMouseClicked(event -> {
+            selectedCast = castTable.getSelectionModel().getSelectedItem();
+            if (selectedCast != null) {
+                for (Actor actor : actorComboBox.getItems()) {
+                    if (actor.getActorID() == selectedCast.getActorID()) {
+                        actorComboBox.setValue(actor);
+                        break;
+                    }
+                }
+                for (Role role : roleComboBox.getItems()) {
+                    if (role.getRoleID() == selectedCast.getRoleID()) {
+                        roleComboBox.setValue(role);
+                        break;
+                    }
+                }
+                for (Content content : contentComboBox.getItems()) {
+                    if (content.getContentID() == selectedCast.getContentID()) {
+                        contentComboBox.setValue(content);
+                        break;
+                    }
+                }
+            }
+        });
+
+        directorTable.setOnMouseClicked(event -> {
+            Director selectedDirector = directorTable.getSelectionModel().getSelectedItem();
+            if (selectedDirector != null) {
+                directorTextField.setText(selectedDirector.getDirectorName());
+            }
+        });
+
+        actorTable.setEditable(true);
+
+
+
+
+ }
 
     private void initializeActorColumn() {
         actorIDColumn.setCellValueFactory(new PropertyValueFactory<>("actorID"));
@@ -253,6 +306,19 @@ public class AdminCastController implements Initializable {
         roleComboBox.setItems(roleList);
         contentComboBox.setItems(contentList);
     }
+
+    private void clearForm() {
+        actorTextField.clear();
+        roleTextField.clear();
+        directorTextField.clear();
+        selectedActor = null;
+        selectedRole = null;
+        selectedCast = null;
+        actorComboBox.setValue(null);
+        roleComboBox.setValue(null);       
+        contentComboBox.setValue(null);
+    }
+
 
 // ============================ ACTOR ===============================
 
@@ -297,6 +363,7 @@ public class AdminCastController implements Initializable {
             alert.showAndWait();
         }
         displayActor();
+        clearForm();
     }
 
     @FXML
@@ -320,6 +387,48 @@ public class AdminCastController implements Initializable {
             alert.showAndWait();
         }
         displayActor();
+        clearForm();
+    }
+
+    @FXML
+    private void updateActor (ActionEvent event) {
+
+        Actor actor = actorTable.getSelectionModel().getSelectedItem();
+
+        if (actor != null) {
+            String newActorName = actorTextField.getText().trim();
+            if (!newActorName.isEmpty()) {
+                actor.setActorName(newActorName);
+                if (DatabaseHandler.updateActor(actor)) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Actor updated successfully!");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Failed to update actor");
+                    alert.showAndWait();
+                }
+                displayActor();
+            } else {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Actor name cannot be empty");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No actor selected for update");
+            alert.showAndWait();
+        }
+
+        clearForm();
     }
 
 // ============================ ROLE ===============================
@@ -365,6 +474,7 @@ public class AdminCastController implements Initializable {
             alert.showAndWait();
         }
         displayRole();
+        clearForm();
     }
 
     @FXML
@@ -388,6 +498,46 @@ public class AdminCastController implements Initializable {
             alert.showAndWait();
         }
         displayRole();
+        clearForm();
+    }
+
+    @FXML
+    private void updateRole (ActionEvent event) {
+        Role role = roleTable.getSelectionModel().getSelectedItem();
+        if (role != null) {
+            String newRoleName = roleTextField.getText().trim();
+            if (!newRoleName.isEmpty()) {
+                role.setRoleName(newRoleName);
+                if (DatabaseHandler.updateRole(role)) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Role updated successfully!");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Failed to update role");
+                    alert.showAndWait();
+                }
+                displayRole();
+            } else {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Role name cannot be empty");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No role selected for update");
+            alert.showAndWait();
+        }
+
+        clearForm();
     }
 
 // ============================ CAST ===============================
@@ -463,6 +613,8 @@ public class AdminCastController implements Initializable {
         } else {
             showAlert(Alert.AlertType.ERROR, "Failed to add cast");
         }
+
+        clearForm();
     }
 
     @FXML
@@ -481,6 +633,8 @@ public class AdminCastController implements Initializable {
         } else {
             showAlert(Alert.AlertType.ERROR, "Failed to update cast");
         }
+
+        clearForm();
     }
 
     @FXML
@@ -496,6 +650,8 @@ public class AdminCastController implements Initializable {
         } else {
             showAlert(Alert.AlertType.ERROR, "Failed to delete cast");
         }
+
+        clearForm();
     }
 
     private void showAlert(Alert.AlertType type, String msg) {
@@ -503,6 +659,47 @@ public class AdminCastController implements Initializable {
         alert.setContentText(msg);
         alert.showAndWait();
     }
+
+    // @FXML
+    // private void updateCast(ActionEvent event) {
+    //     Cast selected = castTable.getSelectionModel().getSelectedItem();
+    //     if (selected != null) {
+    //         Actor actor = actorComboBox.getValue();
+    //         Role role = roleComboBox.getValue();
+    //         Content content = contentComboBox.getValue();
+    //         if (actor != null && role != null && content != null) {
+    //             selected.setActorName(actor.getActorName());
+    //             selected.setRoleName(role.getRoleName());
+    //             selected.setContentTitle(content.getContentTitle());
+    //             if (DatabaseHandler.updateCast(selected)) {
+    //                 Alert alert = new Alert(AlertType.INFORMATION);
+    //                 alert.setTitle("Success");
+    //                 alert.setHeaderText(null);
+    //                 alert.setContentText("Cast updated successfully!");
+    //                 alert.showAndWait();
+    //             } else {
+    //                 Alert alert = new Alert(AlertType.ERROR);
+    //                 alert.setTitle("Error");
+    //                 alert.setHeaderText(null);
+    //                 alert.setContentText("Failed to update cast");
+    //                 alert.showAndWait();
+    //             }
+    //             loadCasts();
+    //         } else {
+    //             Alert alert = new Alert(AlertType.WARNING);
+    //             alert.setTitle("Warning");
+    //             alert.setHeaderText(null);
+    //             alert.setContentText("Please select an actor, role, and content");
+    //             alert.showAndWait();
+    //         }
+    //     } else {
+    //         Alert alert = new Alert(AlertType.ERROR);
+    //         alert.setTitle("Error");
+    //         alert.setHeaderText(null);
+    //         alert.setContentText("No cast selected for update");
+    //         alert.showAndWait();
+    //     }
+    // }
 
 // ============================ DIRECTOR ===============================
 
@@ -547,6 +744,7 @@ public class AdminCastController implements Initializable {
             alert.showAndWait();
         }
         displayDirector();
+        clearForm();
     }
 
     @FXML
@@ -570,6 +768,47 @@ public class AdminCastController implements Initializable {
             alert.showAndWait();
         }
         displayDirector();
+        clearForm();
+    }
+
+    @FXML 
+    private void updateDirector (ActionEvent event) {
+
+        Director director = directorTable.getSelectionModel().getSelectedItem();
+
+        if (director != null) {
+            String newDirectorName = directorTextField.getText().trim();
+            if (!newDirectorName.isEmpty()) {
+                director.setDirectorName(newDirectorName);
+                if (DatabaseHandler.updateDirector(director)) {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Director updated successfully!");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Failed to update director");
+                    alert.showAndWait();
+                }
+                displayDirector();
+            } else {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Director name cannot be empty");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No director selected for update");
+            alert.showAndWait();
+        }
+        clearForm();
     }
 
 // === NAVIGATION =====================================================================================

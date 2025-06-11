@@ -24,4 +24,8 @@ public class Director {
     public String toString() {
         return directorName.get();
     }
+
+    public void setDirectorName(String directorName) {
+        this.directorName.set(directorName);
+    }
 }
