@@ -24,7 +24,7 @@
                   <Image url="@../../Images/Background/Background.png" />
                </image>
             </ImageView>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="865.0" prefWidth="440.0" style="-fx-background-color: Transparent;" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="865.0" prefWidth="442.0" style="-fx-background-color: Transparent;" vbarPolicy="NEVER">
                <content>
                   <VBox prefWidth="438.0" spacing="30.0" style="-fx-background-color: #141414;">
                      <children>

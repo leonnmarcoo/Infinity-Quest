@@ -83,42 +83,42 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Label layoutX="42.0" layoutY="470.0" text="Admin Data" textFill="#ce2431">
+            <Label layoutX="42.0" layoutY="470.0" text="Admin Data" textFill="#ce2431" visible="false">
                <font>
                   <Font name="Geist Bold" size="32.0" />
                </font>
             </Label>
-            <Label fx:id="usernameLabel" layoutX="44.0" layoutY="523.0" text="Username" textFill="WHITE">
+            <Label fx:id="usernameLabel" layoutX="44.0" layoutY="523.0" text="Username" textFill="WHITE" visible="false">
                <font>
                   <Font name="Geist Medium" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField" layoutX="42.0" layoutY="556.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
+            <TextField fx:id="usernameTextField" layoutX="42.0" layoutY="556.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your username" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" visible="false">
                <font>
                   <Font name="Geist Regular" size="18.0" />
                </font>
             </TextField>
-            <Label fx:id="passwordLabel" layoutX="44.0" layoutY="606.0" text="Password" textFill="WHITE">
+            <Label fx:id="passwordLabel" layoutX="44.0" layoutY="606.0" text="Password" textFill="WHITE" visible="false">
                <font>
                   <Font name="Geist Medium" size="22.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordPasswordField" layoutX="42.0" layoutY="639.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;">
+            <PasswordField fx:id="passwordPasswordField" layoutX="42.0" layoutY="639.0" prefHeight="40.0" prefWidth="350.0" promptText="Enter your password" style="-fx-background-color: #272727; -fx-background-radius: 12; -fx-text-fill: #ffffff;" visible="false">
                <font>
                   <Font name="Geist Regular" size="18.0" />
                </font>
             </PasswordField>
-            <Button fx:id="createButton" graphicTextGap="2.0" layoutX="42.0" layoutY="704.0" mnemonicParsing="false" onAction="#createAdmin" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE">
+            <Button fx:id="createButton" graphicTextGap="2.0" layoutX="42.0" layoutY="704.0" mnemonicParsing="false" onAction="#createAdmin" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="CREATE" textFill="WHITE" visible="false">
                <font>
                   <Font name="Geist Black" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="updateButton" graphicTextGap="2.0" layoutX="162.0" layoutY="704.0" mnemonicParsing="false" onAction="#updateAdmin" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE">
+            <Button fx:id="updateButton" graphicTextGap="2.0" layoutX="162.0" layoutY="704.0" mnemonicParsing="false" onAction="#updateAdmin" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="UPDATE" textFill="WHITE" visible="false">
                <font>
                   <Font name="Geist Black" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="deleteButton" graphicTextGap="2.0" layoutX="282.0" layoutY="704.0" mnemonicParsing="false" onAction="#deleteAdmin" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE">
+            <Button fx:id="deleteButton" graphicTextGap="2.0" layoutX="282.0" layoutY="704.0" mnemonicParsing="false" onAction="#deleteAdmin" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #CE2431; -fx-background-radius: 100;" text="DELETE" textFill="WHITE" visible="false">
                <font>
                   <Font name="Geist Black" size="14.0" />
                </font>
@@ -135,7 +135,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TableView fx:id="adminTable" editable="true" layoutX="432.0" layoutY="470.0" prefHeight="472.0" prefWidth="1029.0" stylesheets="@../../CSS/tableStyle.CSS">
+            <TableView fx:id="adminTable" editable="true" layoutX="432.0" layoutY="470.0" prefHeight="472.0" prefWidth="1029.0" stylesheets="@../../CSS/tableStyle.CSS" visible="false">
               <columns>
                 <TableColumn fx:id="adminIDColumn" prefWidth="330.433349609375" text="Admin ID" />
                 <TableColumn fx:id="adminNameColumn" minWidth="0.0" prefWidth="696.0" text="Admin Username" />

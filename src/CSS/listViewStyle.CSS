@@ -14,6 +14,7 @@
 
 .list-view .list-cell:odd {
     -fx-background-color: #272727;
+    -fx-background-radius: 10;
 }
 
 .list-view .list-cell:even {
