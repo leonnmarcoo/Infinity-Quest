@@ -70,6 +70,7 @@ public class UserSignupController {
         passwordPasswordField.clear();
         emailTextField.clear();
         bioTextField.clear();
+        profilePictureTextField.clear();
         selectedUser = null;
     }    
 
@@ -83,7 +84,7 @@ public class UserSignupController {
 
         User user = new User(0, username, password, email, bio, profilePicture);
 
-        if (username.isEmpty() || password.isEmpty() || email.isEmpty() || bio.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty() || email.isEmpty() || bio.isEmpty())  {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Please fill in all fields");

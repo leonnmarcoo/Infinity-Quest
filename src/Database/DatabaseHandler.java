@@ -160,12 +160,13 @@ public class DatabaseHandler {
 
     public static boolean createUser(User user) {
         try {
-            pstatement = getDBConnection().prepareStatement("INSERT INTO User (userName, userPassword, userEmail, userBio, userProfile) VALUES (?, ?, ?, ?, ?,)");
+            pstatement = getDBConnection().prepareStatement("INSERT INTO User (userName, userPassword, userEmail, userBio, userProfile) VALUES (?, ?, ?, ?, ?)");
             pstatement.setString(1, user.getUserName());
             pstatement.setString(2, user.getUserPassword());
             pstatement.setString(3, user.getUserEmail());
             pstatement.setString(4, user.getUserBio());
             pstatement.setString(5, user.getUserProfile());
+
             return pstatement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
