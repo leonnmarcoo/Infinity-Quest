@@ -32,7 +32,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,7 +42,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -300,75 +298,33 @@ public class UserInformationController implements Initializable{
         
         castListView.setItems(castItems);
     }
-
+    
     private void displayReviewList() {
         if (content == null || reviewListView == null) {
             return;
         }
         
         reviewListView.getItems().clear();
+        
         List<Object[]> reviews = DatabaseHandler.getReviewsByContentID(content.getContentID());
+        
         ObservableList<String> reviewItems = FXCollections.observableArrayList();
         for (Object[] review : reviews) {
-            String userName   = (String) review[0];
+            String userName = (String) review[0];
             String reviewText = (String) review[1];
-            reviewItems.add(userName + ":\n\n" + reviewText);
+            
+            String reviewEntry = userName + ":\n\n" + reviewText;
+            reviewItems.add(reviewEntry);
         }
+        
+        reviewListView.setItems(reviewItems);
+        
+        // If there are no reviews, show a message
         if (reviews.isEmpty()) {
             reviewItems.add("No reviews yet for this content.");
+            reviewListView.setItems(reviewItems);
         }
-        reviewListView.setItems(reviewItems);
-
-        reviewListView.setCellFactory(lv -> {
-            ListCell<String> cell = new ListCell<>() {
-                private final Label label = new Label();
-                {
-                    label.setWrapText(true);
-                    label.setPadding(new Insets(4));
-                    label.maxWidthProperty().bind(lv.widthProperty().subtract(42)); 
-                }
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setGraphic(null);
-                    } else {
-                        label.setText(item);
-                        label.setMinHeight(Label.USE_PREF_SIZE);
-                        setGraphic(label);
-                    }
-                }
-            };
-            return cell;
-        });
     }
-    
-    // private void displayReviewList() {
-    //     if (content == null || reviewListView == null) {
-    //         return;
-    //     }
-        
-    //     reviewListView.getItems().clear();
-        
-    //     List<Object[]> reviews = DatabaseHandler.getReviewsByContentID(content.getContentID());
-        
-    //     ObservableList<String> reviewItems = FXCollections.observableArrayList();
-    //     for (Object[] review : reviews) {
-    //         String userName = (String) review[0];
-    //         String reviewText = (String) review[1];
-            
-    //         String reviewEntry = userName + ":\n\n" + reviewText;
-    //         reviewItems.add(reviewEntry);
-    //     }
-        
-    //     reviewListView.setItems(reviewItems);
-        
-    //     // If there are no reviews, show a message
-    //     if (reviews.isEmpty()) {
-    //         reviewItems.add("No reviews yet for this content.");
-    //         reviewListView.setItems(reviewItems);
-    //     }
-    // }
     
     @FXML
     private void backButtonHandler(ActionEvent event) {
