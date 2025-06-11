@@ -83,14 +83,25 @@ public class UserLoginController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    } else {
+    }
+
+    User user = DatabaseHandler.getUserByUsername(username);
+    if (user == null) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Login Failed");
         alert.setHeaderText(null);
-        alert.setContentText("Invalid username or password.");
+        alert.setContentText("User not found");
         alert.showAndWait();
-    }
-}
+        return;
+        }
 
+        else {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Login Failed");
+        alert.setHeaderText(null);
+        alert.setContentText("Credentials don't match.");
+        alert.showAndWait();
+     }
+    }
 
 }
