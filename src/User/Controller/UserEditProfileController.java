@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import Objects.User;
 import User.Session.SessionManager;
 
+@SuppressWarnings("unused")
 public class UserEditProfileController {
 
     @FXML

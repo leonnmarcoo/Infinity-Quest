@@ -46,6 +46,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class UserHomeController implements Initializable {
 
     @FXML

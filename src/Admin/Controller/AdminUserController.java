@@ -29,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class AdminUserController implements Initializable {
 
     ObservableList<User> userList = FXCollections.observableArrayList();  

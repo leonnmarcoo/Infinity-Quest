@@ -46,6 +46,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class UserFilterController implements Initializable {
 
     @FXML

@@ -15,20 +15,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,24 +30,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 
+
+@SuppressWarnings("unused")
 public class UserInformationController implements Initializable{
 
     @FXML
@@ -165,6 +159,7 @@ public class UserInformationController implements Initializable{
         this.sortType = sortType;
     }
     
+    @SuppressWarnings("unused")
     private void displayContentDetails() {
         if (content == null) {
             return;
@@ -406,45 +401,6 @@ public class UserInformationController implements Initializable{
         }
     }
     
-    // @FXML
-    // private void watchButtonHandler(ActionEvent event) {
-    //     if (content == null) {
-    //         showAlert(Alert.AlertType.ERROR, "No content selected");
-    //         return;
-    //     }
-
-    //     // Check if content has already been watched
-    //     if (DatabaseHandler.isContentWatched(username, content.getContentID())) {
-    //         showAlert(Alert.AlertType.ERROR, "\"" + content.getContentTitle() + "\" has already been watched!");
-    //         return;
-    //     }
-        
-    //     try {
-    //         FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/FXML/UserLogReview.fxml"));
-    //         Parent root = loader.load();
-            
-    //         UserLogReviewController controller = loader.getController();
-    //         controller.setContent(content);
-            
-    //         // Get username from window user data
-    //         String username = ((Node) event.getSource()).getScene().getWindow().getUserData().toString();
-    //         controller.setUsername(username);
-            
-    //         // Pass the content title to be displayed
-    //         controller.setTitle(content.getContentTitle());
-            
-    //         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    //         Scene scene = new Scene(root);
-    //         stage.setScene(scene);
-    //         stage.show();
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //         showAlert(Alert.AlertType.ERROR, "Could not load review screen");
-    //     }
-    // }
-
-
-    //  Updated code sa watchButtonHandler, nka session narin ung user, so no need na i-pass ung username sa controller.
     @FXML
     private void watchButtonHandler(ActionEvent event) {
         if (content == null) {

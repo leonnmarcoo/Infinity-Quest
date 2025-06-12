@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class AdminWatchlistController implements Initializable {
     ObservableList<Watchlist> watchlistList = FXCollections.observableArrayList();
     ObservableList<Watched> watchedList = FXCollections.observableArrayList();

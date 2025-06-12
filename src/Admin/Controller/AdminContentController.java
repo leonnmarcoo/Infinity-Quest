@@ -39,6 +39,7 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class AdminContentController implements Initializable {
 
     // ======================= TABLEVIEW AND COLUMNS =======================

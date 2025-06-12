@@ -1,31 +1,8 @@
 package User.Controller;
 
 import Objects.Content;
-import Objects.Director;
-import Objects.User;
-import User.Session.SessionManager;
 import Database.DatabaseHandler;
-
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,22 +11,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class UserSearchController implements Initializable {
 
@@ -134,7 +112,9 @@ public class UserSearchController implements Initializable {
         
         displaySearchResults(searchResults);
     }
-    
+
+
+    @SuppressWarnings("unused")
     private void displaySearchResults(List<Content> results) {
         contentGridPane.getChildren().clear();
         contentGridPane.getRowConstraints().clear();
@@ -157,17 +137,7 @@ public class UserSearchController implements Initializable {
         return;
     }
     contentGridPane.setAlignment(Pos.TOP_LEFT);
-
-        
-    // if (results.isEmpty()) {
-    //     Label noResults = new Label("No results found for your search");
-    //     noResults.setPrefWidth(400);
-    //     noResults.setAlignment(Pos.CENTER);
-    //     noResults.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: Geist;");
-    //     contentGridPane.add(noResults, 0, 0);
-    //     return;
-    // }
-        
+ 
         int col = 0;
         int row = 0;
         int maxCols = 3;
@@ -209,7 +179,6 @@ public class UserSearchController implements Initializable {
             controller.setContent(content);
             controller.setPreviousFXMLPath("/User/FXML/UserSearch.fxml");
             
-            // Pass the current search term to preserve state
             String currentSearchTerm = searchTextField.getText().trim();
             if (!currentSearchTerm.isEmpty()) {
                 controller.setSearchTerm(currentSearchTerm);

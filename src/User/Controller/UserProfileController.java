@@ -121,7 +121,7 @@ public class UserProfileController {
             alert.setContentText(message);
             alert.showAndWait();
 }
-
+    @SuppressWarnings("unused")
     private void loadRecentActivity() {
         recentActivityHBox.getChildren().clear();
         User user = SessionManager.getCurrentUser();

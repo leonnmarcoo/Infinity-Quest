@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 import javax.naming.spi.DirStateFactory;
 import javax.xml.transform.Templates;
 
+@SuppressWarnings("unused")
 public class AdminHomeController implements Initializable {
 
     ObservableList<Admin> adminList = FXCollections.observableArrayList();

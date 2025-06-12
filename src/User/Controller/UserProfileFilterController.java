@@ -80,7 +80,7 @@ public class UserProfileFilterController {
         displayFilteredContent();
     }
 
-
+    @SuppressWarnings("unused")
     private void displayFilteredContent() {
         contentGridPane.getChildren().clear();
         contentGridPane.getRowConstraints().clear();
