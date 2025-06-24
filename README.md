@@ -119,6 +119,6 @@ We're stronger together! Meet our amazing team:
 
 For inquiries, suggestions, or support, please contact:
 
-- **Email**: [develaleonmarco@gmail.com](mailto:support@develaleonmarco@gmail.com)
+- **Email**: [develaleonmarco@gmail.com](mailto:develaleonmarco@gmail.com)
 - **Twitter**: [@leonmarco__](https://twitter.com/leonmarco__)
 - **Instagram**: [@leons_s.den](https://www.instagram.com/leon_s.den/)
