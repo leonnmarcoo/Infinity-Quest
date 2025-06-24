@@ -61,11 +61,11 @@
 </div>
 
 <div align="center">
-  <img src="Assets/User Side.png" alt="Infinity Quest User Side" width="1000"/>
+  <img src="Assets/User Side HD.png" alt="Infinity Quest User Side" width="1000"/>
 </div>
 
 <div align="center">
-  <img src="Assets/Admin Side.png" alt="Infinity Quest Admin Side" width="1000"/>
+  <img src="Assets/Admin Side HD.png" alt="Infinity Quest Admin Side" width="1000"/>
 </div>
 
 > _More screenshots and demos coming soon… stay tuned!_
